@@ -74,7 +74,7 @@ dependencies {
 
     //Spring Security
     compile 'org.grails.plugins:spring-security-core:3.2.0'
-    compile 'org.grails.plugins:spring-security-ui:3.1.1'
+//    compile 'org.grails.plugins:spring-security-ui:3.1.1'
 
     //PDFBox
     compile group: 'org.apache.pdfbox', name: 'pdfbox-app', version: '2.0.8'
@@ -98,9 +98,11 @@ assets {
     if(Environment.current == Environment.PRODUCTION){
         minifyJs = true
         minifyCss = true
+        includes = ["fonts/*"]
     }else{
         minifyJs = false
         minifyCss = false
+        includes = ["fonts/*"]
     }
 }
 

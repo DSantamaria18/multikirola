@@ -52,8 +52,20 @@
         </li>
     </sec:ifAnyGranted>
 
-    <li><sec:ifLoggedIn><g:link controller='logout'>Cerrar Sesión</g:link></sec:ifLoggedIn></li>
-    <li><sec:ifNotLoggedIn><g:link controller='login'>Identificarse</g:link></sec:ifNotLoggedIn></li>
+    <sec:ifLoggedIn>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-user"></i>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
+            <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
+        </ul>
+    </li>
+    </sec:ifLoggedIn>
+
+    <sec:ifNotLoggedIn><li><g:link controller='login'>Identificarse</g:link></li></sec:ifNotLoggedIn>
 </content>
 
 <div class="svg" role="presentation">
@@ -66,13 +78,6 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h1>Welcome to Grails</h1>
-
-        <p>
-            Congratulations, you have successfully started your first Grails application! At the moment
-            this is the default page, feel free to modify it to either redirect to a controller or display
-            whatever content you may choose. Below is a list of controllers that are currently deployed in
-            this application, click on each to execute its default action:
-        </p>
 
         <div id="controllers" role="navigation">
             <h2>Available Controllers:</h2>

@@ -30,8 +30,13 @@ class UserController {
 
         try {
             userService.save(user)
+
+            def role = Role.findByAuthority('ROLE_CUSTOMER')
+            UserRole.create(user, role, true)
+
         } catch (ValidationException e) {
-            respond user.errors, view:'create'
+            respond user.errors, view:'register'
+//            respond user.errors, view:'create'
             return
         }
 
@@ -95,5 +100,9 @@ class UserController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def register(){
+        respond new User(params)
     }
 }
