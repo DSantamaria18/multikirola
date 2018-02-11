@@ -7,12 +7,74 @@
 
 <body>
 
+<content tag="nav">
+    <sec:ifAnyGranted roles='ROLE_ADMIN'>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Application Status <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
+                <li><a href="#">App profile: ${grailsApplication.config.grails?.profile}</a></li>
+                <li><a href="#">App version:
+                    <g:meta name="info.app.version"/></a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Grails version:
+                    <g:meta name="info.app.grailsVersion"/></a>
+                </li>
+                <li><a href="#">Groovy version: ${GroovySystem.getVersion()}</a></li>
+                <li><a href="#">JVM version: ${System.getProperty('java.version')}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</a></li>
+            </ul>
+        </li>
+    </sec:ifAnyGranted>
+
+    <sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_MANAGER, ROLE_USER'>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Multikirola<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><g:link class="list" controller="Curso" action="index">Cursos</g:link></li>
+                <li><g:link class="list" controller="Centro" action="index">Centros</g:link></li>
+            </ul>
+        </li>
+    </sec:ifAnyGranted>
+
+    <sec:ifAnyGranted roles='ROLE_ADMIN'>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Seguridad<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li class="controller"><g:link controller="User" action="index">Usuarios</g:link></li>
+                <li class="controller"><g:link controller="Role" action="index">Roles</g:link></li>
+                <li class="controller"><g:link controller="UserRole" action="index">Roles-Usuarios</g:link></li>
+            </ul>
+        </li>
+    </sec:ifAnyGranted>
+
+    <sec:ifLoggedIn>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="glyphicon glyphicon-user"></i>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
+                <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
+            </ul>
+        </li>
+    </sec:ifLoggedIn>
+
+    <sec:ifNotLoggedIn><li><g:link controller='login'>Identificarse</g:link></li></sec:ifNotLoggedIn>
+</content>
+
 <div class="container">
     <div id="signupbox" style="margin-top:50px"
          class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title">Registro</div>
+                <div class="panel-title">Mi Cuenta</div>
 
                 <div style="float:right; font-size: 85%; position: relative; top:-10px">
                     <a id="signinlink" href="/multikirola/login/auth">Iniciar sesión</a>
@@ -42,38 +104,39 @@
 
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input id="signup-useremail" type="text" class="form-control" name="email" value=""
+                        <input id="signup-useremail" type="text" class="form-control" name="email" value="${this.user?.email}"
                                placeholder="Email">
                     </div>
 
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="signup-username" type="text" class="form-control"
-                               name="${securityConfig.apf.usernameParameter}" value="" placeholder="Nombre y apellidos">
+                               name="${securityConfig.apf.usernameParameter}" value="${this.user?.username}" placeholder="Nombre y apellidos">
                     </div>
 
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input id="signup-userphone" type="text" class="form-control" name="telefono" value=""
+                        <input id="signup-userphone" type="text" class="form-control" name="telefono" value="${this.user?.telefono}"
                                placeholder="Teléfono">
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                        <input id="signup-usercellphone" type="text" class="form-control" name="movil" value=""
+                        <input id="signup-usercellphone" type="text" class="form-control" name="movil" value="${this.user?.movil}"
                                placeholder="Teléfono móvil">
                     </div>
 
                     <div class="input-group" style="margin-bottom: 25px">
                         <div class="checkbox">
                             <label>
-                                <input id="signup-whatsapp" type="checkbox" name="whatsapp"
-                                       value="1"> Notificarme por Whatsapp
+                                <input id="signup-whatsapp" type="checkbox" name="whatsapp" value="${this.user?.whatsapp}">
+                                %{--<input id="signup-whatsapp" type="checkbox" name="whatsapp" value="1"> --}%
+                                Notificarme por Whatsapp
                             </label>
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 25px" class="input-group">
+                   %{-- <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="signup-password" type="password" class="form-control"
                                name="${securityConfig.apf.passwordParameter}" placeholder="Contraseña">
@@ -92,7 +155,7 @@
                                        value="1"> Acepto los términos y condiciones
                             </label>
                         </div>
-                    </div>
+                    </div>--}%
 
                     <div class="form-group">
                         <!-- Button -->
