@@ -2,67 +2,15 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    %{--<meta name="layout" content="main"/>--}%
-    %{--<s2ui:title messageCode='spring.security.ui.login.title'/>--}%
     <asset:stylesheet src='application.css'/>
-    %{--<asset:stylesheet src='spring-security-ui-auth.css'/>--}%
 </head>
 
 <body>
-<p/>
-%{--<div class="login"  style='text-align:left;'>
-    <div class="login-inner" >
-        <g:form type='login' focus='username'>
-            <div class="sign-in" >
-                <h2>Inicio de Sesión</h2>
-                <table >
-                    <tr >
-                        <td style="text-align: left"><label for="username">Usuario:</label></td>
-                        <td style="text-align: left"><input type="text" name="${securityConfig.apf.usernameParameter}" id="username"  size="20"/></td>
-                        --}%%{--<td style="text-align: left"><input type="text" name="${securityConfig.apf.usernameParameter}" id="username" class='formLogin' size="20"/></td>--}%%{--
-                    </tr>
-                    <tr>
-                        <td style="text-align: right"><label for="password">Contraseña:</label></td>
-                        <td><input type="password" name="${securityConfig.apf.passwordParameter}" id="password"  size="20"/></td>
-                        --}%%{--<td><input type="password" name="${securityConfig.apf.passwordParameter}" id="password" class="formLogin" size="20"/></td>--}%%{--
-                    </tr>
-                    <tr>
-                        <td>
-                        --}%%{--<td colspan='2' style="text-align: right">--}%%{--
-                            <label for='remember_me'>Recordarme</label>
-                            <input type="checkbox" class="checkbox" name="${securityConfig.rememberMe.parameter}" id="remember_me"/>
-                            --}%%{--<input type="checkbox" class="checkbox" name="${securityConfig.rememberMe.parameter}" id="remember_me" checked="checked"/>--}%%{--
-                            --}%%{--<label for='remember_me'>Recordarme</label> |--}%%{--
-                            --}%%{--<span class="forgot-link">--}%%{--
-                                --}%%{--<g:link controller='register' action='forgotPassword'>Recuperar contraseña</g:link>--}%%{--
-                            --}%%{--</span>--}%%{--
-                        </td>
-                        --}%%{--<td><g:link controller='register' action="register">Registrarse</g:link></td>--}%%{--
-                        --}%%{--<td><g:link controller='register' action='forgotPassword'>Recuperar contraseña</g:link></td>--}%%{--
-                    </tr>
-                    <tr>
-                        <td colspan='2'>
-                            <g:link controller='register' action="register">Registrarse</g:link>
-                            <g:link controller='register' action='forgotPassword'>Recuperar contraseña</g:link>
-                            --}%%{--<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'/>--}%%{--
-                            --}%%{--<s2ui:submitButton elementId='loginButton' messageCode='spring.security.ui.login.login'/>--}%%{--
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </g:form>
-    </div>
-</div>--}%
-
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Iniciar Sesión</div>
-
-                <div style="float:right; font-size: 80%; position: relative; top:-10px"><g:link controller='register'
-                                                                                                action='forgotPassword'>¿Olvidaste la contraseña?</g:link></div>
-                %{--<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">¿Olvidaste la contraseña?</a></div>--}%
             </div>
 
             <div style="padding-top:30px" class="panel-body">
@@ -84,13 +32,13 @@
                     </div>
 
 
-                    <div class="input-group">
+                    %{--<div class="input-group">
                         <div class="checkbox">
                             <label>
                                 <input id="login-remember" type="checkbox" name="remember" value="1"> Recordarme
                             </label>
                         </div>
-                    </div>
+                    </div>--}%
 
 
                     <div style="margin-top:10px" class="form-group">
@@ -98,8 +46,7 @@
 
                         <div class="col-sm-12 controls">
                             <button type="submit" class="btn btn-success">Entrar</button>
-                            %{--<g:submitButton name="login" value="Entrar" class="buttons button"/>--}%
-                            %{--<a id="btn-login" href="#" class="btn btn-success">Entrar  </a>--}%
+                            <div style="float:right; font-size: 80%; position: relative; "><g:link controller='register' action='forgotPassword'>¿Olvidaste la contraseña?</g:link></div>
                         </div>
                     </div>
 
@@ -111,9 +58,6 @@
                                 <a href="/multikirola/user/register">
                                     Regístrate aquí
                                 </a>
-                                %{--<a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                    Regístrate aquí
-                                </a>--}%
                             </div>
                         </div>
                     </div>

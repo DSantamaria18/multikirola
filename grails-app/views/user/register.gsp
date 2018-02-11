@@ -14,7 +14,8 @@
             <div class="panel-heading">
                 <div class="panel-title">Registro</div>
 
-                <div style="float:right; font-size: 85%; position: relative; top:-10px">
+
+                <div style="float:right; font-size: 80%; position: relative; top:-25px">
                     <a id="signinlink" href="/multikirola/login/auth">Iniciar sesión</a>
                 </div>
             </div>
