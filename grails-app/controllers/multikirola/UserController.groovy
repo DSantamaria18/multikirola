@@ -1,5 +1,6 @@
 package multikirola
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import org.springframework.security.access.prepost.PostAuthorize
@@ -9,6 +10,7 @@ import static org.springframework.http.HttpStatus.*
 
 class UserController {
 
+    SpringSecurityService springSecurityService
     UserService userService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -41,6 +43,8 @@ class UserController {
             def role = Role.findByAuthority('ROLE_CUSTOMER')
             UserRole.create(user, role, true)
 
+            springSecurityService.reauthenticate user.username
+
         } catch (ValidationException e) {
             respond user.errors, view: 'register'
 //            respond user.errors, view:'create'
@@ -50,7 +54,8 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                redirect url:'/'
+//                redirect user
             }
             '*' { respond user, [status: CREATED] }
         }
@@ -69,6 +74,7 @@ class UserController {
 
         try {
             userService.save(user)
+
         } catch (ValidationException e) {
             respond user.errors, view: 'edit'
             return
