@@ -55,12 +55,15 @@
 
     <sec:ifLoggedIn>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">
                 <i class="glyphicon glyphicon-user"></i>
+                <sec:username/>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
                 <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
+
                 <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
             </ul>
         </li>
@@ -75,14 +78,11 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Mi Cuenta</div>
-
-                <div style="float:right; font-size: 85%; position: relative; top:-10px">
-                    <a id="signinlink" href="/multikirola/login/auth">Iniciar sesión</a>
-                </div>
             </div>
 
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form" action="/multikirola/user/save" method="post">
+                <form id="signupform" class="form-horizontal" onsubmit="return validatePassword()"
+                      role="form" action="/multikirola/user/update" method="post">
 
                     <div id="signupalert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
@@ -103,52 +103,58 @@
                     </g:hasErrors>
 
                     <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="signup-username" type="text" class="form-control"
+                               name="${securityConfig.apf.usernameParameter}" value="${this.user?.username}"
+                               placeholder="Nombre de usuario" readonly>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input id="signup-useremail" type="text" class="form-control" name="email" value="${this.user?.email}"
+                        <input id="signup-useremail" type="text" class="form-control" name="email"
+                               value="${this.user?.email}"
                                placeholder="Email">
                     </div>
 
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="signup-username" type="text" class="form-control"
-                               name="${securityConfig.apf.usernameParameter}" value="${this.user?.username}" placeholder="Nombre y apellidos">
-                    </div>
 
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input id="signup-userphone" type="text" class="form-control" name="telefono" value="${this.user?.telefono}"
+                        <input id="signup-userphone" type="text" class="form-control" name="telefono"
+                               value="${this.user?.telefono}"
                                placeholder="Teléfono">
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                        <input id="signup-usercellphone" type="text" class="form-control" name="movil" value="${this.user?.movil}"
+                        <input id="signup-usercellphone" type="text" class="form-control" name="movil"
+                               value="${this.user?.movil}"
                                placeholder="Teléfono móvil">
                     </div>
 
                     <div class="input-group" style="margin-bottom: 25px">
                         <div class="checkbox">
                             <label>
-                                <input id="signup-whatsapp" type="checkbox" name="whatsapp" value="${this.user?.whatsapp}">
+                                <input id="signup-whatsapp" type="checkbox" name="whatsapp"
+                                       value="${this.user?.whatsapp}">
                                 %{--<input id="signup-whatsapp" type="checkbox" name="whatsapp" value="1"> --}%
                                 Notificarme por Whatsapp
                             </label>
                         </div>
                     </div>
 
-                   %{-- <div style="margin-bottom: 25px" class="input-group">
+                    <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="signup-password" type="password" class="form-control"
-                               name="${securityConfig.apf.passwordParameter}" placeholder="Contraseña">
+                        <input id="password" type="password" class="form-control"
+                               name="${securityConfig.apf.passwordParameter}" placeholder="Nueva Contraseña">
                     </div>
 
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="signup-password2" type="password" class="form-control"
+                        <input id="password2" type="password" class="form-control"
                                name="password2" placeholder="Confirmar contraseña">
                     </div>
 
-                    <div class="input-group" style="margin-bottom: 25px">
+                    %{-- <div class="input-group" style="margin-bottom: 25px">
                         <div class="checkbox">
                             <label>
                                 <input id="signup-terms" type="checkbox" name="terms"
@@ -160,8 +166,10 @@
                     <div class="form-group">
                         <!-- Button -->
                         <div class="col-md-9">
-                            <button id="btn-signup" type="submit" class="btn btn-info save"
-                                    name="create">Enviar</button>
+                            %{--<button id="btn-signup" type="submit" class="btn btn-info save"
+                                    name="update" value="Actualizar">Actualizar</button>--}%
+                    <input id="btn-signup" type="submit" class="btn btn-info save"
+                            name="update" value="Actualizar"/>
                         </div>
                     </div>
 
@@ -169,8 +177,21 @@
 
             </div>
         </div>
-
     </div>
 </div>
+<g:javascript>
+    function validatePassword() {
+        var pass1 = $('#password').val();
+        var pass2 = $('#password2').val();
+
+        if (pass1 === pass2){
+            return true;
+        }else {
+            alert('Las contraseñas no coinciden');
+            return false;
+        }
+    }
+</g:javascript>
 </body>
+
 </html>
