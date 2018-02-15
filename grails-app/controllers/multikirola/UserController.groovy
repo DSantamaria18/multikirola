@@ -5,6 +5,8 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import org.springframework.validation.Errors
 
+import java.util.logging.Logger
+
 import static org.springframework.http.HttpStatus.*
 
 class UserController {
@@ -46,7 +48,9 @@ class UserController {
             springSecurityService.reauthenticate user.username
 
         } catch (ValidationException e) {
-            respond user.errors, view: 'register'
+//            respond user.errors, view: 'register'
+            log.error("ERROR AL GUARDAR EL USUARIO: ${user.errors}")
+            redirect(action: 'register')
 //            respond user.errors, view:'create'
             return
         }
@@ -55,7 +59,6 @@ class UserController {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
                 redirect url: '/'
-//                redirect user
             }
             '*' { respond user, [status: CREATED] }
         }

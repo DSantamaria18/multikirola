@@ -179,19 +179,6 @@
         </div>
     </div>
 </div>
-<g:javascript>
-    function validatePassword() {
-        var pass1 = $('#password').val();
-        var pass2 = $('#password2').val();
-
-        if (pass1 === pass2){
-            return true;
-        }else {
-            alert('Las contraseñas no coinciden');
-            return false;
-        }
-    }
-</g:javascript>
 </body>
 
 </html>

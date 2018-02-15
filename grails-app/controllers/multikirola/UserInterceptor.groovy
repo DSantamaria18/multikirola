@@ -1,9 +1,17 @@
 package multikirola
 
+import groovy.transform.CompileStatic
 
+//@CompileStatic
 class UserInterceptor {
 
     def springSecurityService
+
+    UserInterceptor(){
+        matchAll().excludes(controller: 'login')
+                .excludes(controller: 'user', action: 'register')
+                .excludes(controller: 'user', action: 'save')
+    }
 
     boolean before() {
         if (!springSecurityService.isLoggedIn()) {
@@ -19,5 +27,4 @@ class UserInterceptor {
     void afterView() {
         // no-op
     }
-
 }
