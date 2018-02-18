@@ -81,10 +81,10 @@
             </div>
 
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form" onsubmit="return validateForm()"
+                <form id="signup-form" class="form-horizontal" role="form" onsubmit="return validateForm()"
                       action="/multikirola/user/save" method="post">
 
-                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                    <div id="signup-alert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
                         <span></span>
                     </div>
@@ -105,7 +105,7 @@
                     %{--<div style="margin-bottom: 25px" class="input-group">--}%
                     <div style="margin-top: 20px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="signup-username" type="text" class="form-control"
+                        <input id="username" type="text" class="form-control"
                                name="${securityConfig.apf.usernameParameter}" value=""
                                placeholder="Nombre de usuario"
                                onchange="$('.error').attr('hidden', true);"/>
@@ -119,7 +119,7 @@
                     %{--<div style="margin-bottom: 20px" class="input-group">--}%
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input id="signup-useremail" type="text" class="form-control"
+                        <input id="useremail" type="text" class="form-control"
                                name="email" value="" placeholder="Email"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
@@ -130,7 +130,7 @@
                     %{--<div style="margin-bottom: 20px" class="input-group">--}%
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input id="signup-userphone" type="text" class="form-control" name="telefono" value=""
+                        <input id="userphone" type="text" class="form-control" name="telefono" value=""
                                placeholder="Teléfono" onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
@@ -140,7 +140,7 @@
                     %{--<div class="input-group">--}%
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                        <input id="signup-usercellphone" type="text" class="form-control" name="movil" value=""
+                        <input id="usercellphone" type="text" class="form-control" name="movil" value=""
                                placeholder="Teléfono móvil" onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
@@ -150,7 +150,7 @@
                     <div class="input-group" style="margin-bottom: 10px">
                         <div class="checkbox">
                             <label>
-                                <input id="signup-whatsapp" type="checkbox" name="whatsapp"
+                                <input id="whatsapp" type="checkbox" name="whatsapp"
                                        value="1"/> Notificadme por Whatsapp
                             </label>
                         </div>
@@ -161,7 +161,7 @@
 
                     <div style="margin-top: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="signup-password" type="password" class="form-control"
+                        <input id="password" type="password" class="form-control"
                                name="${securityConfig.apf.passwordParameter}"
                                placeholder="Contraseña" onchange="$('.error').attr('hidden', true); "/>
                     </div>
@@ -171,7 +171,7 @@
 
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="signup-password2" type="password" class="form-control"
+                        <input id="password2" type="password" class="form-control"
                                name="password2" placeholder="Confirmar contraseña"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
@@ -182,7 +182,7 @@
                     <div style="margin-top: 20px" class="input-group">
                         <div class="checkbox">
                             <label>
-                                <input id="signup-legal" type="checkbox" name="terms"
+                                <input id="legal" type="checkbox" name="terms"
                                        value="1" onchange="$('.error').attr('hidden', true); "/> He leído y acepto los <a href="#" target="_blank"> Términos y Condiciones </a> y la <a href="#" target="_blank">Política de Privacidad</a> .
                             </label>
                         </div>
