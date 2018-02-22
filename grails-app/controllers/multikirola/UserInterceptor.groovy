@@ -1,20 +1,18 @@
 package multikirola
 
-import groovy.transform.CompileStatic
-
-//@CompileStatic
 class UserInterceptor {
 
     def springSecurityService
 
     UserInterceptor(){
-        matchAll().excludes(controller: 'login')
+        matchAll().excludes(uri:'/')
+                .excludes(controller: 'login')
                 .excludes(controller: 'user', action: 'register')
                 .excludes(controller: 'user', action: 'save')
     }
 
     boolean before() {
-        if (!springSecurityService.isLoggedIn()) {
+        if (!springSecurityService.isLoggedIn() && controllerName != null) {
             redirect(controller: "login", action: "auth")
             return false
         } else {
