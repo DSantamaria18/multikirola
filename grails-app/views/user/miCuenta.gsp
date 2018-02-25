@@ -3,6 +3,20 @@
 <head>
     <meta name="layout" content="main"/>
     <asset:stylesheet src='application.css'/>
+
+    <style>
+    /* Icon when the collapsible content is shown */
+    .btn:after {
+        font-family: "Glyphicons Halflings";
+        content: "\e114";
+        float: right;
+        margin-left: 15px;
+    }
+    /* Icon when the collapsible content is hidden */
+    .btn.collapsed:after {
+        content: "\e080";
+    }
+    </style>
 </head>
 
 <body>
@@ -55,12 +69,15 @@
 
     <sec:ifLoggedIn>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">
                 <i class="glyphicon glyphicon-user"></i>
+                <sec:username/>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
                 <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
+
                 <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
             </ul>
         </li>
@@ -75,16 +92,13 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Mi Cuenta</div>
-
-                <div style="float:right; font-size: 85%; position: relative; top:-10px">
-                    <a id="signinlink" href="/multikirola/login/auth">Iniciar sesión</a>
-                </div>
             </div>
 
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form" action="/multikirola/user/save" method="post">
+                <form id="myaccount-form" class="form-horizontal" onsubmit="return validateForm()"
+                      role="form" action="/multikirola/user/update" method="post">
 
-                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                    <div id="myaccount-alert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
                         <span></span>
                     </div>
@@ -102,66 +116,97 @@
                         </ul>
                     </g:hasErrors>
 
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input id="signup-useremail" type="text" class="form-control" name="email" value="${this.user?.email}"
-                               placeholder="Email">
-                    </div>
-
-                    <div style="margin-bottom: 25px" class="input-group">
+                    <div style="margin-top: 20px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="signup-username" type="text" class="form-control"
-                               name="${securityConfig.apf.usernameParameter}" value="${this.user?.username}" placeholder="Nombre y apellidos">
+                        <input id="username" type="text" class="form-control"
+                               name="${securityConfig.apf.usernameParameter}" value="${this.user?.username}"
+                               placeholder="Nombre de usuario"
+                               onchange="$('.error').attr('hidden', true);" readonly/>
                     </div>
 
-                    <div style="margin-bottom: 25px" class="input-group">
+                    <div>
+                        <label id="error-username" class="error" style="color: red" hidden>ERROR!!!</label>
+                    </div>
+
+                    <div style="margin-top: 10px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input id="useremail" type="text" class="form-control"
+                               name="email" placeholder="Email" value="${this.user?.email}"
+                               onchange="$('.error').attr('hidden', true); "/>
+                    </div>
+
+                    <div>
+                        <label id="error-email" class="error" style="color: red" hidden>ERROR!!!</label>
+                    </div>
+
+                    <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input id="signup-userphone" type="text" class="form-control" name="telefono" value="${this.user?.telefono}"
-                               placeholder="Teléfono">
+                        <input id="userphone" type="text" class="form-control" name="telefono"
+                               value="${this.user?.telefono}"
+                               placeholder="Teléfono" onchange="$('.error').attr('hidden', true); "/>
                     </div>
 
-                    <div class="input-group">
+                    <div>
+                        <label id="error-userphone" class="error" style="color: red" hidden>ERROR!!!</label>
+                    </div>
+
+                    <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                        <input id="signup-usercellphone" type="text" class="form-control" name="movil" value="${this.user?.movil}"
-                               placeholder="Teléfono móvil">
+                        <input id="usercellphone" type="text" class="form-control" name="movil"
+                               value="${this.user?.movil}"
+                               placeholder="Teléfono móvil" onchange="$('.error').attr('hidden', true); "/>
                     </div>
 
-                    <div class="input-group" style="margin-bottom: 25px">
+                    <div>
+                        <label id="error-usercellphone" class="error" style="color: red" hidden>ERROR!!!</label>
+                    </div>
+
+                    <div class="input-group" style="margin-bottom: 10px">
                         <div class="checkbox">
                             <label>
-                                <input id="signup-whatsapp" type="checkbox" name="whatsapp" value="${this.user?.whatsapp}">
-                                %{--<input id="signup-whatsapp" type="checkbox" name="whatsapp" value="1"> --}%
-                                Notificarme por Whatsapp
+                                <g:checkBox id="whatsapp" name="whatsapp"
+                                       value="${this.user?.whatsapp}"/> Notificadme por Whatsapp
                             </label>
                         </div>
                     </div>
 
-                   %{-- <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="signup-password" type="password" class="form-control"
-                               name="${securityConfig.apf.passwordParameter}" placeholder="Contraseña">
+                    <div>
+                        <label id="error-whatsapp" class="error" style="color: red" hidden>ERROR!!!</label>
                     </div>
 
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="signup-password2" type="password" class="form-control"
-                               name="password2" placeholder="Confirmar contraseña">
-                    </div>
+                    <!-- PASSWORD -->
+                    <button type="button" class="btn collapsed" data-toggle="collapse" data-target="#password-group" >Actualizar contraseña</button>
 
-                    <div class="input-group" style="margin-bottom: 25px">
-                        <div class="checkbox">
-                            <label>
-                                <input id="signup-terms" type="checkbox" name="terms"
-                                       value="1"> Acepto los términos y condiciones
-                            </label>
+                    <div id="password-group" class="collapse">
+                        <div style="margin-top: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="password" type="password" class="form-control"
+                                   name="${securityConfig.apf.passwordParameter}"
+                                   placeholder="Nueva Contraseña" onchange="$('.error').attr('hidden', true); "/>
                         </div>
-                    </div>--}%
 
-                    <div class="form-group">
+                        <div>
+                            <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>
+                        </div>
+
+                        <div style="margin-top: 10px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="password2" type="password" class="form-control"
+                                   name="password2" placeholder="Confirmar contraseña"
+                                   onchange="$('.error').attr('hidden', true);"/>
+                        </div>
+
+                        <div>
+                            <label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="margin-top: 20px">
                         <!-- Button -->
                         <div class="col-md-9">
-                            <button id="btn-signup" type="submit" class="btn btn-info save"
-                                    name="create">Enviar</button>
+                            <input id="btn-myaccount" type="submit" class="btn btn-info save"
+                                   name="register" value="Actualizar"/>
                         </div>
                     </div>
 
@@ -169,8 +214,8 @@
 
             </div>
         </div>
-
     </div>
 </div>
 </body>
+
 </html>

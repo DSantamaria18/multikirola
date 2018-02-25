@@ -56,6 +56,7 @@
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="glyphicon glyphicon-user"></i>
+            <sec:username/>
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">

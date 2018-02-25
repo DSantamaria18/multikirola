@@ -3,8 +3,9 @@ package multikirola
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
-import org.springframework.security.access.prepost.PostAuthorize
-import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.validation.Errors
+
+import java.util.logging.Logger
 
 import static org.springframework.http.HttpStatus.*
 
@@ -13,7 +14,8 @@ class UserController {
     SpringSecurityService springSecurityService
     UserService userService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+//    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     @Secured('ROLE_ADMIN')
     def index(Integer max) {
@@ -46,7 +48,9 @@ class UserController {
             springSecurityService.reauthenticate user.username
 
         } catch (ValidationException e) {
-            respond user.errors, view: 'register'
+//            respond user.errors, view: 'register'
+            log.error("ERROR AL GUARDAR EL USUARIO: ${user.errors}")
+            redirect(action: 'register')
 //            respond user.errors, view:'create'
             return
         }
@@ -54,8 +58,7 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect url:'/'
-//                redirect user
+                redirect url: '/'
             }
             '*' { respond user, [status: CREATED] }
         }
@@ -71,19 +74,35 @@ class UserController {
             notFound()
             return
         }
-
+        User updUser = getAuthenticatedUser()
         try {
-            userService.save(user)
-
+            if (updUser.username == user.username) {
+                updUser.email = user.email
+                updUser.telefono = user.telefono
+                updUser.movil = user.movil
+                updUser.whatsapp = user.whatsapp
+                if (user.password != null) {
+                    updUser.password = user.password
+                }
+                userService.save(updUser)
+            } else {
+                throw new Exception("Error de validación del usuario")
+            }
         } catch (ValidationException e) {
-            respond user.errors, view: 'edit'
+//            redirect(action: 'miCuenta')
+            flash.message = "Se ha producido un error. Por favor, revisa los datos introducidos e inténtalo de nuevo..."
+            render(view: 'miCuenta', model: [user: updUser])
+            return
+        } catch (Exception ex) {
+            flash.message = "No se han podido actualizar los datos del usuario ${user.username.toUpperCase()}"
+            render(view: 'miCuenta', model: [user: updUser])
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                flash.message = "Datos actualizados"
+                redirect(action: 'miCuenta')
             }
             '*' { respond user, [status: OK] }
         }
@@ -120,9 +139,13 @@ class UserController {
         respond new User(params)
     }
 
-//    @PreAuthorize("#user.id == authentication.id")
-//    @PostAuthorize('hasPermission(#user, read)')
-    def miCuenta(Long id) {
-        respond userService.get(id)
+    def miCuenta() {
+        if (isLoggedIn()) {
+            Long userId = getAuthenticatedUser().id
+            User user = userService.get(userId)
+            render(view: 'miCuenta', model: [user: user])
+        }
     }
+
+
 }
