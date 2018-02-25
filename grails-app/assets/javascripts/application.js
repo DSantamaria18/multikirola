@@ -20,19 +20,6 @@ if (typeof jQuery !== 'undefined') {
     })(jQuery);
 }
 
-/*function validatePassword() {
-    console.log("Validando password");
-    var pass1 = $('#password').val();
-    var pass2 = $('#password2').val();
-
-    if (pass1 === pass2){
-        return true;
-    }else {
-        alert('Las contraseñas no coinciden');
-        return false;
-    }
-}*/
-
 function isValidPassword() {
     var passOk = true;
     var password = $('#password').val();
@@ -92,22 +79,21 @@ function validateForm() {
     const telefono = $('#userphone').val();
     const movil = $('#usercellphone').val();
     const whatsapp = $('#whatsapp').prop('checked');
-    const legal = $('#legal').prop('checked');
+
 
     /* validación de username */
     if (username == "") {
         $('#error-username').text('Debes introducir un nombre de usuario.');
         $('#error-username').attr('hidden', false);
         formOk = false;
+    } else {
+        const user_re = /^\w+$/; // Sólo caracteres y números
+        if (!user_re.test(username)) {
+            $('#error-username').text('Caracteres no válidos en el nombre de usuario.');
+            $('#error-username').attr('hidden', false);
+            formOk = false;
+        }
     }
-
-    const user_re = /^\w+$/; // Sólo caracteres y números
-    if (!user_re.test(username)) {
-        $('#error-username').text('Caracteres no válidos en el nombre de usuario.');
-        $('#error-username').attr('hidden', false);
-        formOk = false;
-    }
-
 
     /* validación de email */
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -138,14 +124,17 @@ function validateForm() {
         formOk = false;
     }
 
-    if (legal == false) {
-        $('#error-legal').text('Debes aceptar las condiciones.');
-        $('#error-legal').attr('hidden', false);
-        formOk = false;
+    if ($('#legal').size() > 0) {
+        const legal = $('#legal').prop('checked');
+        if (legal == false) {
+            $('#error-legal').text('Debes aceptar las condiciones.');
+            $('#error-legal').attr('hidden', false);
+            formOk = false;
+        }
     }
 
     /* validación de password */
-    if ($('#password-group.in').size() > 0) {
+    if ($('#password-group.in').size() > 0 || $('#password-group').size < 1) {
         if (!isValidPassword()) {
             formOk = false;
         } else {

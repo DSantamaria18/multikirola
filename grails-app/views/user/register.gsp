@@ -150,8 +150,8 @@
                     <div class="input-group" style="margin-bottom: 10px">
                         <div class="checkbox">
                             <label>
-                                <input id="whatsapp" type="checkbox" name="whatsapp"
-                                       value="1"/> Notificadme por Whatsapp
+                                <g:checkBox id="whatsapp" name="whatsapp"
+                                            value="${this.user?.whatsapp}"/> Notificadme por Whatsapp
                             </label>
                         </div>
                     </div>
@@ -182,8 +182,10 @@
                     <div style="margin-top: 20px" class="input-group">
                         <div class="checkbox">
                             <label>
-                                <input id="legal" type="checkbox" name="terms"
-                                       value="1" onchange="$('.error').attr('hidden', true); "/> He leído y acepto los <a href="#" target="_blank"> Términos y Condiciones </a> y la <a href="#" target="_blank">Política de Privacidad</a> .
+                                %{--<input id="legal" type="checkbox" name="terms"
+                                       value="1" onchange="$('.error').attr('hidden', true); "/> He leído y acepto los <a href="#" target="_blank"> Términos y Condiciones </a> y la <a href="#" target="_blank">Política de Privacidad</a> .--}%
+                                <g:checkBox id="legal" name="terms"/>
+                                He leído y acepto los <a href="#" target="_blank"> Términos y Condiciones </a> y la <a href="#" target="_blank">Política de Privacidad</a>
                             </label>
                         </div>
                     </div>

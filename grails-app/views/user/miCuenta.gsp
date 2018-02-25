@@ -164,7 +164,7 @@
                     <div class="input-group" style="margin-bottom: 10px">
                         <div class="checkbox">
                             <label>
-                                <input id="whatsapp" type="checkbox" name="whatsapp"
+                                <g:checkBox id="whatsapp" name="whatsapp"
                                        value="${this.user?.whatsapp}"/> Notificadme por Whatsapp
                             </label>
                         </div>
@@ -200,9 +200,6 @@
                             <label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>
                         </div>
                     </div>
-
-
-
 
 
                     <div class="form-group" style="margin-top: 20px">
