@@ -72,13 +72,12 @@
 <div class="svg" role="presentation">
     <div class="grails-logo-container">
         <g:img dir="images" file="multikirolak.jpg" class="img-responsive grails-logo" style="margin: 0 auto"/>
-        %{--<img class="img-responsive grails-logo" src="../assets/images/multikirolak.jpg" />--}%
         %{--<asset:image src="multikirolak.jpg" class="grails-logo"/>--}%
         %{--<asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>--}%
     </div>
 </div>
 
-<div id="content" role="main">
+%{--<div id="content" role="main">
     <section class="row colset-2-its">
         <h1>Welcome to Grails</h1>
 
@@ -93,7 +92,7 @@
             </ul>
         </div>
     </section>
-</div>
+</div>--}%
 
 </body>
 </html>
