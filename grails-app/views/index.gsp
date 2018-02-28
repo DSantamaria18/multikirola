@@ -53,17 +53,18 @@
     </sec:ifAnyGranted>
 
     <sec:ifLoggedIn>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="glyphicon glyphicon-user"></i>
-            <sec:username/>
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
-            <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
-        </ul>
-    </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">
+                <i class="glyphicon glyphicon-user"></i>
+                <sec:username/>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
+                <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
+            </ul>
+        </li>
     </sec:ifLoggedIn>
 
     <sec:ifNotLoggedIn><li><g:link controller='login'>Identificarse</g:link></li></sec:ifNotLoggedIn>
@@ -91,6 +92,72 @@
                 </g:each>
             </ul>
         </div>--}%
+
+        <div class="grid-container actividades-home">
+            <div class="grid-item futbol-sala-home">
+                <g:img dir="images" file="futbol-sala.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item beisbol-home">
+                <g:img dir="images" file="beisbol.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item hockey-home">
+                <g:img dir="images" file="hockey.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item rugby-home">
+                <g:img dir="images" file="rugby.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item danza-moderna-home">
+                <g:img dir="images" file="danza-moderna.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item balonmano-home">
+                <g:img dir="images" file="balonmano.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item pelota-home">
+                <g:img dir="images" file="pelota.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item tiro-con-arco-home">
+                <g:img dir="images" file="tiro-con-arco.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item herri-kirolak-home">
+                <g:img dir="images" file="herri-kirolak.jpeg" class="img-responsive"/>
+            </div>
+            <div class="grid-item waterpolo-home">
+                <g:img dir="images" file="waterpolo.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item futbol-home">
+                <g:img dir="images" file="futbol.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item atletismo-home">
+                <g:img dir="images" file="atletismo.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item baloncesto-home">
+                <g:img dir="images" file="baloncesto.png" class="img-responsive"/>
+            </div>
+            <div class="grid-item surf-home">
+                <g:img dir="images" file="surf.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item patinaje-home">
+                <g:img dir="images" file="patinaje.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item pesca-home">
+                <g:img dir="images" file="pesca.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item paddle-surf-home">
+                <g:img dir="images" file="paddle-surf.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item badminton-home">
+                <g:img dir="images" file="badminton.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item kayak-home">
+                <g:img dir="images" file="kayak.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item vela-home">
+                <g:img dir="images" file="vela.jpg" class="img-responsive"/>
+            </div>
+            <div class="grid-item mountain-bike-home">
+                <g:img dir="images" file="mountain-bike.jpg" class="img-responsive"/>
+            </div>
+        </div>
     </section>
 </div>
 
