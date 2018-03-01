@@ -12,6 +12,7 @@ class Participante {
     Boolean whatsapp
     String telefono
     String email
+    Date fechaNacimiento
 
     static constraints = {
         nombre(nullable: false, blank: false)
@@ -24,5 +25,6 @@ class Participante {
         whatsapp()
         telefono()
         email(nullable: false, email: true, blank: false)
+        fechaNacimiento(nullable: false, blank: false)
     }
 }

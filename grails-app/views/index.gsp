@@ -82,17 +82,6 @@
     <section class="row colset-2-its">
         <h1>Multikirolak</h1>
 
-        %{--<div id="controllers" role="navigation">
-            <h2>Available Controllers:</h2>
-            <ul>
-                <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">
-                    <li class="controller">
-                        <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
-                    </li>
-                </g:each>
-            </ul>
-        </div>--}%
-
         <div class="grid-container actividades-home">
             <div class="grid-item futbol-sala-home">
                 <g:img dir="images" file="futbol-sala.jpg" class="img-responsive"/>
