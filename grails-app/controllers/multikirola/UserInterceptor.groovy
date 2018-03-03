@@ -18,7 +18,7 @@ class UserInterceptor {
     }
 
     boolean before() {
-//        if (!springSecurityService.isLoggedIn() && controllerName != null) {
+        //        if (!springSecurityService.isLoggedIn() && controllerName != null) {
         if (!springSecurityService.isLoggedIn() && !isExcludedURI(request.requestURI)) {
             redirect(controller: "login", action: "auth")
             return false
@@ -34,7 +34,7 @@ class UserInterceptor {
     }
 
     boolean isExcludedURI(final String requestedURI) {
-        def excludedURIs = ['/multikirola/', '/multikirola/error', '/multikirola/notFound', '/multikirola/static/presentacion.html']
+        def excludedURIs = ['/multikirola/', '/multikirola/error', '/multikirola/notFound', '/multikirola/static/presentacion']
         boolean result = false
 
         if (requestedURI in excludedURIs) result = true
