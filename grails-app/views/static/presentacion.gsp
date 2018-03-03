@@ -17,7 +17,8 @@
         <h1 class="h1">Multideporte</h1>
 
         <p class="lead">
-            <strong>Si estudias en Primaria y quieres participar en el programa de Multikirolak rellena este <g:link controller="user" action="register">formulario</g:link>
+            <strong>Si estudias en Primaria y quieres participar en el programa de Multikirolak rellena este <g:link
+                    controller="user" action="register">formulario</g:link>
             </strong>
         </p>
 
@@ -81,10 +82,7 @@
         conocidas.
         Las excursiones están abiertas a la participación de sus familiares.</p>
 
-
-
     </div>
 </div>
 
 </body>
-</html>
