@@ -33,9 +33,9 @@
         comunidad
         escolar.</p>
 
-        <p><img class="img_left" src="http://www.getxo.net/ImagesPublic/Kirolak/multikirolak1.jpg"
+        <img class="img-responsive" src="http://www.getxo.net/ImagesPublic/Kirolak/multikirolak1.jpg"
                 alt="Multikirolak"
-                width="561" height="287"/></p>
+                style="margin: 0 auto"/>
 
         <p>Con el programa de <strong>Multikirolak</strong>–Premio Bizkaia 2008 por el fomento del deporte escolar–
         queremos que las y los estudiantes getxotarras conozcan una oferta variada de deportes para que, más
@@ -63,9 +63,9 @@
 
         <h3 class="h3">Encuentro deportivo (topaketa)</h3>
 
-        <p><img class="img_left" src="http://www.getxo.net/ImagesPublic/Kirolak/multikirolak2.jpg"
+        <p><img class="img-responsive" src="http://www.getxo.net/ImagesPublic/Kirolak/multikirolak2.jpg"
                 alt="Multikirolak"
-                width="561" height="287"/></p>
+                    style="margin: 0 auto"/>
 
         <p>Después de practicar una modalidad durante 8 sesiones en los centros escolares, se convoca a los niños y
         las
@@ -74,10 +74,9 @@
 
         <h3 class="h3">Excursión (txangoa)</h3>
 
-        <p><img class="img_left" src="http://www.getxo.net/ImagesPublic/Kirolak/multikirolak3.jpg"
+        <img class="img-responsive" src="http://www.getxo.net/ImagesPublic/Kirolak/multikirolak3.jpg"
                 alt="Multikirolak"
-                width="561" height="287"/></p>
-
+                style="margin: 0 auto"/>
         <p>Se trata de una actividad deportiva no preparada previamente en la que se descubren modalidades menos
         conocidas.
         Las excursiones están abiertas a la participación de sus familiares.</p>
