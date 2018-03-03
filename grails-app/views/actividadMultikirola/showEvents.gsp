@@ -7,6 +7,8 @@
 
 <body>
 
+<g:render template="/navbar"/>
+
 <div id="list-eventos" class="content scaffold-list" role="main">
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
