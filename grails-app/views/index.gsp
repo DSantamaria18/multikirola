@@ -6,7 +6,17 @@
 </head>
 
 <body>
-<content tag="nav">
+%{--<content tag="nav">
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+           aria-expanded="false">Multikirolak<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="/multikirola/static/presentacion.html">Qué es Multikirolak</a></li>
+            <li><g:link controller="static" action="presentacion">Qué es Multikirolak</g:link></li>
+        </ul>
+    </li>
+
     <sec:ifAnyGranted roles='ROLE_ADMIN'>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -68,7 +78,9 @@
     </sec:ifLoggedIn>
 
     <sec:ifNotLoggedIn><li><g:link controller='login'>Identificarse</g:link></li></sec:ifNotLoggedIn>
-</content>
+</content>--}%
+
+<g:render template="navbar"></g:render>
 
 <div class="svg" role="presentation">
     <div class="grails-logo-container">
