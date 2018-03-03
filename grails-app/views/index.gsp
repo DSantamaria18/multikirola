@@ -6,8 +6,8 @@
 </head>
 
 <body>
-%{--<content tag="nav">
 
+%{--<content tag="nav">
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
            aria-expanded="false">Multikirolak<span class="caret"></span></a>
@@ -83,10 +83,12 @@
 <g:render template="navbar"></g:render>
 
 <div class="svg" role="presentation">
-    <div class="grails-logo-container">
+    <div class="grails-logo-con
+    <g:link action="showEvents" controller="actividadMultikirola">
         <g:img dir="images" file="multikirolak.jpg" class="img-responsive grails-logo" style="margin: 0 auto"/>
-        %{--<asset:image src="multikirolak.jpg" class="grails-logo"/>--}%
-        %{--<asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>--}%
+    </g:link>%{--<asset:image src="multikirolak.jpg" class="grail
+        s-logo"/>--}%
+    %{--<asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>--}%
     </div>
 </div>
 
@@ -96,67 +98,132 @@
 
         <div class="grid-container actividades-home">
             <div class="grid-item futbol-sala-home">
-                <g:img dir="images" file="futbol-sala.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola">
+
+                    <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 20]">
+                        <g:img dir="images" file="futbol-sala.jpg" class="img-responsive"/>
+                    </g:link>
+                </g:link>
             </div>
+
             <div class="grid-item beisbol-home">
-                <g:img dir="images" file="beisbol.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 8]">
+                    <g:img dir="images" file="beisbol.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item hockey-home">
-                <g:img dir="images" file="hockey.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 24]">
+                    <g:img dir="images" file="hockey.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item rugby-home">
-                <g:img dir="images" file="rugby.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 39]">
+                    <g:img dir="images" file="rugby.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item danza-moderna-home">
-                <g:img dir="images" file="danza-moderna.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 13]">
+                    <g:img dir="images" file="danza-moderna.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item balonmano-home">
-                <g:img dir="images" file="balonmano.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 7]">
+                    <g:img dir="images" file="balonmano.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item pelota-home">
-                <g:img dir="images" file="pelota.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 1]">
+                    <g:img dir="images" file="pelota.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item tiro-con-arco-home">
-                <g:img dir="images" file="tiro-con-arco.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 49]">
+                    <g:img dir="images" file="tiro-con-arco.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item herri-kirolak-home">
-                <g:img dir="images" file="herri-kirolak.jpeg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 22]">
+                    <g:img dir="images" file="herri-kirolak.jpeg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item waterpolo-home">
-                <g:img dir="images" file="waterpolo.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 54]">
+                    <g:img dir="images" file="waterpolo.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item futbol-home">
-                <g:img dir="images" file="futbol.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 19]">
+                    <g:img dir="images" file="futbol.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item atletismo-home">
-                <g:img dir="images" file="atletismo.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 5]">
+                    <g:img dir="images" file="atletismo.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item baloncesto-home">
-                <g:img dir="images" file="baloncesto.png" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 6]">
+                    <g:img dir="images" file="baloncesto.png" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item surf-home">
-                <g:img dir="images" file="surf.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 44]">
+                    <g:img dir="images" file="surf.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item patinaje-home">
-                <g:img dir="images" file="patinaje.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 34]">
+                    <g:img dir="images" file="patinaje.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item pesca-home">
-                <g:img dir="images" file="pesca.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 3]">
+                    <g:img dir="images" file="pesca.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item paddle-surf-home">
-                <g:img dir="images" file="paddle-surf.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 32]">
+                    <g:img dir="images" file="paddle-surf.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item badminton-home">
-                <g:img dir="images" file="badminton.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 1]">
+                    <g:img dir="images" file="badminton.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item kayak-home">
-                <g:img dir="images" file="kayak.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 26]">
+                    <g:img dir="images" file="kayak.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item vela-home">
-                <g:img dir="images" file="vela.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 20]">
+                    <g:img dir="images" file="vela.jpg" class="img-responsive"/>
+                </g:link>
             </div>
+
             <div class="grid-item mountain-bike-home">
-                <g:img dir="images" file="mountain-bike.jpg" class="img-responsive"/>
+                <g:link action="showEvents" controller="actividadMultikirola" params="['modalidad': 28]">
+                    <g:img dir="images" file="mountain-bike.jpg" class="img-responsive"/>
+                </g:link>
             </div>
         </div>
     </section>
