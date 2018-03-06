@@ -1,10 +1,11 @@
 <content tag="nav">
 
+    <li><a href="/multikirola">Inicio</a></li>
+
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
            aria-expanded="false">Multikirolak<span class="caret"></span></a>
         <ul class="dropdown-menu">
-            %{--<li><a href="/multikirola/static/presentacion.html">Qué es Multikirolak</a></li>--}%
             <li><g:link controller="static" action="presentacion">Qué es Multikirolak</g:link></li>
         </ul>
     </li>
@@ -64,6 +65,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
+                <li><g:link controller='participante' action="index">Participantes</g:link></li>
                 <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
             </ul>
         </li>
