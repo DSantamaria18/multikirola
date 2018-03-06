@@ -151,7 +151,7 @@ class ParticipanteController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'participante.label', default: 'Participante'), participante.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'participante.label', default: 'Participante'), participante.token])
                 redirect participante
             }
             '*' { respond participante, [status: OK] }
