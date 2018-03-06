@@ -1,9 +1,5 @@
 package multikirola
 
-import grails.validation.ValidationException
-
-import java.security.MessageDigest
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
