@@ -22,7 +22,12 @@ class ParticipanteController {
     }*/
 
     def show(Participante participante) {
-        respond participante
+        User currentUser = getAuthenticatedUser()
+        if (participante && participante.usuario == currentUser){
+            respond participante
+        } else {
+            redirect(uri: '/')
+        }
     }
 
     def create() {
