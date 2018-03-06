@@ -83,12 +83,8 @@
 <g:render template="navbar"></g:render>
 
 <div class="svg" role="presentation">
-    <div class="grails-logo-con
-    <g:link action="showEvents" controller="actividadMultikirola">
+    <div class="grails-logo-container">
         <g:img dir="images" file="multikirolak.jpg" class="img-responsive grails-logo" style="margin: 0 auto"/>
-    </g:link>%{--<asset:image src="multikirolak.jpg" class="grail
-        s-logo"/>--}%
-    %{--<asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>--}%
     </div>
 </div>
 
