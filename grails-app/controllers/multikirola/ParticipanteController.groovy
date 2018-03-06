@@ -71,11 +71,17 @@ class ParticipanteController {
 
         String token = encodeToken(participante)
         participante.token = token
+
+        User currentUser = getAuthenticatedUser()
+        participante.usuario = currentUser
+
         participante.validate()
 
         if (participante.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            participante.errors.reject('participant.already.exists', "Este participante ya ha sido dado de alta [${participante.token}]")
+            if (participante.errors.getFieldError('token')) {
+                participante.errors.reject('participant.already.exists', "Este participante ya ha sido dado de alta [${participante.token}]")
+            }
             respond participante.errors, view: 'create'
             return
         }

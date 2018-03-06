@@ -20,14 +20,15 @@ class Participante {
         nombre(nullable: false, blank: false)
         apellido1(nullable: false, blank: false)
         apellido2(nullable: true, blank: true)
-        centro(nullable: false, blank: false)
-        curso(nullable: false, blank: false)
-        sexo(inList: ['EMAKUMEZKOA - MUJER', 'GIZONEZKOA - HOMBRE'])
+        fechaNacimiento(nullable: false, blank: false, max: new Date())
+        sexo(inList: ['EMAKUMEZKOA - FEMENINO', 'GIZONEZKOA - MASCULINO'])
         telefono()
         movil(nullable: false, blank: false)
         email(nullable: false, email: true, blank: false)
-        fechaNacimiento(nullable: false, blank: false, max: new Date())
-        token(nullable: false, unique: true)
+        centro(nullable: false, blank: false)
+        curso(nullable: false, blank: false)
+        token(nullable: false, unique: true, display: false)
+        usuario(nullable: false, display: false)
     }
 
 
