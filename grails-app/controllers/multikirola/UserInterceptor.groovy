@@ -14,16 +14,14 @@ class UserInterceptor {
                 .excludes(controller: 'static')
                 .excludes(uri: '/multikirola/error')
                 .excludes(uri: '/multikirola/notFound')
-//                .excludes(uri: '/multikirola/presentacion')
     }
 
     boolean before() {
-        //        if (!springSecurityService.isLoggedIn() && controllerName != null) {
-        if (!springSecurityService.isLoggedIn() && !isExcludedURI(request.requestURI)) {
+        if (springSecurityService.isLoggedIn() || isExcludedURI(request.requestURI)) {
+            return true
+        } else {
             redirect(controller: "login", action: "auth")
             return false
-        } else {
-            return true
         }
     }
 
