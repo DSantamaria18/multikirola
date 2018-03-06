@@ -11,8 +11,6 @@ import grails.transaction.Transactional
 class ParticipanteController {
 
     ParticipanteService participanteService
-
-
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -32,6 +30,11 @@ class ParticipanteController {
     }
 
     def create() {
+        User currentUser = getAuthenticatedUser()
+        params.email = currentUser.email
+        params.telefono= currentUser.telefono
+        params.movil = currentUser.movil
+
         respond new Participante(params)
     }
 
@@ -189,7 +192,7 @@ class ParticipanteController {
         }
     }
 
-    private String encodeToken(Participante participante) {
+    private static String encodeToken(Participante participante) {
         List salt = ["M", "U", "L", "T", "I", "K", "I", "R", "O", "L", "A", "K"]
         def fecha = participante.fechaNacimiento.toTimestamp().toString().split(" ")[0].split('-')
         String año = fecha[0].toString().reverse()
@@ -199,7 +202,6 @@ class ParticipanteController {
         String nombre = participante.nombre.substring(0, 2).toUpperCase()
         String apellido = participante.apellido1.substring(0, 2).toUpperCase()
 
-//        Collections.shuffle(salt)
         String random1 = salt[11]
         String random2 = salt[2]
         String random3 = salt[7]
