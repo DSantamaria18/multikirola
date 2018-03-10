@@ -131,21 +131,21 @@
                         %{--<g:if test="${participantesEventoList?.size() > 0}">--}%
                         %{--<g:each in="${participantesEventoList}" var="participante">--}%
 
-                        <div class="participante-row">
+                       %{-- <div class="participante-row">
                             <div class="participante-datarow">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span class="text-capitalize">paco</span>
-                                %{--<span class="text-capitalize">${participante.nombre}</span>--}%
+                                --}%%{--<span class="text-capitalize">${participante.nombre}</span>--}%%{--
                                 <span class="text-capitalize">porras</span>
-                                %{--<span class="text-capitalize">${participante.apellido1}</span>--}%
+                                --}%%{--<span class="text-capitalize">${participante.apellido1}</span>--}%%{--
                                 <span class="text-capitalize">perez</span>
-                                %{--<span class="text-capitalize">${participante?.apellido2}</span>--}%
+                                --}%%{--<span class="text-capitalize">${participante?.apellido2}</span>--}%%{--
                             </div>
 
                             <div class="btn btn-danger push eliminar-push" onclick="borraParticipante(this)">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </div>
-                        </div>
+                        </div>--}%
                         %{--</g:each>--}%
                         %{--</g:if>--}%
                     </div>
