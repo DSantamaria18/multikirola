@@ -154,25 +154,20 @@ function apuntarParticipantes() {
         var participanteId = $(this).val();
         console.log(participanteId);
         selectedParticpantsIds.push(participanteId);
-        console.table(selectedParticpantsIds);
         var nombre = $(this).siblings('span').text();
         selectedParticipants.push(nombre);
-        console.table(selectedParticipants);
-    });
-
-    for(part in selectedParticipants) {
-        var html = `<div class="participante-row" style="display: flex"><i class=\"glyphicon glyphicon-user\"></i><span class=\"text-capitalize\">${part}</span></div><div class="btn btn-danger push eliminar-push"> <i class="glyphicon glyphicon-remove"></i></div>`
-        console.log(html);
+        var html = `<div class="participante-row"><div class="participante-datarow"><i class=\"glyphicon glyphicon-user\"></i><span class=\"text-capitalize\"> ${nombre}</span></div><div class="btn btn-danger push eliminar-push" onclick="borraParticipante(this)"> <i class="glyphicon glyphicon-remove"></i></div></div>`
         $('.panel-footer').append(html);
-
-    };
+    });
+    console.table(selectedParticpantsIds);
+    console.log(selectedParticipants);
 
     var params = {
         eventoId: eventId,
         selectedParticpantsIds: selectedParticpantsIds
     }
 
-    $.post("/multikirola/")
+    // $.post("/multikirola/")
 
 };
 
@@ -180,3 +175,7 @@ function passEvent(elem){
     var eventId = $(elem).data('event');
     $('#eventId').val(eventId);
 };
+
+function borraParticipante(elem) {
+    elem.closest('.participante-row').remove();
+}

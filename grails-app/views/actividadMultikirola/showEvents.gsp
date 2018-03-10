@@ -49,6 +49,11 @@
         font-size: xx-large;
     }
 
+    .participante-row {
+        display: flex;
+        padding-bottom: 10px;
+    }
+
     @media only screen and (min-width: 600px) {
         .content {
             margin: 0% 25%;
@@ -126,7 +131,7 @@
                         %{--<g:if test="${participantesEventoList?.size() > 0}">--}%
                         %{--<g:each in="${participantesEventoList}" var="participante">--}%
 
-                        <div class="participante-row" style="display: flex">
+                        <div class="participante-row">
                             <div class="participante-datarow">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span class="text-capitalize">paco</span>
@@ -137,7 +142,7 @@
                                 %{--<span class="text-capitalize">${participante?.apellido2}</span>--}%
                             </div>
 
-                            <div class="btn btn-danger push eliminar-push">
+                            <div class="btn btn-danger push eliminar-push" onclick="borraParticipante(this)">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </div>
                         </div>
