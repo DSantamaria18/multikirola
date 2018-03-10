@@ -127,7 +127,7 @@
                         </div>
                     </div>
 
-                    <div class="panel-footer">
+                    <div class="panel-footer " id="footer-${evento.id}">
                         %{--<g:if test="${participantesEventoList?.size() > 0}">--}%
                         %{--<g:each in="${participantesEventoList}" var="participante">--}%
 

@@ -146,9 +146,11 @@ function validateForm() {
 }
 
 function apuntarParticipantes() {
-    var eventId = $('#eventId').val;
+    var eventId = $('#eventId').val();
     var selectedParticpantsIds = [];
     var selectedParticipants = [];
+    var footer = `[id="footer-${eventId}"]`;
+    console.log(footer);
 
     $('#checkbox-participante:checked').each(function(){
         var participanteId = $(this).val();
@@ -157,10 +159,8 @@ function apuntarParticipantes() {
         var nombre = $(this).siblings('span').text();
         selectedParticipants.push(nombre);
         var html = `<div class="participante-row"><div class="participante-datarow"><i class=\"glyphicon glyphicon-user\"></i><span class=\"text-capitalize\"> ${nombre}</span></div><div class="btn btn-danger push eliminar-push" onclick="borraParticipante(this)"> <i class="glyphicon glyphicon-remove"></i></div></div>`
-        $('.panel-footer').append(html);
+        $(footer).append(html);
     });
-    console.table(selectedParticpantsIds);
-    console.log(selectedParticipants);
 
     var params = {
         eventoId: eventId,
