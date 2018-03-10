@@ -144,3 +144,39 @@ function validateForm() {
 
     return formOk;
 }
+
+function apuntarParticipantes() {
+    var eventId = $('#eventId').val;
+    var selectedParticpantsIds = [];
+    var selectedParticipants = [];
+
+    $('#checkbox-participante:checked').each(function(){
+        var participanteId = $(this).val();
+        console.log(participanteId);
+        selectedParticpantsIds.push(participanteId);
+        console.table(selectedParticpantsIds);
+        var nombre = $(this).siblings('span').text();
+        selectedParticipants.push(nombre);
+        console.table(selectedParticipants);
+    });
+
+    for(part in selectedParticipants) {
+        var html = `<div class="participante-row" style="display: flex"><i class=\"glyphicon glyphicon-user\"></i><span class=\"text-capitalize\">${part}</span></div><div class="btn btn-danger push eliminar-push"> <i class="glyphicon glyphicon-remove"></i></div>`
+        console.log(html);
+        $('.panel-footer').append(html);
+
+    };
+
+    var params = {
+        eventoId: eventId,
+        selectedParticpantsIds: selectedParticpantsIds
+    }
+
+    $.post("/multikirola/")
+
+};
+
+function passEvent(elem){
+    var eventId = $(elem).data('event');
+    $('#eventId').val(eventId);
+};

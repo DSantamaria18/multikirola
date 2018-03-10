@@ -12,9 +12,16 @@ class ActividadMultikirolaController {
         params.max = Math.min(max ?: 10, 100)
         def eventList = actividadMultikirolaService.findEvents(params.modalidad)
 
+        User currentUser = getAuthenticatedUser()
+        def participantesList = Participante.findAllByUsuario(currentUser)
+
         if (eventList.size() == 0) {
             flash.message = "Lo sentimos, no hay actividades programadas para esta modalidad..."
         }
-        [eventList: eventList]
+
+        if (eventList.size() == 0) {
+            flash.message = "Recuerda que debes dar de alta al menos un participante"
+        }
+        [eventList: eventList, participantesList: participantesList]
     }
 }
