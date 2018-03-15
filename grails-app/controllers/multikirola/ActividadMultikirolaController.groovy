@@ -24,4 +24,13 @@ class ActividadMultikirolaController {
         }
         [eventList: eventList, participantesList: participantesList]
     }
+
+    def registrarParticipantes(Long eventId){
+        User currentUser = getAuthenticatedUser()
+        def participantesList = Participante.findAllByUsuario(currentUser)
+
+        def evento = actividadMultikirolaService.findEvent(eventId).first()
+
+        [evento: evento,  participantesList: participantesList]
+    }
 }

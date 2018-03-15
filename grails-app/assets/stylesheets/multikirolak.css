@@ -1,0 +1,23 @@
+.grid-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.link-evento {
+    text-decoration: none;
+}
+
+.home-img-multikirola {
+    content: url("/multikirola/assets/multikirolak.jpg");
+}
+
+.multikirolak-logo-container {
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .home-img-multikirola {
+        content: url("/multikirola/assets/multikirolak-small.jpg");
+    }
+}
