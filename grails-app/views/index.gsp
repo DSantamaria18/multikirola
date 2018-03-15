@@ -3,6 +3,8 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Multikirolak</title>
+    <asset:javascript src="application.js"/>
+
 </head>
 
 <body>
@@ -90,9 +92,9 @@
 
 <div id="content" role="main">
     <section class="row colset-2-its">
-        <h1>Multikirolak</h1>
+        <h1>Próximas Actividades</h1>
 
-        <div class="grid-container actividades-home">
+        %{--<div class="grid-container actividades-home">
             <div class="grid-item futbol-sala-home">
                 <g:link action="showEvents" controller="actividadMultikirola">
 
@@ -221,9 +223,60 @@
                     <g:img dir="images" file="mountain-bike.jpg" class="img-responsive"/>
                 </g:link>
             </div>
+        </div>--}%
+
+        <div class="grid-container" id="grid-actividades-home">
+            %{--<g:each in="${eventList}" var="evento" status="i">
+                <div class="grid-item home-20">
+                    <div class="list-event-item thumbnail" eventId="${evento?.id}">
+                        <g:link controller="actividadMultikirola" action="registrarParticipantes"
+                                params="[eventId: evento.id]" class="link-evento">
+                            <g:img dir="images" file="${evento.modalidad_id}.jpg" class="img-responsive img-rounded"/>
+
+                            <div class="caption">
+                                <h1 class="text-center text-uppercase"><strong>${evento?.tipo_actividad}</strong></h1>
+
+                                <p>
+
+                                <div class="list-event-date">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <span class="text-capitalize">
+                                        <g:formatDate date="${evento.fecha}" format="EEEE dd-MMMM-yyyy" style="MEDIUM"/>
+                                    </span>
+                                </div>
+
+                                <div class="list-event-time">
+                                    <i class="glyphicon glyphicon-time"></i>
+                                    <span>${evento?.horario}</span><br/>
+                                </div>
+
+                                <div class="item-event-venue">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                    <span>${evento?.lugar}</span>
+                                    <span>${evento?.recinto}</span>
+                                    <span>${evento?.instalacion}</span><br/>
+                                </div>
+
+                            </div>
+                        </g:link>
+                    </div>
+                </div>
+            </g:each>--}%
+        <g:render template="listaEventos" model="[eventList: eventList]"/>
         </div>
     </section>
 </div>
 
+%{--<g:javascript>
+    $(document).ready(function () {
+        $.get("/multikirola/actividadMultikirola/getNextEvents/",
+                function (data, status) {
+                    console.log(status);
+                    $('#grid-actividades-home').html(data)
+                })
+    });
+</g:javascript>--}%
 </body>
+
+
 </html>
