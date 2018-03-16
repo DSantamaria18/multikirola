@@ -170,15 +170,6 @@ function borrarParticipante(elem) {
 
 };
 
-
-$('[name="checkbox-participante"]').click(function(){
-   if($(this).prop('checked')){
-       $(this).parents('.participante-item-nombre').addClass('has-success');
-   }else{
-       $(this).parents('.participante-item-nombre').removeClass('has-success');
-   }
-});
-
 function inscribirParticipante() {
     var eventId = $('#eventId').val();
     var participanteId = $('#selected-participant-id').val();
@@ -224,3 +215,25 @@ function showContactInfo() {
     $('.div-inscribirParticipanteBtn').show();
 
 };
+
+function unsubscribeParticipant(elem){
+    var eventId = $(elem).parent().siblings('#event-id').data('id');
+    var nombre_participante = $(elem).parent().siblings('#participant-name').text();
+    var participanteId = $(elem).parent().siblings('#participant-name').data('id');
+
+    console.log(nombre_participante);
+    var msg = nombre_participante.toUpperCase() + " no participará en el evento. ¿Estás seguro?";
+    var result = confirm(msg);
+
+    if(result){
+        $.post("/multikirola/actividadMultikirola/delete",
+            {
+                eventId: eventId,
+                participanteId: participanteId
+            }, function (data, status) {
+                console.log(status);
+                $(elem).closest('#registros').remove();
+            }
+        );
+    }
+}
