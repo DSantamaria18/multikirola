@@ -7,14 +7,19 @@ import grails.transaction.Transactional
 class ParticipanteController {
 
     ParticipanteService participanteService
+    ActividadMultikirolaService actividadMultikirolaService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         User currentUser = getAuthenticatedUser()
         def participantesList = Participante.findAllByUsuario(currentUser)
+        def actividadMultikirolaList = actividadMultikirolaService.getActiveInscriptions(currentUser.id)
 
-        respond participantesList, model: [participanteCount: participantesList.size()]
+        render(view: "index", model: [participantesList: participantesList, actividadMultikirolaList: actividadMultikirolaList])
+
+//        respond participantesList, model: [participanteCount: participantesList.size()]
     }
 
     /*def show(Long id) {

@@ -90,4 +90,19 @@ class ActividadMultikirolaService {
         final result = sql.rows(query).first()
         return result['multikirola'] == true
     }
+
+    def getActiveInscriptions(Long userId) {
+        final String query = "SELECT e.id as evento_id, e.nombre as evento, p.id as participante_id, p.nombre as nombre_participante, " +
+                "p.apellido1 as apellido1_participante, p.apellido2 as apellido2_participante, e.fecha as fecha " +
+                "FROM actividad_multikirola AS am " +
+                "INNER JOIN participante AS p " +
+                "   ON p.id = am.participante " +
+                "INNER JOIN evento AS e " +
+                "   ON e.id = am.evento " +
+                "WHERE p.usuario_id = ${userId} AND fecha >= now()"
+
+        final Sql sql = new Sql(dataSource)
+        final results = sql.rows(query)
+        return results
+    }
 }

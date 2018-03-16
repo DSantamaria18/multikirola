@@ -8,7 +8,7 @@ class Curso {
         nombre(nullable: false, blank: false, unique: true)
     }
 
-//    String toString(){
-//        return nombre?.toString().toUpperCase()
-//    }
+    String toString(){
+        return nombre?.toString()?.toUpperCase()
+    }
 }

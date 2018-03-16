@@ -26,11 +26,38 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <f:table collection="${participanteList}"/>
-
-    <div class="pagination">
-        <g:paginate total="${participanteCount ?: 0}"/>
-    </div>
+    <f:table collection="${participantesList}"/>
 </div>
+
+
+<g:if test="${actividadMultikirolaList.size() > 0}">
+    <div id="list-inscripciones" class="content scaffold-list">
+        <h1>Inscripciones Activas</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Evento</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <g:each in="${actividadMultikirolaList}" var="am" status="i">
+                <tr id="registros">
+                    <td id="event-id" data-id="${am.evento_id}" hidden></td>
+                    <td id="event-name">${am.evento}</td>
+                    <td id="event-date"><g:formatDate date="${am.fecha}" format="EEEE dd-MMMM-yyyy"
+                                                      style="MEDIUM"/></td>
+                    <td id="participant-name"
+                        data-id="${am.participante_id}">${am.nombre_participante} ${am.apellido1_participante} ${am.apellido2_participante}</td>
+                    <td id="remove-btn"><div class="btn btn-sm btn-danger" onclick="unsubscribeParticipant(this)"><i
+                            class="glyphicon glyphicon-remove"></i></div></td>
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
+    </div>
+</g:if>
 </body>
 </html>
