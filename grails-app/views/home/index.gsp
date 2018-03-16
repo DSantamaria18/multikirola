@@ -8,9 +8,9 @@
 
 <body>
 
-%{--<g:render template="navbar"></g:render>--}%
+<g:render template="navbar"></g:render>
 
-<content tag="nav">
+%{--<content tag="nav">
 
     <li><a href="/multikirola">Inicio</a></li>
 
@@ -84,7 +84,7 @@
     </sec:ifLoggedIn>
 
     <sec:ifNotLoggedIn><li><g:link controller='login'>Identificarse</g:link></li></sec:ifNotLoggedIn>
-</content>
+</content>--}%
 
 
 <div class="svg" role="presentation">
