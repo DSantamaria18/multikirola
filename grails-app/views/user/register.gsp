@@ -7,7 +7,9 @@
 
 <body>
 
-<content tag="nav">
+<g:render template="/navbar"/>
+
+%{--<content tag="nav">
     <sec:ifAnyGranted roles='ROLE_ADMIN'>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -70,7 +72,7 @@
     </sec:ifLoggedIn>
 
     <sec:ifNotLoggedIn><li><g:link controller='login'>Identificarse</g:link></li></sec:ifNotLoggedIn>
-</content>
+</content>--}%
 
 <div class="container">
     <div id="signupbox" style="margin-top:50px"

@@ -144,3 +144,177 @@ function validateForm() {
 
     return formOk;
 }
+
+function apuntarParticipantes() {
+    var eventId = $('#eventId').val();
+    var selectedParticpantsIds = [];
+    var selectedParticipants = [];
+    var listaParticipantes = [];
+    var footer = `[id="footer-${eventId}"]`;
+
+    // $('footer .text-capitalize').each(function(){
+    $($(footer), $('.text-capitalize')).each(function(){
+       var nombreParticipante = $(this).text();
+       console.log(nombreParticipante);
+       listaParticipantes.push(nombreParticipante.toLowerCase());
+    });
+
+    $('#checkbox-participante:checked').each(function(){
+        var participanteId = $(this).val();
+        console.log(participanteId);
+        selectedParticpantsIds.push(participanteId);
+        var nombre = $(this).siblings('span').text();
+        if(listaParticipantes.indexOf(nombre.toLowerCase()) < 0 ) {
+            // selectedParticipants.push(nombre);
+            var html = `<div class="participante-row"><div class="participante-datarow"><i class=\"glyphicon glyphicon-user\"></i><span class=\"text-capitalize\"> ${nombre}</span></div><div class="btn btn-danger push eliminar-push" onclick="borraParticipante(this)"> <i class="glyphicon glyphicon-remove"></i></div></div>`
+            $(footer).append(html);
+        }
+    });
+
+    var params = {
+        eventoId: eventId,
+        selectedParticpantsIds: selectedParticpantsIds
+    }
+
+    // $.post("/multikirola/")
+
+};
+
+function passEvent(elem){
+    var eventId = $(elem).data('event');
+    $('#eventId').val(eventId);
+};
+
+// $('#borrarParticipanteBtn').click(function () {
+// $('.borrar-participante-btn').click(function () {
+function borrarParticipante(elem) {
+    var eventId = $('#eventId').val();
+    console.log(eventId);
+
+    var participanteId = $(elem).parent().attr('participante-id')
+    console.log(participanteId);
+
+    $.post("/multikirola/actividadMultikirola/delete",
+        {
+            eventId: eventId,
+            participanteId: participanteId
+        }, function (data, status) {
+            console.log(status);
+        }
+    );
+
+    $(elem).closest('.participanteRegistrado-row').remove();
+
+};
+
+
+$('[name="checkbox-participante"]').click(function(){
+   if($(this).prop('checked')){
+       $(this).parents('.participante-item-nombre').addClass('has-success');
+   }else{
+       $(this).parents('.participante-item-nombre').removeClass('has-success');
+   }
+});
+
+/*$('#inscribirBtn').click(function(){
+    var eventId = $('#eventId').val();
+    var participantes = [];
+
+
+
+    // for(var i = 0; i < $('[name="checkbox-participante"]:checked').size(); i++){
+    $('[name="checkbox-participante"]:checked').each(function () {
+        var participante = [];
+        var id, telefono, movil;
+        id = $(this).val();
+        console.log(id);
+        participante.push(id);
+
+        telefono = $(this).parents('.input-group').siblings().children('input').eq(0).val();
+        console.log(telefono);
+        participante.push(telefono);
+
+        movil = $(this).parents('.input-group').siblings().children('input').eq(1).val();
+        console.log(movil);
+        participante.push(movil);
+
+        participantes.push(participante);
+        // infoParticipantes.participantes
+    });
+    console.table(participantes);
+    console.log(eventId);
+
+    var infoParticipantes = {
+        eventId: eventId,
+        listaParticipantes: JSON.stringify(participantes)
+    };
+
+    $.post('/multikirola/actividadMultikirola/save', infoParticipantes,
+        function (data, status) {
+            console.log(status);
+        }
+
+    );
+});*/
+
+// $('#inscribirParticipanteBtn').click(function () {
+function inscribirParticipante() {
+    var eventId = $('#eventId').val();
+    var participanteId = $('#selected-participant-id').val();
+    var telefono =  $('#participante-telefono').val();
+    var movil =  $('#participante-mobile').val();
+
+    if(telefono.length < 9 || movil.length < 9) {
+        alert("Los datos de contacto del participante no son correctos...")
+    }
+
+    var params = {
+        eventId: eventId,
+        participanteId: participanteId,
+        telefono: telefono,
+        movil: movil
+    }
+
+    $.post('/multikirola/actividadMultikirola/save', params,
+        function (data, status) {
+            console.log(status);
+            $('#selected-participant-id').val('');
+            $('#participante-telefono').val('');
+            $('#participante-mobile').val('');
+            $('.form-datos-contacto').hide();
+            $('.div-inscribirParticipanteBtn').hide();
+            // $('#div-participantes-registrados').html(data);
+            $('#selector-participantes').html(data);
+        }
+
+    );
+};
+
+/*
+$('#select-participantes').change(function () {
+    var telefono = $('option:selected').attr('phone');
+    var movil = $('option:selected').attr('mobile');
+    var id = $('option:selected').attr('id');
+
+    $('#selected-participant-id').val(id);
+    $('#participante-telefono').val(telefono);
+    $('#participante-mobile').val(movil);
+
+    $('.form-datos-contacto').show();
+    $('.div-inscribirParticipanteBtn').show();
+
+});*/
+
+function showContactInfo() {
+    var telefono = $('option:selected').attr('phone');
+    var movil = $('option:selected').attr('mobile');
+    var id = $('option:selected').attr('id');
+
+    $('#selected-participant-id').val(id);
+    $('#participante-telefono').val(telefono);
+    $('#participante-mobile').val(movil);
+
+    $('.form-datos-contacto').show();
+    $('.div-inscribirParticipanteBtn').show();
+
+};
