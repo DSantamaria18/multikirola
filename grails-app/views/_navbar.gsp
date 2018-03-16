@@ -35,10 +35,10 @@
     <sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_MANAGER, ROLE_USER'>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false">Multikirola<span class="caret"></span></a>
+               aria-expanded="false">Centros<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><g:link class="list" controller="Curso" action="index">Cursos</g:link></li>
                 <li><g:link class="list" controller="Centro" action="index">Centros</g:link></li>
+                <li><g:link class="list" controller="Curso" action="index">Cursos</g:link></li>
             </ul>
         </li>
     </sec:ifAnyGranted>
