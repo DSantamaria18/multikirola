@@ -7,6 +7,8 @@
 </head>
 
 <body>
+<g:render template="/navbar"/>
+
 <g:if env="development">
     <g:if test="${Throwable.isInstance(exception)}">
         <g:renderException exception="${exception}"/>
