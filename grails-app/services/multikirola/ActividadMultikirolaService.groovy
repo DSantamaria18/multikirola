@@ -38,8 +38,8 @@ class ActividadMultikirolaService {
         return results
     }
 
-    def findNextEvents() {
-        final String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
+    def findNextEvents(Integer limit = null) {
+        String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
                 "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
                 "FROM evento e " +
                 "LEFT JOIN lugar l ON e.lugar_id = l.id " +
@@ -48,7 +48,9 @@ class ActividadMultikirolaService {
                 "LEFT JOIN modalidad m ON e.modalidad_id = m.id " +
                 "WHERE multikirola = TRUE and fecha >= now() " +
                 "AND modalidad_id IN (1,3,5,6,7,8,13,19,20,22,24,26,28,32,34,39,44,49,52,54,62) " +
-                "ORDER BY fecha ASC"
+                "ORDER BY fecha ASC "
+
+        if(limit) query +=  "LIMIT ${limit} "
 
         final Sql sql = new Sql(dataSource)
         final results = sql.rows(query)
