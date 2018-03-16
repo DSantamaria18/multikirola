@@ -29,6 +29,7 @@ class CursoController {
         }
 
         try {
+            curso.nombre = curso.nombre.toUpperCase()
             cursoService.save(curso)
         } catch (ValidationException e) {
             respond curso.errors, view:'create'

@@ -29,6 +29,7 @@ class CentroController {
         }
 
         try {
+            centro.nombre = centro.nombre.toUpperCase()
             centroService.save(centro)
         } catch (ValidationException e) {
             respond centro.errors, view:'create'
