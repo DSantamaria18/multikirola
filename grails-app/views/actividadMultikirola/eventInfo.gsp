@@ -68,21 +68,23 @@
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
+                <th hidden>Id</th>
                 <th>Apellidos</th>
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Movil</th>
+                <th>Token</th>
             </tr>
             </thead>
             <tbody>
             <g:each in="${participantesList}" var="participante" status="i">
                 <tr>
-                    <td>${participante.token}</td>
+                    <td hidden>${participante.id}</td>
                     <td>${participante.apellido1} ${participante.apellido2}</td>
                     <td>${participante.nombre}</td>
                     <td>${participante.telefono}</td>
                     <td>${participante.movil}</td>
+                    <td>${participante.token}</td>
                 </tr>
             </g:each>
             </tbody>
