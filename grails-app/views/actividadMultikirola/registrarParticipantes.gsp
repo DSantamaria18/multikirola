@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Eventos Fútbol Sala</title>
+    %{--<title>Eventos Fútbol Sala</title>--}%
 </head>
 
 <style>
