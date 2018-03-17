@@ -42,7 +42,7 @@
                     %{--<div style="margin-bottom: 25px" class="input-group">--}%
                     <div style="margin-top: 20px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="username" type="text" class="form-control"
+                        <input id="username" type="text" class="form-control" data-toggle="tooltip-user" title="Tu identificador de acceso a la aplicación. Debe ser único."
                                name="${securityConfig.apf.usernameParameter}" value=""
                                placeholder="Nombre de usuario"
                                onchange="$('.error').attr('hidden', true);"/>

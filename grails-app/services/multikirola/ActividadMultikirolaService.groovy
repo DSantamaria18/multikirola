@@ -23,7 +23,7 @@ class ActividadMultikirolaService {
         return results
     }
 
-    def findEvent(Long eventId){
+    def findEvent(Long eventId) {
         final String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
                 "i.nombre_instalacion as instalacion, m.nombre as modalidad, m.id as modalidad_id " +
                 "FROM evento e " +
@@ -50,14 +50,14 @@ class ActividadMultikirolaService {
                 "AND modalidad_id IN (1,3,5,6,7,8,13,19,20,22,24,26,28,32,34,39,44,49,52,54,62) " +
                 "ORDER BY fecha ASC "
 
-        if(limit) query +=  "LIMIT ${limit} "
+        if (limit) query += "LIMIT ${limit} "
 
         final Sql sql = new Sql(dataSource)
         final results = sql.rows(query)
         return results
     }
 
-    def findRegisteredParticipants(Long eventId, Long userId){
+    def findRegisteredParticipants(Long eventId, Long userId) {
         final String query = "SELECT * FROM actividad_multikirola am, participante p " +
                 "WHERE am.participante = p.id AND am.evento = ${eventId} AND participante IN (SELECT id FROM " +
                 "participante as p WHERE p.usuario_id = ${userId})"
@@ -67,7 +67,7 @@ class ActividadMultikirolaService {
         return results
     }
 
-    def findAvailableParticipants(Long eventId, Long userId){
+    def findAvailableParticipants(Long eventId, Long userId) {
         final String query = "SELECT * FROM participante AS p " +
                 "WHERE p.usuario_id = ${userId} AND p.id NOT IN (SELECT participante FROM " +
                 "actividad_multikirola AS am WHERE evento = ${eventId})"
@@ -77,7 +77,7 @@ class ActividadMultikirolaService {
         return results
     }
 
-    void deletePArticipantFromEvent(Long eventId, Long participanteId){
+    void deletePArticipantFromEvent(Long eventId, Long participanteId) {
         final String query = "DELETE FROM actividad_multikirola " +
                 "WHERE evento = ${eventId} AND participante = ${participanteId}"
 
@@ -85,7 +85,7 @@ class ActividadMultikirolaService {
         sql.execute(query)
     }
 
-    boolean isMultikirolaEvent(Long eventId){
+    boolean isMultikirolaEvent(Long eventId) {
         final String query = "SELECT multikirola FROM evento WHERE id = ${eventId}"
 
         final Sql sql = new Sql(dataSource)

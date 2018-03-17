@@ -236,4 +236,8 @@ function unsubscribeParticipant(elem){
             }
         );
     }
-}
+};
+
+$('#username').hover(function () {
+   $(this).tooltip();
+});
