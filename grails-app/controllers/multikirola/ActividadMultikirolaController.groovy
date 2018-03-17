@@ -12,15 +12,16 @@ class ActividadMultikirolaController {
 
     def showEvents(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        def eventList = actividadMultikirolaService.findEvents(params.modalidad)
+        def eventList = actividadMultikirolaService.getEvents()
+//        def eventList = actividadMultikirolaService.findEvents(params.modalidad)
 
-        if (eventList.size() == 0) {
+        /*if (eventList.size() == 0) {
             flash.message = "Lo sentimos, no hay actividades programadas para esta modalidad..."
-        }
+        }*/
 
-        if (eventList.size() == 0) {
+    /*    if (eventList.size() == 0) {
             flash.message = "Recuerda que debes dar de alta al menos un participante"
-        }
+        }*/
         [eventList: eventList]
     }
 
@@ -103,5 +104,21 @@ class ActividadMultikirolaController {
         def eventList = actividadMultikirolaService.findNextEvents()
 
         render(template: "listaEventos", model:[eventList: eventList])
+    }
+
+    def eventInfo(params){
+        def eventId = params.event as Long
+        User currentUser = getAuthenticatedUser()
+
+        if(!currentUser){
+            redirect(uri:'/login/auth')
+            return
+        }
+
+        def evento = actividadMultikirolaService.findEvent(eventId).first()
+        def participantesList = actividadMultikirolaService.findRegisteredParticipants(eventId)
+//        def participantesDisponiblesList = actividadMultikirolaService.findAvailableParticipants(eventId)
+
+        [evento: evento,  participantesList: participantesList]
     }
 }

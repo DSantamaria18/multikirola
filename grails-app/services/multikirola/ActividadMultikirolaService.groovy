@@ -7,7 +7,7 @@ import groovy.sql.Sql
 class ActividadMultikirolaService {
     def dataSource
 
-    def findEvents(final String modalidadId) {
+    /*def findEvents(final String modalidadId) {
         final String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
                 "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
                 "FROM evento e " +
@@ -17,6 +17,22 @@ class ActividadMultikirolaService {
                 "LEFT JOIN modalidad m ON e.modalidad_id = m.id " +
                 "WHERE multikirola = TRUE and fecha >= now() " +
                 "AND modalidad_id = ${modalidadId} ORDER BY fecha DESC"
+
+        final Sql sql = new Sql(dataSource)
+        final results = sql.rows(query)
+        return results
+    }*/
+
+    def getEvents() {
+        final String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
+                "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
+                "FROM evento e " +
+                "LEFT JOIN lugar l ON e.lugar_id = l.id " +
+                "LEFT JOIN recinto r ON e.recinto_id = r.id " +
+                "LEFT JOIN instalacion i ON e.instalacion_id = i.id " +
+                "LEFT JOIN modalidad m ON e.modalidad_id = m.id " +
+                "WHERE multikirola = TRUE " +
+                "ORDER BY fecha DESC"
 
         final Sql sql = new Sql(dataSource)
         final results = sql.rows(query)
@@ -61,6 +77,15 @@ class ActividadMultikirolaService {
         final String query = "SELECT * FROM actividad_multikirola am, participante p " +
                 "WHERE am.participante = p.id AND am.evento = ${eventId} AND participante IN (SELECT id FROM " +
                 "participante as p WHERE p.usuario_id = ${userId})"
+
+        final Sql sql = new Sql(dataSource)
+        final results = sql.rows(query)
+        return results
+    }
+
+    def findRegisteredParticipants(Long eventId) {
+        final String query = "SELECT * FROM actividad_multikirola am, participante p " +
+                "WHERE am.participante = p.id AND am.evento = ${eventId} ORDER BY p.apellido1, p.apellido2 ASC"
 
         final Sql sql = new Sql(dataSource)
         final results = sql.rows(query)
