@@ -68,63 +68,13 @@
 
 <g:render template="/navbar"/>
 
-%{--<div id="list-eventos" class="content scaffold-list" role="main">
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-
-    <g:if test="${eventList.size() > 0}">
-        <h1 class="text-center">Próximas actividades de ${eventList[0]?.modalidad}</h1>
-
-        <div class="list-group list-event">
-            <g:each in="${eventList}" var="evento" status="i">
-                <div class="panel panel-info list-event-item" eventId="${evento?.id}">
-                    <div class="panel-heading">
-                        <h3 class="panel-title text-center">${evento?.tipo_actividad}</h3>
-                    </div>
-                    <div class="list-event-row">
-
-                        <div class="panel-body">
-                            <div class="list-event-date">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                                <span class="text-capitalize">
-                                    <g:formatDate date="${evento.fecha}" format="EEEE dd-MMMM-yyyy" style="MEDIUM"/>
-                                </span>
-                            </div>
-
-                            <div class="list-event-time">
-                                <i class="glyphicon glyphicon-time"></i>
-                                <span>${evento?.horario}</span><br/>
-                            </div>
-
-                            <div class="item-event-venue">
-                                <i class="glyphicon glyphicon-map-marker"></i>
-                                <span>${evento?.lugar}</span>
-                                <span>${evento?.recinto}</span>
-                                <span>${evento?.instalacion}</span><br/>
-                            </div>
-                        </div>
-
-                       --}%%{-- <div class="push inscribir-push btn btn-primary push">
-                            <g:link controller="actividadMultikirola" action="registrarParticipantes"  class="inscribir-link btn"
-                            params="[eventId: evento.id]">
-                                <i class="glyphicon glyphicon-pencil inscribir-span"></i>
-                            </g:link>
-                        </div>--}%%{--
-
-                    </div>
-                </div>
-            </g:each>
-        </div>
-
-    </g:if>
-    <g:else>
-        <h1>No hay eventos programados para esta actividad...</h1>
-    </g:else>
-
-
-
-</div>--}%
+<div class="nav" role="navigation">
+    <ul>
+        %{--<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>--}%
+        <li><g:link class="create" action="create"><g:message code="default.new.label"
+                                                              args="[entityName]"/></g:link></li>
+    </ul>
+</div>
 
 
 <g:if test="${flash.message}">
@@ -136,7 +86,7 @@
     <g:if test="${eventList.size() > 0}">
         <div class="list-event row" id="">
             <g:each in="${eventList}" var="evento" status="i">
-                <div class="list-event-item thumbnail" eventId="${evento?.id}">
+               %{-- <div class="list-event-item thumbnail" eventId="${evento?.id}">
                     <g:link controller="actividadMultikirola" action="registrarParticipantes"  params="[eventId: evento.id]" class="link-evento" >
                         <g:img dir="images" file="${evento.modalidad_id}.jpg" class="img-responsive img-rounded"/>
 
@@ -165,16 +115,9 @@
 
                         </div>
 
-                    %{--<div class="btn btn-primary" style="width: 100%; margin: 0 auto;">
-                        <g:link controller="actividadMultikirola" action="registrarParticipantes"  class="inscribir-link btn"
-                        params="[eventId: evento.id]">
-                            <i class="glyphicon glyphicon-plus"></i>
-                            <i class="glyphicon glyphicon-user"></i>
-                        </g:link>
-                    </div>--}%
                     </g:link>
-                </div>
-            %{--</div>--}%
+                </div>--}%
+                <g:fichaEvento event="${evento}"/>
             </g:each>
         </div>
 
