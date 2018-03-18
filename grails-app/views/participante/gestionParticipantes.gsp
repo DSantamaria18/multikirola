@@ -13,22 +13,44 @@
 <a href="#list-participante" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
                                                                    default="Skip to content&hellip;"/></a>
 
-<div class="nav" role="navigation">
+%{--<div class="nav" role="navigation">
     <ul>
         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
         <li><g:link class="create" action="create"><g:message code="default.new.label"
                                                               args="[entityName]"/></g:link></li>
     </ul>
-</div>
+</div>--}%
 
-<div id="list-participante" class="content scaffold-list" role="main">
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <f:table collection="${participantesList}"/>
+<div id="tabla-participantes">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Apellido 1</th>
+                <th>Apellido 2</th>
+                <th>Nombre</th>
+                <th>Fecha Nacimiento</th>
+                <th>Teléfono</th>
+                <th>Móvil</th>
+            </tr>
+            </thead>
+            <tbody>
+            <g:each in="${participantesList}" var="participante" status="i">
+                <tr data-id="${participante.id}" onclick="">
+                    <td>${participante.id}</td>
+                    <td class="text-capitalize">${participante.apellido1}</td>
+                    <td class="text-capitalize">${participante.apellido2}</td>
+                    <td class="text-capitalize">${participante.nombre}</td>
+                    <td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>
+                    <td>${participante.telefono}</td>
+                    <td>${participante.movil}</td>
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 
 </body>
 </html>

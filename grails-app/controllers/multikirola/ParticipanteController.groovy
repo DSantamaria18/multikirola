@@ -234,8 +234,15 @@ class ParticipanteController {
             redirect(uri:'/login/auth')
             return
         }
-
-        def participantesList = Participante.list()
+        
+        def c = Participante.createCriteria()
+        def participantesList = c.list{
+            and{
+                order("apellido1", "asc")
+                order("apellido2", "asc")
+                order("nombre", "asc")
+            }
+        }
 
         [participantesList: participantesList]
     }
