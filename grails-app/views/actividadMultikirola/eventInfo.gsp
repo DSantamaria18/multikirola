@@ -9,13 +9,12 @@
 <g:render template="/navbar"/>
 
 
-<div class="nav" role="navigation">
+%{--<div class="nav" role="navigation">
     <ul>
-        %{--<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>--}%
-        <li><g:link class="create" action="create"><g:message code="default.new.label"
-                                                              args="[entityName]"/></g:link></li>
+        --}%%{--<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>--}%%{--
+        <li><g:link action="descargarParticipantes"><i class="glyphicon glyphicon-download"></i> </g:link></li>
     </ul>
-</div>
+</div>--}%
 
 <div class="container">
     <div id="event-info" class="content mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" role="main">
@@ -62,7 +61,14 @@
 </div>
 
 <div class="container">
-    <h1>Participantes Inscritos  <span class="badge">${participantesList.size()}</span> </h1>
+    <h1>Participantes <span class="badge">${participantesList.size()}</span>
+        <span style="text-decoration: none; margin-left: 25%">
+
+            <g:link class="btn btn-primary" action="descargarParticipantes" params="[eventId: evento.id ]">
+                <i class="glyphicon glyphicon-download"></i>
+            </g:link>
+        </span>
+    </h1>
 
     <div class="table-responsive">
         <table class="table">
@@ -80,8 +86,8 @@
             <g:each in="${participantesList}" var="participante" status="i">
                 <tr>
                     <td hidden>${participante.id}</td>
-                    <td>${participante.apellido1} ${participante.apellido2}</td>
-                    <td>${participante.nombre}</td>
+                    <td class="text-capitalize">${participante.apellido1} ${participante.apellido2}</td>
+                    <td class="text-capitalize">${participante.nombre}</td>
                     <td>${participante.telefono}</td>
                     <td>${participante.movil}</td>
                     <td>${participante.token}</td>
