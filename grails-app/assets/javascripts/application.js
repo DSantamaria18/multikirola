@@ -242,6 +242,37 @@ $('#username').hover(function () {
    $(this).tooltip();
 });
 
-$('tr[role="button"').click(function () {
+/*$('tr[role="button"]').click(function () {
     window.location= $(this).data('href');
-})
+});*/
+
+function goToEvent(elem) {
+    var eventId = $(elem).data('id');
+    window.location= "/multikirola/actividadMultikirola/eventInfo?event=" + eventId;
+};
+
+
+function filtrarEventos(fechaIniDesde, fechaIniHasta) {
+    $.get("/multikirola/actividadMultikirola/filtrarEventos/",
+        {
+            'fechaDesde': fechaIniDesde,
+            'fechaHasta': fechaIniHasta
+        }).done(function (data, status) {
+            console.log(status);
+            $('#tabla-eventos').html(data);
+    })
+};
+
+function filtrarParticipantes(apellido1, telefono, movil){
+    console.log("filtrando...");
+    $.get("/multikirola/participante/filtrarParticipantes/",
+        {
+            apellido1: apellido1,
+            telefono: telefono,
+            movil: movil
+
+        }).done(function (data, status) {
+        console.log(status);
+        $('#tabla-participantes').html(data);
+    })
+}

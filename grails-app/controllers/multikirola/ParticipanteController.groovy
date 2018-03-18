@@ -1,5 +1,7 @@
 package multikirola
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,6 +9,7 @@ import grails.transaction.Transactional
 class ParticipanteController {
 
     ParticipanteService participanteService
+    ParticipanteImplService participanteImplService
     ActividadMultikirolaService actividadMultikirolaService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -18,8 +21,6 @@ class ParticipanteController {
         def actividadMultikirolaList = actividadMultikirolaService.getActiveInscriptions(currentUser.id)
 
         render(view: "index", model: [participantesList: participantesList, actividadMultikirolaList: actividadMultikirolaList])
-
-//        respond participantesList, model: [participanteCount: participantesList.size()]
     }
 
     /*def show(Long id) {
@@ -225,6 +226,31 @@ class ParticipanteController {
         String token = random1 + año + apellido + random2 + dia + nombre + mes + random3
 
         return token
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def gestionParticipantes(){
+        User currentUser = getAuthenticatedUser()
+        if(!currentUser){
+            redirect(uri:'/login/auth')
+            return
+        }
+
+        def c = Participante.createCriteria()
+        def participantesList = c.list{
+            and{
+                order("apellido1", "asc")
+                order("apellido2", "asc")
+                order("nombre", "asc")
+            }
+        }
+
+        [participantesList: participantesList]
+    }
+
+    def filtrarParticipantes(params){
+        def participantesList = participanteImplService.filtrarParticipantes(params)
+        render(template: "tablaParticipantes", model:[participantesList: participantesList])
     }
 
 }
