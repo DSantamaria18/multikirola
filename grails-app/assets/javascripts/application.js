@@ -262,3 +262,16 @@ function filtrarEventos(fechaIniDesde, fechaIniHasta) {
             $('#tabla-eventos').html(data);
     })
 };
+
+function filtrarParticipantes(apellido1, telefono, movil){
+    $.get("/multikirola/participante/filtrarParticipantes/",
+        {
+            apellido1: apellido1,
+            telefono: telefono,
+            movil: movil
+
+        }).done(function (data, status) {
+        console.log(status);
+        $('#tabla-participantes').html(data);
+    })
+}

@@ -2,6 +2,8 @@ package multikirola
 
 import grails.plugin.springsecurity.annotation.Secured
 
+import javax.servlet.http.Part
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -234,7 +236,7 @@ class ParticipanteController {
             redirect(uri:'/login/auth')
             return
         }
-        
+
         def c = Participante.createCriteria()
         def participantesList = c.list{
             and{
@@ -245,6 +247,21 @@ class ParticipanteController {
         }
 
         [participantesList: participantesList]
+    }
+
+    def filtrarParticipantes(params){
+        String apellido1 = params?.apellido1
+        String telefono = params?.telefono
+        String movil = params?.movil
+
+        def c = Participante.createCriteria()
+        def participantesList = c.list {
+            like("apellido1", apellido1)
+        }
+
+//        def participantesList = Participante.findAllByApellido1IlikeAndTelefonoIlikeAndMovilIlike(apellido1,telefono,movil)
+//        def participantesList = participanteService.filtrarParticipantes(params)
+        render(template: "tablaParticipantes", model:[participantesList: participantesList])
     }
 
 }
