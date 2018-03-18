@@ -236,4 +236,12 @@ function unsubscribeParticipant(elem){
             }
         );
     }
-}
+};
+
+$('#username').hover(function () {
+   $(this).tooltip();
+});
+
+$('tr[role="button"').click(function () {
+    window.location= $(this).data('href');
+})
