@@ -272,4 +272,9 @@ class ActividadMultikirolaController {
         workbook.close()
 
     }
+
+    def filtrarEventos(params){
+        def eventList = actividadMultikirolaService.filtrarEventos(params)
+        render(template: "tablaEventos", model:[eventList: eventList])
+    }
 }

@@ -132,4 +132,26 @@ class ActividadMultikirolaService {
         final results = sql.rows(query)
         return results
     }
+
+    def filtrarEventos(params){
+        String fDesde = params.fechaDesde
+        String fHasta = params.fechaHasta
+
+        String query = "SELECT e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
+                "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
+                "FROM evento e " +
+                "LEFT JOIN lugar l ON e.lugar_id = l.id " +
+                "LEFT JOIN recinto r ON e.recinto_id = r.id " +
+                "LEFT JOIN instalacion i ON e.instalacion_id = i.id " +
+                "LEFT JOIN modalidad m ON e.modalidad_id = m.id " +
+                "WHERE (e.fecha BETWEEN '${fDesde}' AND '${fHasta}' " +
+                    "OR fecha_fin BETWEEN '${fDesde}' AND '${fHasta}' " +
+                    "OR (fecha < '${fDesde}' AND fecha_fin > '${fHasta}')) " +
+                "AND multikirola = TRUE " +
+                "ORDER BY fecha DESC"
+
+        final Sql sql = new Sql(dataSource)
+        final results = sql.rows(query)
+        return results
+    }
 }

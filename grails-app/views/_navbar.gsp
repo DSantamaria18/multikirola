@@ -40,7 +40,7 @@
                 <li><g:link class="list" controller="ActividadMultikirola" action="showEvents">Actividades</g:link></li>
                 <li><g:link class="list" controller="Centro" action="index">Centros</g:link></li>
                 <li><g:link class="list" controller="Curso" action="index">Cursos</g:link></li>
-                %{--<li><g:link class="list" controller="Participante" action="index">Participantes</g:link></li>--}%
+                <li><g:link class="list" controller="Participante" action="gestionParticipantes">Participantes</g:link></li>
                 %{--<li><g:link class="list" controller="User" action="index">Usuarios</g:link></li>--}%
             </ul>
         </li>
