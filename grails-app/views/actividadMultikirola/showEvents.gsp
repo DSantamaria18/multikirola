@@ -36,21 +36,26 @@
             <div class="panel-body form-group">
                 <g:form resource="${this.query}" method="post" action="exportEventosFiltrados">
                     <div class="row fieldcontain">
-                        <label>
-                            Tiene lugar entre:
-                        </label>
+                        <label> Tiene lugar entre: </label>
                         <g:datePicker name="fechaDesde" precision="day" id="qFechaDesde"
                                       years="${2016..2030}"/> y
                         <g:datePicker name="fechaHasta" precision="day" id="qFechaHasta"
                                       years="${2016..2030}"/>
                     </div>
 
+                    <div class="row fieldcontain">
+                        <label>Actividad: </label>
+                        <g:select name="actividad" id="qActividad"
+                                  from="['CUALQUIERA', 'TOPAKETA - ENCUENTRO DEPORTIVO', 'TXANGOA - EXCURSION']"
+                                  value=""/>
+                    </div>
+
                     <!-- botones filtrado-->
                     <div class="row fieldcontain">
                         <button type="button" class="row btn-block btn-primary"
-                                onclick="filtrarEventos($('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val()
-                                    + '-' + $('#qFechaDesde_day').val(), $('#qFechaHasta_year').val() + '-'
-                                    + $('#qFechaHasta_month').val() + '-' + $('#qFechaHasta_day').val())">
+                                onclick="filtrarEventos($('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val() + '-' + $('#qFechaDesde_day').val(),
+                                    $('#qFechaHasta_year').val() + '-' + $('#qFechaHasta_month').val() + '-' + $('#qFechaHasta_day').val(),
+                                    $('#qActividad').val())">
                             FILTRAR EVENTOS</button>
                     </div>
                 </g:form>
