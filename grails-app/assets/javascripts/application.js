@@ -264,6 +264,7 @@ function filtrarEventos(fechaIniDesde, fechaIniHasta) {
 };
 
 function filtrarParticipantes(apellido1, telefono, movil){
+    console.log("filtrando...");
     $.get("/multikirola/participante/filtrarParticipantes/",
         {
             apellido1: apellido1,

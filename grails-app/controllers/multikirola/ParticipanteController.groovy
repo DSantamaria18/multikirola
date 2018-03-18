@@ -2,8 +2,6 @@ package multikirola
 
 import grails.plugin.springsecurity.annotation.Secured
 
-import javax.servlet.http.Part
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -11,6 +9,7 @@ import grails.transaction.Transactional
 class ParticipanteController {
 
     ParticipanteService participanteService
+    ParticipanteImplService participanteImplService
     ActividadMultikirolaService actividadMultikirolaService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -250,17 +249,7 @@ class ParticipanteController {
     }
 
     def filtrarParticipantes(params){
-        String apellido1 = params?.apellido1
-        String telefono = params?.telefono
-        String movil = params?.movil
-
-        def c = Participante.createCriteria()
-        def participantesList = c.list {
-            like("apellido1", apellido1)
-        }
-
-//        def participantesList = Participante.findAllByApellido1IlikeAndTelefonoIlikeAndMovilIlike(apellido1,telefono,movil)
-//        def participantesList = participanteService.filtrarParticipantes(params)
+        def participantesList = participanteImplService.filtrarParticipantes(params)
         render(template: "tablaParticipantes", model:[participantesList: participantesList])
     }
 
