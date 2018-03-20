@@ -252,12 +252,11 @@ function goToEvent(elem) {
 };
 
 
-function filtrarEventos(fechaIniDesde, fechaIniHasta, actividad) {
+function filtrarEventos(fechaIniDesde, fechaIniHasta) {
     $.get("/multikirola/actividadMultikirola/filtrarEventos/",
         {
             'fechaDesde': fechaIniDesde,
-            'fechaHasta': fechaIniHasta,
-            'actividad': actividad
+            'fechaHasta': fechaIniHasta
         }).done(function (data, status) {
             console.log(status);
             $('#tabla-eventos').html(data);

@@ -138,7 +138,6 @@ class ActividadMultikirolaService {
     def filtrarEventos(params){
         String fDesde = params.fechaDesde
         String fHasta = params.fechaHasta
-        String actividad = params?.actividad
 
         String baseQuery = "SELECT e.id, e.tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
                 "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
@@ -152,9 +151,8 @@ class ActividadMultikirolaService {
                     "OR (fecha < '${fDesde}' AND fecha_fin > '${fHasta}')) " +
                 "AND multikirola = TRUE "
 
-        String actividadQuery = (actividad == 'CUALQUIERA')? "" :  "AND e.tipo_actividad = '${actividad}' "
         String sortQuery = "ORDER BY fecha DESC "
-        String query = baseQuery + actividadQuery + sortQuery
+        String query = baseQuery + sortQuery
 
         final Sql sql = new Sql(dataSource)
         final results = sql.rows(query)
