@@ -170,46 +170,65 @@ function borrarParticipante(elem) {
 
 };
 
+function calcularEdad(fnacimiento) { // birthday is a date
+    var ageDifMs = Date.now() - fnacimiento.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    var result = Math.abs(ageDate.getUTCFullYear() - 1970);
+    console.log(result);
+    return result;
+    // return Math.abs(ageDate.getUTCFullYear() - 1970);
+};
+
 function inscribirParticipante() {
     var eventId = $('#eventId').val();
     var participanteId = $('#selected-participant-id').val();
     var telefono =  $('#participante-telefono').val();
     var movil =  $('#participante-mobile').val();
+    var fnacimiento = new Date($('#participante-fnacimiento').val());
+    var edadMinima = parseInt($('#edadMinima').val());
 
-    if(telefono.length < 9 || movil.length < 9) {
-        alert("Los datos de contacto del participante no son correctos...")
-    }
+    var edad = calcularEdad(fnacimiento);
+    if (edad < edadMinima) {
+        alert("La edad mínima para poder inscribirse es de " + edadMinima.toString() + " años.");
+    } else {
 
-    var params = {
-        eventId: eventId,
-        participanteId: participanteId,
-        telefono: telefono,
-        movil: movil
-    }
 
-    $.post('/multikirola/actividadMultikirola/save', params,
-        function (data, status) {
-            console.log(status);
-            $('#selected-participant-id').val('');
-            $('#participante-telefono').val('');
-            $('#participante-mobile').val('');
-            $('.form-datos-contacto').hide();
-            $('.div-inscribirParticipanteBtn').hide();
-            // $('#div-participantes-registrados').html(data);
-            $('#selector-participantes').html(data);
+        if (telefono.length < 9 || movil.length < 9) {
+            alert("Los datos de contacto del participante no son correctos...")
         }
 
-    );
+        var params = {
+            eventId: eventId,
+            participanteId: participanteId,
+            telefono: telefono,
+            movil: movil
+        }
+
+        $.post('/multikirola/actividadMultikirola/save', params,
+            function (data, status) {
+                console.log(status);
+                $('#selected-participant-id').val('');
+                $('#participante-telefono').val('');
+                $('#participante-mobile').val('');
+                $('.form-datos-contacto').hide();
+                $('.div-inscribirParticipanteBtn').hide();
+                // $('#div-participantes-registrados').html(data);
+                $('#selector-participantes').html(data);
+            }
+        );
+    }
 };
 
 function showContactInfo() {
     var telefono = $('option:selected').attr('phone');
     var movil = $('option:selected').attr('mobile');
     var id = $('option:selected').attr('id');
+    var fnacimiento = $('option:selected').attr('fnacimiento');
 
     $('#selected-participant-id').val(id);
     $('#participante-telefono').val(telefono);
     $('#participante-mobile').val(movil);
+    $('#participante-fnacimiento').val(fnacimiento);
 
     $('.form-datos-contacto').show();
     $('.div-inscribirParticipanteBtn').show();
@@ -241,10 +260,6 @@ function unsubscribeParticipant(elem){
 $('#username').hover(function () {
    $(this).tooltip();
 });
-
-/*$('tr[role="button"]').click(function () {
-    window.location= $(this).data('href');
-});*/
 
 function goToEvent(elem) {
     var eventId = $(elem).data('id');

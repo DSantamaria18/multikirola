@@ -41,7 +41,7 @@ class ActividadMultikirolaService {
 
     def findEvent(Long eventId) {
         final String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
-                "i.nombre_instalacion as instalacion, m.nombre as modalidad, m.id as modalidad_id " +
+                "i.nombre_instalacion as instalacion, m.nombre as modalidad, m.id as modalidad_id, e.edad_minima " +
                 "FROM evento e " +
                 "LEFT JOIN lugar l ON e.lugar_id = l.id " +
                 "LEFT JOIN recinto r ON e.recinto_id = r.id " +

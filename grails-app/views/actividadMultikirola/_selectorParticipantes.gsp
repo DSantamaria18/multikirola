@@ -8,7 +8,8 @@
             <g:each in="${participantesList}" var="participante" status="j">
                 <option id="${participante.id}"
                         phone="${participante?.telefono}"
-                        mobile="${participante?.movil}">
+                        mobile="${participante?.movil}"
+                        fnacimiento="${participante?.fecha_nacimiento}">
                     ${participante.nombre} ${participante.apellido1} ${participante?.apellido2}
                 </option>
             </g:each>
@@ -19,6 +20,8 @@
 <!-- Datos de contacto -->
 <div class="form-group form-datos-contacto" hidden>
     <span class="lead">Por favor, verifica los datos de contacto...</span>
+
+    <input class="hidden" id="participante-fnacimiento" value=""/>
 
     <div class="participante-item-telefono input-group" style="margin-bottom: 5px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
