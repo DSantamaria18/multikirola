@@ -236,14 +236,23 @@ class ParticipanteController {
             return
         }
 
-        def c = Participante.createCriteria()
+        /*def c = Participante.createCriteria()
         def participantesList = c.list{
             and{
                 order("apellido1", "asc")
                 order("apellido2", "asc")
                 order("nombre", "asc")
             }
-        }
+        }*/
+
+        params.apellido1 = ''
+        params.movil= ''
+        params.email= ''
+        params.centro= ''
+        params.curso= ''
+        params.fdesde = '-'
+        params.fhasta = '-'
+        def participantesList = participanteImplService.filtrarParticipantes(params)
 
         [participantesList: participantesList]
     }

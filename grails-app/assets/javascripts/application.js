@@ -278,13 +278,17 @@ function filtrarEventos(fechaIniDesde, fechaIniHasta) {
     })
 };
 
-function filtrarParticipantes(apellido1, telefono, movil){
-    console.log("filtrando...");
+function filtrarParticipantes(apellido1, movil, email, centro, curso, fDesde, fHasta){
+
     $.get("/multikirola/participante/filtrarParticipantes/",
         {
             apellido1: apellido1,
-            telefono: telefono,
-            movil: movil
+            movil: movil,
+            email: email,
+            centro: centro,
+            curso: curso,
+            fdesde: fDesde,
+            fhasta: fHasta
 
         }).done(function (data, status) {
         console.log(status);

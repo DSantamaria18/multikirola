@@ -1,3 +1,4 @@
+<%@ page import="multikirola.Curso; multikirola.Centro" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,12 +42,12 @@
                             <g:textField name="apellido1" id="qApellido1"/>
                         </div>
 
-                        <div class="fieldcontain row">
+                        %{--<div class="fieldcontain row">
                             <label>
                                 Teléfono :
                             </label>
                             <g:textField name="telefono" id="qTelefono"/>
-                        </div>
+                        </div>--}%
 
                         <div class="fieldcontain row">
                             <label>
@@ -55,10 +56,61 @@
                             <g:textField name="movil" id="qMovil"/>
                         </div>
 
+                        <div class="fieldcontain row">
+                            <label>
+                                Email :
+                            </label>
+                            <g:textField name="email" id="qEmail"/>
+                        </div>
+
+                        <div class="fieldcontain row">
+                            <label>
+                                Centro :
+                            </label>
+                            <g:select name="centro"
+                                      from="${Centro.listOrderByNombre()}"
+                                      value="''"
+                                      noSelection="${['': 'Cualquiera']}"
+                                      optionKey="id"
+                                      optionValue="nombre"
+                                      id="qCentro"/>
+                        </div>
+
+                        <div class="fieldcontain row">
+                            <label>
+                                Curso :
+                            </label>
+                            <g:select name="curso"
+                                      from="${Curso.listOrderByNombre()}"
+                                      value="''"
+                                      noSelection="${['': 'Cualquiera']}"
+                                      optionKey="id"
+                                      optionValue="nombre"
+                                      id="qCurso"/>
+                        </div>
+
+                        <div class="fieldcontain row">
+                            <label>
+                                F. Nacimiento :
+                            </label>
+                            <g:datePicker name="fechaDesde" precision="month" id="qFechaDesde"
+                                          relativeYears="${-15..0}" noSelection="['':'']" default="none"/> y
+                            <g:datePicker name="fechaHasta" precision="month" id="qFechaHasta"
+                                          relativeYears="${-15..0}" noSelection="['':'']" default="none"/>
+                        </div>
+
                         <!-- botones filtrado-->
                         <div class="row fieldcontain">
                             <button type="button" class="row btn-block btn-primary"
-                                    onclick="filtrarParticipantes($('#qApellido1').val(), $('#qTelefono').val(), $('#qMovil').val())">
+                                    onclick="filtrarParticipantes(
+                                        $('#qApellido1').val()
+                                        , $('#qMovil').val()
+                                        , $('#qEmail').val()
+                                        , $('#qCentro option:selected').val()
+                                        , $('#qCurso option:selected').val()
+                                        , $('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val()
+                                        , $('#qFechaHasta_year').val() + '-' + $('#qFechaHasta_month').val()
+                                        )">
                                 FILTRAR PARTICIPANTES</button>
                         </div>
                     </g:form>
