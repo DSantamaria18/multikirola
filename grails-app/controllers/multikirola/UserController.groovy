@@ -5,8 +5,6 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import org.springframework.validation.Errors
 
-import java.util.logging.Logger
-
 import static org.springframework.http.HttpStatus.*
 
 class UserController {
@@ -17,10 +15,24 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 //    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    @Secured('ROLE_ADMIN')
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model: [userCount: userService.count()]
+
+        User currentUser = getAuthenticatedUser()
+
+        if (Role.findByAuthority('ROLE_ADMIN') in currentUser.getAuthorities()) {
+            respond userService.list(params), model: [userCount: userService.count()]
+        } else {
+            if (Role.findByAuthority('ROLE_USER') in currentUser.getAuthorities()) {
+                def userRoleList = UserRole.findAllByRole(Role.findByAuthority('ROLE_CUSTOMER'))
+                List<User> userList = []
+                for(user in userRoleList.user) {
+                    userList.add(user)
+                }
+                respond userList(params), model: [userCount: userList.size()]
+            }
+        }
     }
 
     @Secured('ROLE_ADMIN')

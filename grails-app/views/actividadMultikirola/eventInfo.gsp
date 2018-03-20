@@ -77,9 +77,12 @@
                 <th hidden>Id</th>
                 <th>Apellidos</th>
                 <th>Nombre</th>
+                <th>F. Nacimiento</th>
                 <th>Teléfono</th>
                 <th>Movil</th>
-                <th>Token</th>
+                <th>Email</th>
+                <th>Centro</th>
+                <th>Curso</th>
             </tr>
             </thead>
             <tbody>
@@ -88,9 +91,12 @@
                     <td hidden>${participante.id}</td>
                     <td class="text-capitalize">${participante.apellido1} ${participante.apellido2}</td>
                     <td class="text-capitalize">${participante.nombre}</td>
+                    <td><g:formatDate date="${participante.fnacimiento}" format="dd-MM-yyyy"/></td>
                     <td>${participante.telefono}</td>
                     <td>${participante.movil}</td>
-                    <td>${participante.token}</td>
+                    <td>${participante.email}</td>
+                    <td>${participante.centro}</td>
+                    <td>${participante.curso}</td>
                 </tr>
             </g:each>
             </tbody>

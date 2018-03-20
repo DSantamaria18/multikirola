@@ -9,6 +9,9 @@
             <th>Fecha Nacimiento</th>
             <th>Teléfono</th>
             <th>Móvil</th>
+            <th>Email</th>
+            <th>Centro</th>
+            <th>Curso</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +24,9 @@
                 <td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>
                 <td>${participante.telefono}</td>
                 <td>${participante.movil}</td>
+                <td>${participante.email}</td>
+                <td>${participante.centro.nombre}</td>
+                <td>${participante.curso.nombre}</td>
             </tr>
         </g:each>
         </tbody>

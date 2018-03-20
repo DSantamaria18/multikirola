@@ -33,15 +33,6 @@
             <div class="panel-collapse collapse" id="panel-opciones-filtrado">
                 <div class="panel-body form-group">
                     <g:form resource="${this.query}" method="post" action="exportEventosFiltrados">
-                    %{--<div class="row fieldcontain">
-                        <label>
-                            Fecha de Naciento entre:
-                        </label>
-                        <g:datePicker name="fechaDesde" precision="day" id="qFechaDesde"
-                                      years="${2016..2030}"/> y
-                        <g:datePicker name="fechaHasta" precision="day" id="qFechaHasta"
-                                      years="${2016..2030}"/>
-                    </div>--}%
 
                         <div class=" row fieldcontain">
                             <label>
@@ -65,14 +56,6 @@
                         </div>
 
                         <!-- botones filtrado-->
-                        %{--<div class="row fieldcontain">
-                            <button type="button" class="row btn-block btn-primary"
-                                    onclick="filtrarParticioantes($('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val()
-                                        + '-' + $('#qFechaDesde_day').val(), $('#qFechaHasta_year').val() + '-'
-                                        + $('#qFechaHasta_month').val() + '-' + $('#qFechaHasta_day').val())">
-                                FILTRAR PARTICIPANTES</button>
-                        </div>--}%
-
                         <div class="row fieldcontain">
                             <button type="button" class="row btn-block btn-primary"
                                     onclick="filtrarParticipantes($('#qApellido1').val(), $('#qTelefono').val(), $('#qMovil').val())">
@@ -84,7 +67,6 @@
         </div>
 
     </div>
-
 
     <div id="tabla-participantes">
         <g:render template="tablaParticipantes" model="[participantesList: participantesList]"/>
