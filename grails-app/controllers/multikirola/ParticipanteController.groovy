@@ -189,11 +189,11 @@ class ParticipanteController {
             return
         }
 
-        participanteService.delete(flush: true)
+        participanteService.delete(participante.id)
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'participante.label', default: 'Participante'), id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'participante.label', default: 'Participante'), participante.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
