@@ -231,46 +231,46 @@ class ActividadMultikirolaController {
             fila = fila + 2
 
             // Cabecera listado participantes
-            sheet.addCell(new Label(columna, fila, "APELLIDOS ", headerFormat))
+            sheet.addCell(new Label(columna, fila, "CENTRO ", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "CURSO ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "NOMBRE ", headerFormat))
             columna++
-            sheet.addCell(new Label(columna, fila, "F.NACIMIENTO ", headerFormat))
+            sheet.addCell(new Label(columna, fila, "APELLIDOS ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "SEXO ", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "EMAIL ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "TELEFONO ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "MOVIL ", headerFormat))
             columna++
-            sheet.addCell(new Label(columna, fila, "EMAIL ", headerFormat))
-            columna++
-            sheet.addCell(new Label(columna, fila, "CENTRO ", headerFormat))
-            columna++
-            sheet.addCell(new Label(columna, fila, "CURSO ", headerFormat))
+            sheet.addCell(new Label(columna, fila, "F.NACIMIENTO ", headerFormat))
 
             fila++
             columna = 1
 
             // Datos de los participantes
             participantesList.each {
-                sheet.addCell(new Label(columna, fila, "${it.apellido1} ${it.apellido2}".toUpperCase()  , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase() , cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase() , cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.nombre}".toUpperCase() , cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${formatDate(format: "dd/MM/yyyy", date: it.fnacimiento)}", cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.apellido1} ${it.apellido2}".toUpperCase()  , cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.sexo}" , cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.email}".toUpperCase() , cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.telefono}" , cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.movil}" , cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.email}".toUpperCase() , cellFormat))
-                columna++
-                sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase() , cellFormat))
-                columna++
-                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase() , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${formatDate(format: "dd/MM/yyyy", date: it.fnacimiento)}", cellFormat))
 
                 columna = 1
                 fila++
