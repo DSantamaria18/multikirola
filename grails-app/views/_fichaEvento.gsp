@@ -5,7 +5,6 @@
         <div class="caption">
             <h1 class="text-center text-uppercase"><strong>${evento?.tipo_actividad}</strong></h1>
 
-            <p>
             <div class="list-event-date">
                 <i class="glyphicon glyphicon-calendar"></i>
                 <span class="text-capitalize">
@@ -24,6 +23,10 @@
                 <span>${evento?.recinto}</span>
                 <span>${evento?.instalacion}</span><br/>
             </div>
+
+            <g:if test="${evento?.edad_minima > 0}">
+                <p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span> La edad mínima para participar es de ${evento?.edad_minima} año(s)</span></p>
+            </g:if>
 
         </div>
 
