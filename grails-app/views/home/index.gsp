@@ -20,7 +20,7 @@
 <g:if test="${eventList.size() > 0}">
     <div id="content" role="main">
         <section class="row ">
-            <h1>Próximas Actividades</h1>
+            <h1 class="text-uppercase"><g:message code="default.label.proximasActividades"/></h1>
 
             <div class="grid-container" id="grid-actividades-home">
                 <g:each in="${eventList}" var="evento" status="i">
