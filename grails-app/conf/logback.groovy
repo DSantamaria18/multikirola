@@ -41,7 +41,7 @@ appender("ROLLING", RollingFileAppender) {
                 "%level %logger - %msg%n"
     }
     rollingPolicy(TimeBasedRollingPolicy) {
-        fileNamePattern = "${LOGS_DIR}/gobela21-%d{yyyy-MM-dd}.log"
+        fileNamePattern = "${LOGS_DIR}/multikirola-%d{yyyy-MM-dd}.log"
         maxHistory = 30
         totalSizeCap = FileSize.valueOf("2GB")
     }
