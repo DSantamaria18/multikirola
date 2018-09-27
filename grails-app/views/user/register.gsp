@@ -14,7 +14,8 @@
          class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title">Registro</div>
+                %{--<div class="panel-title">Registro</div>--}%
+                <div class="panel-title"> <g:message code="default.label.registro"/></div>
             </div>
 
             <div class="panel-body">
@@ -44,7 +45,8 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="username" type="text" class="form-control" data-toggle="tooltip-user" title="Tu identificador de acceso a la aplicación. Debe ser único."
                                name="${securityConfig.apf.usernameParameter}" value=""
-                               placeholder="Nombre de usuario"
+                               %{--placeholder="Nombre de usuario"--}%
+                               placeholder= <g:message code="default.label.nombreUsuario"/>
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
                     <div>
@@ -57,7 +59,8 @@
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                         <input id="useremail" type="text" class="form-control"
-                               name="email" value="" placeholder="Email"
+                               %{--name="email" value="" placeholder="Email"--}%
+                               name="email" value="" placeholder= <g:message code="default.label.correoElectronico"/>
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
@@ -68,7 +71,8 @@
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                         <input id="userphone" type="text" class="form-control" name="telefono" value=""
-                               placeholder="Teléfono" onchange="$('.error').attr('hidden', true); "/>
+                               %{--placeholder="Teléfono" onchange="$('.error').attr('hidden', true); "/>--}%
+                               placeholder= <g:message code="default.label.telefono"/> onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
                         <label id="error-userphone" class="error" style="color: red" hidden>ERROR!!!</label>
@@ -78,7 +82,8 @@
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                         <input id="usercellphone" type="text" class="form-control" name="movil" value=""
-                               placeholder="Teléfono móvil" onchange="$('.error').attr('hidden', true); "/>
+                               %{--placeholder="Teléfono móvil" onchange="$('.error').attr('hidden', true); "/>--}%
+                               placeholder= <g:message code="default.label.telefonoMovil"/> onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
                         <label id="error-usercellphone" class="error" style="color: red" hidden>ERROR!!!</label>
@@ -87,8 +92,9 @@
                     <div class="input-group" style="margin-bottom: 10px">
                         <div class="checkbox">
                             <label>
-                                <g:checkBox id="whatsapp" name="whatsapp"
-                                            value="${this.user?.whatsapp}"/> Notificadme por Whatsapp
+                                <g:checkBox id="whatsapp" name="whatsapp" value="${this.user?.whatsapp}"/>
+                                %{--Notificadme por Whatsapp--}%
+                                <g:message code="default.label.notificadmeWhatsapp"/>
                             </label>
                         </div>
                     </div>
@@ -100,7 +106,8 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="password" type="password" class="form-control"
                                name="${securityConfig.apf.passwordParameter}"
-                               placeholder="Contraseña" onchange="$('.error').attr('hidden', true); "/>
+                               %{--placeholder="Contraseña" onchange="$('.error').attr('hidden', true); "/>--}%
+                               placeholder= <g:message code="default.label.contrasena"/> onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
                         <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>
@@ -109,7 +116,8 @@
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="password2" type="password" class="form-control"
-                               name="password2" placeholder="Confirmar contraseña"
+                               %{--name="password2" placeholder="Confirmar contraseña"--}%
+                               name="password2" placeholder= <g:message code="default.label.confirmarContrasena"/>
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
                     <div>
@@ -134,7 +142,8 @@
                         <!-- Button -->
                         <div class="col-md-9">
                             <input id="btn-signup" type="submit" class="btn btn-info save"
-                                   name="register" value="Enviar"/>
+                                   %{--name="register" value="Enviar"/>--}%
+                                   name="register" value=<g:message code="default.label.enviar"/>/>
                         </div>
                     </div>
                 </form>
