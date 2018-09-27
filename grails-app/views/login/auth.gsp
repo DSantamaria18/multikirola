@@ -32,15 +32,6 @@
                     </div>
 
 
-                    %{--<div class="input-group">
-                        <div class="checkbox">
-                            <label>
-                                <input id="login-remember" type="checkbox" name="remember" value="1"> Recordarme
-                            </label>
-                        </div>
-                    </div>--}%
-
-
                     <div style="margin-top:10px" class="form-group">
                         <!-- Button -->
 

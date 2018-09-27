@@ -35,13 +35,19 @@
     <sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_MANAGER, ROLE_USER'>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false">Gestión<span class="caret"></span></a>
+               aria-expanded="false"><g:message code="default.label.gestion"/><span class="caret"></span></a>
+               %{--aria-expanded="false">Gestión<span class="caret"></span></a>--}%
             <ul class="dropdown-menu">
-                <li><g:link class="list" controller="ActividadMultikirola" action="showEvents">Actividades</g:link></li>
-                <li><g:link class="list" controller="Centro" action="index">Centros</g:link></li>
-                <li><g:link class="list" controller="Curso" action="index">Cursos</g:link></li>
+                %{--<li><g:link class="list" controller="ActividadMultikirola" action="showEvents">Actividades</g:link></li>--}%
+                <li><g:link class="list" controller="ActividadMultikirola" action="showEvents"><g:message code="default.label.actividades"/></g:link></li>
+                %{--<li><g:link class="list" controller="Centro" action="index">Centros</g:link></li>--}%
+                <li><g:link class="list" controller="Centro" action="index"><g:message code="default.label.centros"/></g:link></li>
+                %{--<li><g:link class="list" controller="Curso" action="index">Cursos</g:link></li>--}%
+                <li><g:link class="list" controller="Curso" action="index"><g:message code="default.label.cursos"/></g:link></li>
+                %{--<li><g:link class="list" controller="Participante"
+                            action="gestionParticipantes">Participantes</g:link></li>--}%
                 <li><g:link class="list" controller="Participante"
-                            action="gestionParticipantes">Participantes</g:link></li>
+                            action="gestionParticipantes"><g:message code="default.label.participante"/></g:link></li>
                 %{--<li><g:link class="list" controller="User" action="index">Usuarios</g:link></li>--}%
             </ul>
         </li>
@@ -70,9 +76,12 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>
-                <li><g:link controller='participante' action="index">Participantes</g:link></li>
-                <li><g:link controller='logout'>Cerrar Sesión</g:link></li>
+                %{--<li><g:link controller='user' action="miCuenta">Mi Cuenta</g:link></li>--}%
+                <li><g:link controller='user' action="miCuenta"><g:message code="default.label.micuenta"/></g:link></li>
+                %{--<li><g:link controller='participante' action="index">Participantes</g:link></li>--}%
+                <li><g:link controller='participante' action="index"><g:message code="default.label.participantes"/></g:link></li>
+                %{--<li><g:link controller='logout'>Cerrar Sesión</g:link></li>--}%
+                <li><g:link controller='logout'><g:message code="default.label.logout"/></g:link></li>
             </ul>
         </li>
     </sec:ifLoggedIn>
