@@ -26,7 +26,8 @@
             </div>
 
             <g:if test="${evento?.edad_minima > 0}">
-                <p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span> La edad mínima para participar es de ${evento?.edad_minima} año(s)</span></p>
+                %{--<p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span> La edad mínima para participar es de ${evento?.edad_minima} año(s)</span></p>--}%
+                <p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span> <g:message code="default.label.avisoEdadMinima" args="[evento?.edad_minima]"/></span></p>
             </g:if>
 
         </div>
