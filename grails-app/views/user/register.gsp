@@ -46,7 +46,7 @@
                         <input id="username" type="text" class="form-control" data-toggle="tooltip-user" title="Tu identificador de acceso a la aplicación. Debe ser único."
                                name="${securityConfig.apf.usernameParameter}" value=""
                                %{--placeholder="Nombre de usuario"--}%
-                               placeholder= <g:message code="default.label.nombreUsuario"/>
+                               placeholder="<g:message code="default.label.nombreUsuario"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
                     <div>
@@ -60,7 +60,8 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                         <input id="useremail" type="text" class="form-control"
                                %{--name="email" value="" placeholder="Email"--}%
-                               name="email" value="" placeholder= <g:message code="default.label.correoElectronico"/>
+                               name="email" value=""
+                               placeholder="<g:message code="default.label.correoElectronico"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
@@ -72,7 +73,8 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                         <input id="userphone" type="text" class="form-control" name="telefono" value=""
                                %{--placeholder="Teléfono" onchange="$('.error').attr('hidden', true); "/>--}%
-                               placeholder= <g:message code="default.label.telefono"/> onchange="$('.error').attr('hidden', true); "/>
+                               placeholder="<g:message code="default.label.telefono"/>"
+                               onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
                         <label id="error-userphone" class="error" style="color: red" hidden>ERROR!!!</label>
@@ -83,7 +85,8 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                         <input id="usercellphone" type="text" class="form-control" name="movil" value=""
                                %{--placeholder="Teléfono móvil" onchange="$('.error').attr('hidden', true); "/>--}%
-                               placeholder= <g:message code="default.label.telefonoMovil"/> onchange="$('.error').attr('hidden', true); "/>
+                               placeholder="<g:message code="default.label.telefonoMovil"/>"
+                               onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
                         <label id="error-usercellphone" class="error" style="color: red" hidden>ERROR!!!</label>
@@ -107,7 +110,8 @@
                         <input id="password" type="password" class="form-control"
                                name="${securityConfig.apf.passwordParameter}"
                                %{--placeholder="Contraseña" onchange="$('.error').attr('hidden', true); "/>--}%
-                               placeholder= <g:message code="default.label.contrasena"/> onchange="$('.error').attr('hidden', true); "/>
+                               placeholder="<g:message code="default.label.contrasena"/>"
+                               onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
                         <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>
@@ -117,7 +121,8 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="password2" type="password" class="form-control"
                                %{--name="password2" placeholder="Confirmar contraseña"--}%
-                               name="password2" placeholder= <g:message code="default.label.confirmarContrasena"/>
+                               name="password2"
+                               placeholder="<g:message code="default.label.confirmarContrasena"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
                     <div>
@@ -143,7 +148,7 @@
                         <div class="col-md-9">
                             <input id="btn-signup" type="submit" class="btn btn-info save"
                                    %{--name="register" value="Enviar"/>--}%
-                                   name="register" value=<g:message code="default.label.enviar"/>/>
+                                   name="register" value="<g:message code="default.label.enviar"/>"/>
                         </div>
                     </div>
                 </form>
