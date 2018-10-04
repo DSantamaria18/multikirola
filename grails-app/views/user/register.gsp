@@ -135,7 +135,8 @@
                                 %{--<input id="legal" type="checkbox" name="terms"
                                        value="1" onchange="$('.error').attr('hidden', true); "/> He leído y acepto los <a href="#" target="_blank"> Términos y Condiciones </a> y la <a href="#" target="_blank">Política de Privacidad</a> .--}%
                                 <g:checkBox id="legal" name="terms"/>
-                                He leído y acepto los <a href="#" target="_blank"> Términos y Condiciones </a> y la <a href="#" target="_blank">Política de Privacidad</a>
+                                %{--He leído y acepto los <a href="#" target="_blank"> Términos y Condiciones </a> y la <a href="#" target="_blank">Política de Privacidad</a>--}%
+                                <span><g:message code="default.label.textoGDPR" htmlEscape="false"/>
                             </label>
                         </div>
                     </div>
