@@ -50,7 +50,9 @@
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
                     <div>
-                        <label id="error-username" class="error" style="color: red" hidden>ERROR!!!</label>
+                        %{--<label id="error-username" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                        <label id="error-username" class="error" style="color: red" hidden><g:message code="default.error.nombreUsuario"/></label>
+                        <label id="error-caracteresUsername" class="error" style="color: red" hidden><g:message code="default.error.caracteresNombreUsuario"/></label>
                     </div>
                     %{--<div style="margin-bottom: 20px" class="input-group">--}%
 
@@ -65,7 +67,7 @@
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
-                        <label id="error-email" class="error" style="color: red" hidden>ERROR!!!</label>
+                        <label id="error-email" class="error" style="color: red" hidden><g:message code="default.error.email"/></label>
                     </div>
 
                     %{--<div style="margin-bottom: 20px" class="input-group">--}%
@@ -77,7 +79,8 @@
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
-                        <label id="error-userphone" class="error" style="color: red" hidden>ERROR!!!</label>
+                        %{--<label id="error-userphone" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                        <label id="error-userphone" class="error" style="color: red" hidden><g:message code="default.error.telefono"/></label>
                     </div>
 
                     %{--<div class="input-group">--}%
@@ -89,7 +92,8 @@
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
-                        <label id="error-usercellphone" class="error" style="color: red" hidden>ERROR!!!</label>
+                        %{--<label id="error-usercellphone" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                        <label id="error-usercellphone" class="error" style="color: red" hidden><g:message code="default.error.telefono"/></label>
                     </div>
 
                     <div class="input-group" style="margin-bottom: 10px">
@@ -102,7 +106,8 @@
                         </div>
                     </div>
                     <div>
-                        <label id="error-whatsapp" class="error" style="color: red" hidden>ERROR!!!</label>
+                        %{--<label id="error-whatsapp" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                        <label id="error-whatsapp" class="error" style="color: red" hidden><g:message code="default.error.whatsapp"/></label>
                     </div>
 
                     <div style="margin-top: 25px" class="input-group">
@@ -114,7 +119,13 @@
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
-                        <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>
+                        %{--<label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                        <label id="error-password" class="error" style="color: red" hidden><g:message code="default.error.password"/></label>
+                        <label id="error-longitudPassword" class="error" style="color: red" hidden><g:message code="default.error.longitudPassword"/></label>
+                        <label id="error-digitoPassword" class="error" style="color: red" hidden><g:message code="default.error.digitoPassword"/></label>
+                        <label id="error-minusculasPassword" class="error" style="color: red" hidden><g:message code="default.error.minuculaPassword"/></label>
+                        <label id="error-mayusculasPassword" class="error" style="color: red" hidden><g:message code="default.error.mayusculasPassword"/></label>
+                        <label id="error-contenidoPassword" class="error" style="color: red" hidden><g:message code="default.error.contenidoPassword"/></label>
                     </div>
 
                     <div style="margin-top: 10px" class="input-group">
@@ -126,7 +137,8 @@
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
                     <div>
-                        <label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>
+                        %{--<label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                        <label id="error-password2" class="error" style="color: red" hidden><g:message code="default.error.password2"/></label>
                     </div>
 
                     <div style="margin-top: 20px" class="input-group">
@@ -141,7 +153,8 @@
                         </div>
                     </div>
                     <div>
-                        <label id="error-legal" class="error" style="color: red" hidden>ERROR!!!</label>
+                        %{--<label id="error-legal" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                        <label id="error-legal" class="error" style="color: red" hidden><g:message code="default.error.checkCondiciones"/></label>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px">
