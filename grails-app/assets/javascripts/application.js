@@ -63,7 +63,7 @@ function isValidPassword() {
     }
 
     if (password !== password2) {
-        $('#error-password2').text('Las contraseñas no coinciden');
+        // $('#error-password2').text('Las contraseñas no coinciden');
         $('#error-password2').attr('hidden', false);
         return false;
     }
