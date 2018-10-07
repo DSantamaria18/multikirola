@@ -37,7 +37,8 @@
 
                         <div class=" row fieldcontain">
                             <label>
-                                Apellido 1:
+                                %{--Apellido 1:--}%
+                                <g:message code="default.label.apellido1"/>
                             </label>
                             <g:textField name="apellido1" id="qApellido1"/>
                         </div>
@@ -51,7 +52,8 @@
 
                         <div class="fieldcontain row">
                             <label>
-                                Móvil :
+                                %{--Móvil :--}%
+                                <g:message code="default.label.telefonoMovil"/>
                             </label>
                             <g:textField name="movil" id="qMovil"/>
                         </div>
@@ -65,7 +67,8 @@
 
                         <div class="fieldcontain row">
                             <label>
-                                Centro :
+                                %{--Centro :--}%
+                                <g:message code="default.label.centro"/>
                             </label>
                             <g:select name="centro"
                                       from="${Centro.listOrderByNombre()}"
@@ -78,7 +81,8 @@
 
                         <div class="fieldcontain row">
                             <label>
-                                Curso :
+                                %{--Curso :--}%
+                                <g:message code="default.label.curso"/>
                             </label>
                             <g:select name="curso"
                                       from="${Curso.listOrderByNombre()}"
@@ -91,7 +95,8 @@
 
                         <div class="fieldcontain row">
                             <label>
-                                F. Nacimiento :
+                                %{--F. Nacimiento :--}%
+                                <g:message code="default.label.fechaNacimiento"/>
                             </label>
                             <g:datePicker name="fechaDesde" precision="month" id="qFechaDesde"
                                           relativeYears="${-15..0}" noSelection="['':'']" default="none"/> y
