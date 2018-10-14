@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'participante.label', default: 'Participante')}"/>
+    <g:set var="entityName" value="${message(code: 'default.label.participante', default: 'Participante')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
 
@@ -48,7 +48,7 @@
 
         <g:if test="${participante?.nombre} && ${participante?.apellido1} && ${participante?.apellido2}">
             <li class="fieldcontain">
-                <span id="nombre-label" class="property-label"><g:message code="participante.nombre.label"
+                <span id="nombre-label" class="property-label"><g:message code="default.label.nombre"
                                                                           default="Nombre:"/></span>
                 <span class="property-value" aria-labelledby="nombre-label">
                     <g:fieldValue bean="${participante}" field="nombre"/>
@@ -61,7 +61,7 @@
         <g:if test="${participante?.fechaNacimiento}">
             <li class="fieldcontain">
                 <span id="fechaNacimiento-label" class="property-label"><g:message
-                        code="participante.fechaNacimiento.label"
+                        code="default.label.fechaNacimiento"
                         default="Fecha de nacimiento:"/></span>
                 <span class="property-value" aria-labelledby="fechaNacimiento-label">
                     <g:formatDate format="dd-MM-yyyy" date="${participante.fechaNacimiento}"/>
@@ -71,7 +71,7 @@
 
         <g:if test="${participante?.sexo}">
             <li class="fieldcontain">
-                <span id="sexo-label" class="property-label"><g:message code="participante.sexo.label"
+                <span id="sexo-label" class="property-label"><g:message code="default.label.sexo"
                                                                         default="Sexo:"/></span>
                 <span class="property-value" aria-labelledby="sexo-label"><g:fieldValue
                         bean="${participante}"
@@ -81,7 +81,7 @@
 
         <g:if test="${participante?.telefono}">
             <li class="fieldcontain">
-                <span id="telefono-label" class="property-label"><g:message code="participante.telefono.label"
+                <span id="telefono-label" class="property-label"><g:message code="default.label.telefono"
                                                                             default="Teléfono:"/></span>
                 <span class="property-value" aria-labelledby="telefono-label"><g:fieldValue
                         bean="${participante}"
@@ -91,11 +91,20 @@
 
         <g:if test="${participante?.movil}">
             <li class="fieldcontain">
-                <span id="movil-label" class="property-label"><g:message code="participante.movil.label"
+                <span id="movil-label" class="property-label"><g:message code="default.label.movil"
                                                                          default="Móvil:"/></span>
-                <span class="property-value" aria-labelledby="movil-label"><g:fieldValue
+                %{--<span class="property-value" aria-labelledby="movil-label"><g:fieldValue
                         bean="${participante}"
-                        field="movil"/></span>
+                        field="movil"/></span>--}%
+
+                <span class="property-value" aria-labelledby="movil-label">
+                    <g:if test="${participante.sexo == 'F'}">
+                        <g:message code="default.label.femenino"/>
+                    </g:if>
+                    <g:else>
+                        <g:message code="default.label.masculino"/>
+                    </g:else>
+                </span>
             </li>
         </g:if>
 
@@ -111,7 +120,7 @@
 
         <g:if test="${participante?.centro}">
             <li class="fieldcontain">
-                <span id="centro-label" class="property-label"><g:message code="participante.centro.label"
+                <span id="centro-label" class="property-label"><g:message code="default.label.centro"
                                                                           default="Centro:"/></span>
                 <span class="property-value" aria-labelledby="centro-label"><g:fieldValue
                         bean="${participante}"
@@ -122,7 +131,7 @@
 
         <g:if test="${participante?.curso}">
             <li class="fieldcontain">
-                <span id="curso-label" class="property-label"><g:message code="participante.curso.label"
+                <span id="curso-label" class="property-label"><g:message code="default.label.curso"
                                                                          default="Curso:"/></span>
                 <span class="property-value" aria-labelledby="curso-label"><g:fieldValue
                         bean="${participante}"
@@ -131,7 +140,7 @@
         </g:if>
     </ol>
 
-    %{--<f:display bean="participante"/>--}%
+%{--<f:display bean="participante"/>--}%
     <g:form resource="${this.participante}" method="DELETE">
         <fieldset class="buttons">
             <g:link class="edit" action="edit" resource="${this.participante}"><g:message

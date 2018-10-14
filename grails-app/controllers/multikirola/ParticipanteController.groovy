@@ -86,9 +86,10 @@ class ParticipanteController {
 
         if (participante.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            if (participante.errors.getFieldError('token')) {
+            /*if (participante.errors.getFieldError('token')) {
                 participante.errors.reject('participant.already.exists', "Este participante ya ha sido dado de alta [${participante.token}]")
-            }
+            }*/
+            flash.message = message(code: 'participante.create.error', args: [participante.errors.getAllErrors()], default:"No se ha podido crear el participante")
             respond participante.errors, view: 'create'
             return
         }
@@ -98,7 +99,8 @@ class ParticipanteController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'participante.label', default: 'Participante'), participante.token])
-                redirect participante
+//                redirect participante
+                redirect(action: "index")
             }
             '*' { respond participante, [status: CREATED] }
         }

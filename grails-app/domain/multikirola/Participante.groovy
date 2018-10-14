@@ -31,4 +31,8 @@ class Participante {
         token(nullable: false, unique: true, display: false)
         usuario(nullable: false, display: false)
     }
+
+    String toString() {
+        return "${this?.nombre} ${this?.apellido1} ${this?.apellido2}"
+    }
 }
