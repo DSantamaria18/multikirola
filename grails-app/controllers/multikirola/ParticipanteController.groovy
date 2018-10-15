@@ -2,6 +2,8 @@ package multikirola
 
 import grails.plugin.springsecurity.annotation.Secured
 
+import javax.xml.bind.ValidationException
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -16,28 +18,30 @@ class ParticipanteController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        User currentUser = getAuthenticatedUser()
+        User currentUser = getAuthenticatedUser() as User
         def participantesList = Participante.findAllByUsuario(currentUser)
         def actividadMultikirolaList = actividadMultikirolaService.getActiveInscriptions(currentUser.id)
 
-        render(view: "index", model: [participantesList: participantesList, actividadMultikirolaList: actividadMultikirolaList])
+        render(view: "index", controller: "participante", model: [participantesList: participantesList, actividadMultikirolaList: actividadMultikirolaList])
     }
 
     /*def show(Long id) {
         respond participanteService.get(id)
     }*/
 
-    def show(Participante participante) {
-        User currentUser = getAuthenticatedUser()
+//    def show(Participante participante) {
+    def show(Long id) {
+        User currentUser = getAuthenticatedUser() as User
+        Participante participante = Participante.findById(id)
         if (participante && participante.usuario == currentUser){
-            respond participante
+            respond participanteService.get(id)
         } else {
             redirect(uri: '/')
         }
     }
 
     def create() {
-        User currentUser = getAuthenticatedUser()
+        User currentUser = getAuthenticatedUser() as User
         params.email = currentUser.email
         params.telefono= currentUser.telefono
         params.movil = currentUser.movil
@@ -71,7 +75,7 @@ class ParticipanteController {
     @Transactional
     def save(Participante participante) {
         if (participante == null) {
-            transactionStatus.setRollbackOnly()
+//            transactionStatus.setRollbackOnly()
             notFound()
             return
         }
@@ -79,26 +83,32 @@ class ParticipanteController {
         String token = encodeToken(participante)
         participante.token = token
 
-        User currentUser = getAuthenticatedUser()
+        Participante participante2 = Participante.findByToken(token)
+        if(participante2){
+            log.error(">>> ERROR: Ya existe el participante ${token}")
+            flash.message = message(code: 'participante.create.duplicatedToken', args: [${token}], default: "Ya existe un participante con este token: ${token}")
+            respond participante
+            return
+        }
+
+        User currentUser = getAuthenticatedUser() as User
         participante.usuario = currentUser
 
         participante.validate()
 
-        if (participante.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            if (participante.errors.getFieldError('token')) {
-                participante.errors.reject('participant.already.exists', "Este participante ya ha sido dado de alta [${participante.token}]")
-            }
-            respond participante.errors, view: 'create'
+        try{
+            participanteService.save(participante)
+        }catch (ValidationException e) {
+            log.error(e.message)
+            log.error(e.stackTrace)
+            respond participante.errors, view: "create"
             return
         }
 
-        participanteService.save(participante)
-
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'participante.label', default: 'Participante'), participante.token])
-                redirect participante
+                flash.message = message(code: 'default.created.message', args: [message(code: 'default.label.participante', default: 'Participante'), participante.token])
+                redirect action: "index", method: "GET"
             }
             '*' { respond participante, [status: CREATED] }
         }

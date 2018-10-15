@@ -4,7 +4,8 @@
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         <select class="form-control" id="select-participantes" onchange="showContactInfo()">
-            <option value="" selected disabled>Selecciona un participante...</option>
+            %{--<option value="" selected disabled>Selecciona un participante...</option>--}%
+            <option value="" selected disabled><g:message code="registroParticipantes.combo.nullSelected"/></option>
             <g:each in="${participantesList}" var="participante" status="j">
                 <option id="${participante.id}"
                         phone="${participante?.telefono}"

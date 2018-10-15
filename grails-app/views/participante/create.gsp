@@ -1,8 +1,9 @@
+<%@ page import="multikirola.Curso" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'participante.label', default: 'Participante')}"/>
+    <g:set var="entityName" value="${message(code: 'default.label.participante', default: 'Participante')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
 </head>
 
@@ -15,12 +16,13 @@
 <div class="nav" role="navigation">
     <ul>
         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]"/></g:link></li>
+        <li><g:link class="list" action="index"><g:message code="default.list.label"
+                                                           args="[g.message(code: 'default.label.participante')]"/></g:link></li>
     </ul>
 </div>
 
 <div id="create-participante" class="content scaffold-create" role="main">
-    <h1><g:message code="default.create.label" args="[entityName]"/></h1>
+    <h1><g:message code="default.create.label" args="[g.message(code: 'default.label.participante')]"/></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -32,15 +34,341 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:form resource="${this.participante}" method="POST">
-        <fieldset class="form">
-            <f:all bean="participante"/>
-        </fieldset>
-        <fieldset class="buttons">
-            <g:submitButton name="create" class="save"
-                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-        </fieldset>
-    </g:form>
+
+%{-- <g:form resource="${this.participante}" method="POST">
+     <fieldset class="form">
+         <f:all bean="participante"/>
+     </fieldset>
+     <fieldset class="buttons">
+         <g:submitButton name="create" class="save"
+                         value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+     </fieldset>
+ </g:form>--}%
+
+    <div class="container">
+        <g:form resource="${this.participante}" method="POST">
+            <fieldset class="form">
+                <div class="input-group" id="div-nombre">
+                    <span class="input-group-addon"><g:message code="default.label.nombre"/></span>
+                    <input id="nombre" type="text" class="form-control" name="participante.nombre" value=""
+                           onchange="$('#div-nombre').removeClass('has-error')"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-apellido1">
+                    <span class="input-group-addon"><g:message code="default.label.apellido1"/></span>
+                    <input id="apellido1" type="text" class="form-control" name="participante.apellido1" value=""
+                           onchange="$('#div-apellido1').removeClass('has-error')"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-apellido2">
+                    <span class="input-group-addon"><g:message code="default.label.apellido2"/></span>
+                    <input id="apellido2" type="text" class="form-control" name="participante.apellido2" value=""
+                           onchange="$('#div-apellido2').removeClass('has-error')"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-centro">
+                    <span class="input-group-addon"><g:message code="default.label.centro"/></span>
+                    <g:select name="participante.centro.id"
+                              from="${multikirola.Centro.list()}"
+                              value="${participante?.centro?.id}"
+                              optionValue="nombre"
+                              optionKey="id"
+                              noSelection="${['null': g.message(code: 'default.label.centro')]}"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-curso">
+                    <span class="input-group-addon"><g:message code="default.label.curso"/></span>
+                    <g:select name="participante.curso.id"
+                              from="${multikirola.Curso.list()}"
+                              value="${participante?.curso?.id}"
+                              optionValue="nombre"
+                              optionKey="id"
+                              noSelection="${['null': g.message(code: 'default.label.curso')]}"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-sexo">
+                    <span class="input-group-addon"><g:message code="default.label.sexo"/></span>
+                    <g:select name="participante.sexo"
+                              from="${['F', 'M']}"
+                              valueMessagePrefix="default.label.sexo"
+                              value="${participante?.sexo}"
+                              noSelection="${['null': g.message(code: 'default.label.sexo')]}"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-movil">
+                    <span class="input-group-addon"><g:message code="default.label.movil"/></span>
+                    <input id="movil" type="text" class="form-control"
+                           name="participante.movil" value="${this.participante?.movil}"
+                           onchange="$('#div-movil').removeClass('has-error')"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-telefono">
+                    <span class="input-group-addon"><g:message code="default.label.telefono"/></span>
+                    <input id="telefono" type="text" class="form-control"
+                           name="participante.telefono" value="${this.participante?.telefono}"
+                           onchange="$('#div-telefono').removeClass('has-error')"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-email">
+                    <span class="input-group-addon">Email</span>
+                    <input id="email" type="text" class="form-control"
+                           name="participante.email" value="${this.participante?.email}"
+                           onchange="$('#div-email').removeClass('has-error')"/>
+                </div>
+                <br>
+
+                <div class="input-group" id="div-fecha">
+                    <span class="input-group-addon"><g:message code="default.label.fechaNacimiento"/></span>
+                    <input id="fechaNacimiento" type="date" class="form-control" name="participante.fechaNacimiento"
+                           value=""
+                           onchange="$('#div-fecha').removeClass('has-error')"/>
+                </div>
+                <br>
+                %{--
+                                <div class="form-group">
+                                    <input id="btn-myaccount" type="submit" class="btn btn-info save"
+                                           name="register"
+                                           value="<g:message code="default.button.create.label"/>"/>
+                                </div>
+                --}%
+
+                <div class="form-group">
+                    <input id="btn-myaccount" type="button" class="btn btn-info save"
+                           name="register" value="<g:message code="default.button.create.label"/>"/>
+                </div>
+
+            </fieldset>
+
+        </g:form>
+    </div>
+    <g:javascript>
+
+    document.getElementsByName('register')[0].addEventListener('click', function () {
+        let datosOK = validaDatosParticipante();
+        if(datosOK){
+            console.log("Creando participante");
+            const nombre = $('#nombre').val();
+            const apellido1 = $('#apellido1').val();
+            const apellido2 = $('#apellido2').val();
+            const centro = $('[name="participante.centro.id"]').val();
+            const curso = $('[name="participante.curso.id"]').val();
+            const sexo = $('[name="participante.sexo"]').val();
+            const telefono = $('#telefono').val();
+            const movil = $('#movil').val();
+            const email = $('#email').val();
+            const fechaNacimiento = new Date($('#fechaNacimiento').val()).toISOString();
+            // const fechaNacimiento = $('#fechaNacimiento').val();
+
+            const datos = {
+                nombre: nombre,
+                apellido1: apellido1,
+                apellido2: apellido2,
+                centro: centro,
+                curso: curso,
+                sexo: sexo,
+                movil: movil,
+                telefono: telefono,
+                email: email,
+                fechaNacimiento: fechaNacimiento
+            };
+
+            $.post("/multikirola/participante/save", datos,
+                function (data, status) {
+                    console.log(status);
+                    window.location ="/multikirola/participante/index" ;
+                }
+            );
+
+            $.ajax({
+                type: "POST",
+                url: "/multikirola/participante/save",
+                data: datos,
+                success: function(response) {
+                  console.log(response);
+                  window.location ="/multikirola/participante/index" ;
+                },
+                error: function(error) {
+                  console.log(error);
+                  window.location ="/multikirola/participante/create" ;
+                }
+            })
+
+        }else {
+            alert("${message(code: 'registro.participante.alerterror', default: 'Por favor, revisa los campos...')}");
+        }
+    });
+
+    function validaDatosParticipante() {
+        var validacionOK = true;
+        validacionOK = validaNombre() && validaApellido1() && validaApellido2() && validaCentro() && validaCurso() && validaSexo() && validaTelefono() && validaMovil() && validaEmail();
+        return validacionOK;
+    }
+
+    function validaNombre() {
+        console.log("validando nombre");
+        var formOk = true;
+        var nombre = $('#nombre').val();
+        console.log('Nombre: ' + nombre);
+        if (nombre == "" || nombre == undefined) {
+            $('#div-nombre').addClass('has-error');
+            formOk = false;
+        } else {
+            var nombre_re = /^[a-zA-Z]+$/; // Sólo caracteres
+            if (!nombre_re.test(nombre)) {
+                $('#div-nombre').addClass('has-error');
+                formOk = false;
+            }
+        }
+        console.log(formOk);
+        return formOk;
+    }
+
+    function validaApellido1() {
+        console.log("validando apellido1");
+        var formOk = true;
+        var apellido1 = $('#apellido1').val();
+        console.log('Apellido1: ' + apellido1);
+        if (apellido1 == "" || apellido1 == undefined) {
+            $('#div-apellido1').addClass('has-error');
+            formOk = false;
+        } else {
+            var apellido1_re = /^[a-zA-Z]+$/; // Sólo caracteres
+            if (!apellido1_re.test(apellido1)) {
+                $('#div-apellido1').addClass('has-error');
+                formOk = false;
+            }
+        }
+        console.log(formOk);
+        return formOk;
+    }
+
+    function validaApellido2() {
+        console.log("validando apellido 2");
+        var formOk = true;
+        var apellido2 = $('#apellido2').val();
+        console.log('Apellido2: ' + apellido2);
+        var apellido2_re = /^[a-zA-Z]+$/; // Sólo caracteres
+        if (apellido2.length > 0 && !apellido2_re.test(apellido2)) {
+            $('#div-apellido2').addClass('has-error');
+            formOk = false;
+        }
+        console.log(formOk);
+        return formOk;
+    }
+
+    function validaCentro() {
+        console.log("validando Centro");
+        var formOk = true
+        var centro = $('[name="participante.centro.id"]').val();
+        if (centro == "null") {
+            formOk = false;
+            $('#div-centro').addClass('has-error');
+        }
+        return formOk;
+    }
+
+    document.getElementsByName('participante.centro.id')[0].addEventListener('change', function (){
+        $('#div-centro').removeClass('has-error');
+    });
+
+    function validaCurso() {
+        console.log("validando Curso");
+        var formOk = true
+        var curso = $('[name="participante.curso.id"]').val();
+        if (curso == "null") {
+            formOk = false;
+            $('#div-curso').addClass('has-error');
+        }
+        return formOk;
+    }
+
+    document.getElementsByName('participante.curso.id')[0].addEventListener('change', function (){
+        $('#div-curso').removeClass('has-error');
+    });
+
+
+    function validaSexo() {
+        console.log("validando Sexo");
+        var formOk = true
+        var sexo = $('[name="participante.sexo"]').val();
+        if (sexo == "null") {
+            formOk = false;
+            $('#div-sexo').addClass('has-error');
+        }
+        return formOk;
+    }
+
+    document.getElementsByName('participante.sexo')[0].addEventListener('change', function (){
+        $('#div-sexo').removeClass('has-error');
+    });
+
+    function validaMovil() {
+        console.log("validando Movil");
+        var formOk = true;
+        var movil = $('#movil').val();
+        console.log('Movil: ' + movil);
+        if (movil == "" || movil == undefined) {
+            $('#div-movil').addClass('has-error');
+            formOk = false;
+        } else {
+            var movil_re = /(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/; // Sólo caracteres
+            if (!movil_re.test(movil)) {
+                $('#div-movil').addClass('has-error');
+                formOk = false;
+            }
+        }
+        console.log(formOk);
+        return formOk;
+    }
+
+    function validaTelefono() {
+        console.log("validando Telefono");
+        var formOk = true;
+        var telefono = $('#telefono').val();
+        console.log('Telefono: ' + telefono);
+        if (telefono == "" || telefono == undefined) {
+            $('#div-telefono').addClass('has-error');
+            formOk = false;
+        } else {
+            var telefono_re = /(\+34|0034|34)?[ -]*(9)[ -]*([0-9][ -]*){8}/; // Sólo caracteres
+            if (!telefono_re.test(telefono)) {
+                $('#div-telefono').addClass('has-error');
+                formOk = false;
+            }
+        }
+        console.log(formOk);
+        return formOk;
+    }
+
+    function validaEmail() {
+        console.log("validando Email");
+        var formOk = true;
+        var email = $('#email').val();
+        console.log('Email: ' + email);
+        if (email == "" || email == undefined) {
+            $('#div-email').addClass('has-error');
+            formOk = false;
+        } else {
+            var email_re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+            if(!email_re.test(email)) {
+                $('#div-email').addClass('has-error');
+                formOk = false;
+            }
+        }
+        console.log(formOk);
+        return formOk;
+    }
+
+    </g:javascript>
 </div>
+
 </body>
 </html>

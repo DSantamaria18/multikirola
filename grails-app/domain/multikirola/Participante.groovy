@@ -21,7 +21,8 @@ class Participante {
         apellido1(nullable: false, blank: false)
         apellido2(nullable: true, blank: true)
         fechaNacimiento(nullable: false, blank: false, max: new Date())
-        sexo(inList: ['EMAKUMEZKOA - FEMENINO', 'GIZONEZKOA - MASCULINO'])
+        sexo(inList: ['F', 'M'])
+//        sexo(inList: ['EMAKUMEZKOA - FEMENINO', 'GIZONEZKOA - MASCULINO'])
         telefono()
         movil(nullable: false, blank: false)
         email(nullable: false, email: true, blank: false)
@@ -29,5 +30,9 @@ class Participante {
         curso(nullable: false, blank: false)
         token(nullable: false, unique: true, display: false)
         usuario(nullable: false, display: false)
+    }
+
+    String toString() {
+        return "${this?.nombre} ${this?.apellido1} ${this?.apellido2}"
     }
 }

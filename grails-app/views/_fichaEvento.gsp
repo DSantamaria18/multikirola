@@ -22,7 +22,7 @@
                 <i class="glyphicon glyphicon-map-marker"></i>
                 <span>${evento?.lugar}</span>
                 <span>${evento?.recinto}</span>
-                <span>${evento?.instalacion}</span><br/>
+                %{--<span>${evento?.instalacion}</span><br/>/--}%
             </div>
 
             <g:if test="${evento?.edad_minima > 0}">
