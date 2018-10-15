@@ -103,21 +103,24 @@
 
                 <div class="input-group" id="div-movil">
                     <span class="input-group-addon"><g:message code="default.label.movil"/></span>
-                    <input id="movil" type="text" class="form-control" name="participante.movil" value=""
+                    <input id="movil" type="text" class="form-control"
+                           name="participante.movil" value="${this.participante?.movil}"
                            onchange="$('#div-movil').removeClass('has-error')"/>
                 </div>
                 <br>
 
                 <div class="input-group" id="div-telefono">
                     <span class="input-group-addon"><g:message code="default.label.telefono"/></span>
-                    <input id="telefono" type="text" class="form-control" name="participante.telefono" value=""
+                    <input id="telefono" type="text" class="form-control"
+                           name="participante.telefono" value="${this.participante?.telefono}"
                            onchange="$('#div-telefono').removeClass('has-error')"/>
                 </div>
                 <br>
 
                 <div class="input-group" id="div-email">
                     <span class="input-group-addon">Email</span>
-                    <input id="email" type="text" class="form-control" name="participante.email" value=""
+                    <input id="email" type="text" class="form-control"
+                           name="participante.email" value="${this.participante?.email}"
                            onchange="$('#div-email').removeClass('has-error')"/>
                 </div>
                 <br>
@@ -143,12 +146,6 @@
                 </div>
 
             </fieldset>
-
-
-        %{--<fieldset class="buttons">
-            <g:submitButton name="create" class="save"
-                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-        </fieldset>--}%
 
         </g:form>
     </div>
@@ -186,8 +183,23 @@
             $.post("/multikirola/participante/save", datos,
                 function (data, status) {
                     console.log(status);
+                    window.location ="/multikirola/participante/index" ;
                 }
             );
+
+            $.ajax({
+                type: "POST",
+                url: "/multikirola/participante/save",
+                data: datos,
+                success: function(response) {
+                  console.log(response);
+                  window.location ="/multikirola/participante/index" ;
+                },
+                error: function(error) {
+                  console.log(error);
+                  window.location ="/multikirola/participante/create" ;
+                }
+            })
 
         }else {
             alert("${message(code: 'registro.participante.alerterror', default: 'Por favor, revisa los campos...')}");

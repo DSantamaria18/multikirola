@@ -19,7 +19,7 @@ class UserController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 
-        User currentUser = getAuthenticatedUser()
+        User currentUser = getAuthenticatedUser() as User
 
         if (Role.findByAuthority('ROLE_ADMIN') in currentUser.getAuthorities()) {
             respond userService.list(params), model: [userCount: userService.count()]
