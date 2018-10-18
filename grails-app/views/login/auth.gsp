@@ -42,7 +42,7 @@
                             %{--<button type="submit" class="btn btn-success">Entrar</button>--}%
                             <button type="submit" class="btn btn-success"><g:message code="default.label.entrar"/></button>
                             %{--<div style="float:right; font-size: 80%; position: relative; "><g:link controller='register' action='forgotPassword'>¿Olvidaste la contraseña?</g:link></div>--}%
-                            <div style="float:right; font-size: 80%; position: relative; "><g:link controller='register' action='forgotPassword'><g:message code="default.label.recuperarContrasena"/></g:link></div>
+                            %{--<div style="float:right; font-size: 80%; position: relative; "><g:link controller='register' action='forgotPassword'><g:message code="default.label.recuperarContrasena"/></g:link></div>--}%
                         </div>
                     </div>
 

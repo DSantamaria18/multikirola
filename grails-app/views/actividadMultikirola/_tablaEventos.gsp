@@ -13,7 +13,8 @@
         <g:each in="${eventList}" var="event" status="i">
             <tr  data-id="${event.id}" onclick="goToEvent(this)">
                 <td>${event.id}</td>
-                <td><g:formatDate date="${event.fecha}" format="dd-MM-yyyy"/></td>
+                %{--<td><g:formatDate date="${event.fecha}" format="dd-MM-yyyy"/></td>--}%
+                <td><g:formatDate date="${event.fecha}" formatName="default.date.format"/></td>
                 <td>${event.modalidad}</td>
                 <td>${event.lugar} ${event.recinto} ${event.instalacion}</td>
                 <td>${event.horario}</td>
