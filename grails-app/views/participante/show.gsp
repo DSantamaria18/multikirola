@@ -64,7 +64,8 @@
                         code="default.label.fechaNacimiento"
                         default="Fecha de nacimiento:"/></span>
                 <span class="property-value" aria-labelledby="fechaNacimiento-label">
-                    <g:formatDate format="dd-MM-yyyy" date="${participante.fechaNacimiento}"/>
+                    %{--<g:formatDate format="dd-MM-yyyy" date="${participante.fechaNacimiento}"/>--}%
+                    <g:formatDate formatName="default.date.format" date="${participante.fechaNacimiento}"/>
                 </span>
             </li>
         </g:if>

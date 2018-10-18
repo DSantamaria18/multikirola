@@ -91,7 +91,8 @@
                     <td hidden>${participante.id}</td>
                     <td class="text-capitalize">${participante.apellido1} ${participante.apellido2}</td>
                     <td class="text-capitalize">${participante.nombre}</td>
-                    <td><g:formatDate date="${participante.fnacimiento}" format="dd-MM-yyyy"/></td>
+                    %{--<td><g:formatDate date="${participante.fnacimiento}" format="dd-MM-yyyy"/></td>--}%
+                    <td><g:formatDate date="${participante.fnacimiento}" formatName="default.date.format"/></td>
                     <td>${participante.telefono}</td>
                     <td>${participante.movil}</td>
                     <td>${participante.email}</td>

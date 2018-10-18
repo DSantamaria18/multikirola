@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'participante.label', default: 'Participante')}"/>
+    <g:set var="entityName" value="${message(code: 'default.label.participante', default: 'Participante')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -44,7 +44,8 @@
                     <tr>
                         <td><g:link action="show" controller="participante"
                                     id="${participante.id}">${participante.toString()}</g:link></td>
-                        <td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>
+                        %{--<td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>--}%
+                        <td><g:formatDate date="${participante.fechaNacimiento}" formatName="default.date.format"/></td>
                         <td>${participante.telefono}</td>
                         <td>${participante.movil}</td>
                     </tr>
@@ -57,7 +58,8 @@
     <div class="row">
         <g:if test="${actividadMultikirolaList.size() > 0}">
             <div id="list-inscripciones" class="content scaffold-list">
-                <h1>Inscripciones Activas</h1>
+                %{--<h1>Inscripciones Activas</h1>--}%
+                <h1><g:message code="default.label.inscripcionesActivas"/></h1>
                 <table class="table-responsive" style="display: table">
                     <thead>
                     <tr>
@@ -73,8 +75,8 @@
                             %{--<td id="event-id" data-id="${am.evento_id}" hidden></td>--}%
                             <td id="event-name"><g:link uri="/actividadMultikirola/registrarParticipantes?eventId=${am.evento_id}">${am.evento}</g:link></td>
                             %{--<td id="event-date"><g:formatDate date="${am.fecha}" format="EEEE dd-MMMM-yyyy" style="MEDIUM"/></td>--}%
-                            <td id="event-date"><g:formatDate date="${am.fecha}" format="dd-MM-yyyy"
-                                                              style="MEDIUM"/></td>
+                            %{--<td id="event-date"><g:formatDate date="${am.fecha}" format="dd-MM-yyyy" style="MEDIUM"/></td>--}%
+                            <td id="event-date"><g:formatDate date="${am.fecha}" formatName="default.date.format" style="MEDIUM"/></td>
                             <td id="participant-name"
                                 data-id="${am.participante_id}">${am.nombre_participante} ${am.apellido1_participante} ${am.apellido2_participante}</td>
                             <td id="remove-btn"><div class="btn btn-sm btn-danger"

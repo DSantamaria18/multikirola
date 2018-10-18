@@ -9,7 +9,8 @@
                 <i class="glyphicon glyphicon-calendar"></i>
                 <span class="text-capitalize">
                     %{--<g:formatDate date="${evento.fecha}" format="EEEE dd-MMMM-yyyy" style="MEDIUM"/>--}%
-                    <g:formatDate date="${evento.fecha}" format="dd-MM-yyyy" style="MEDIUM"/>
+                    %{--<g:formatDate date="${evento.fecha}" format="dd-MM-yyyy" style="MEDIUM"/>--}%
+                    <g:formatDate date="${evento.fecha}" formatName="default.date.format" style="MEDIUM"/>
                 </span>
             </div>
 

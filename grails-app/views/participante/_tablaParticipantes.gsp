@@ -35,7 +35,8 @@
                 <td>${participante.telefono}</td>
                 <td>${participante.movil}</td>
                 <td>${participante.email}</td>
-                <td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>
+                %{--<td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>--}%
+                <td><g:formatDate date="${participante.fechaNacimiento}" formatName="default.date.format"/></td>
             </tr>
         </g:each>
         </tbody>

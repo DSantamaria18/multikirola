@@ -38,7 +38,8 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     <input type="text" class="form-control" id="event-date" readonly
-                           value="${formatDate(date: evento.fecha, format: "dd-MM-yyyy")}">
+                           %{--value="${formatDate(date: evento.fecha, format: "dd-MM-yyyy")}">--}%
+                           value="${formatDate(date: evento.fecha, formatName:'default.date.format')}">
                            %{--value="${formatDate(date: evento.fecha, format: "EEEE, d MMMM yyyy", style: "LONG")}">--}%
                 </div>
             </div>
