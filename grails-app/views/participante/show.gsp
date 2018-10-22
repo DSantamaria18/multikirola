@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<g:render template="/navbar"/>
 <a href="#show-participante" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
                                                                    default="Skip to content&hellip;"/></a>
 
@@ -74,9 +75,14 @@
             <li class="fieldcontain">
                 <span id="sexo-label" class="property-label"><g:message code="default.label.sexo"
                                                                         default="Sexo:"/></span>
-                <span class="property-value" aria-labelledby="sexo-label"><g:fieldValue
-                        bean="${participante}"
-                        field="sexo"/></span>
+                <span class="property-value" aria-labelledby="movil-label">
+                    <g:if test="${participante.sexo == 'F'}">
+                        <g:message code="default.label.femenino"/>
+                    </g:if>
+                    <g:else>
+                        <g:message code="default.label.masculino"/>
+                    </g:else>
+                </span>
             </li>
         </g:if>
 
@@ -94,18 +100,11 @@
             <li class="fieldcontain">
                 <span id="movil-label" class="property-label"><g:message code="default.label.movil"
                                                                          default="Móvil:"/></span>
-                %{--<span class="property-value" aria-labelledby="movil-label"><g:fieldValue
+                <span class="property-value" aria-labelledby="movil-label"><g:fieldValue
                         bean="${participante}"
-                        field="movil"/></span>--}%
+                        field="movil"/></span>
 
-                <span class="property-value" aria-labelledby="movil-label">
-                    <g:if test="${participante.sexo == 'F'}">
-                        <g:message code="default.label.femenino"/>
-                    </g:if>
-                    <g:else>
-                        <g:message code="default.label.masculino"/>
-                    </g:else>
-                </span>
+
             </li>
         </g:if>
 

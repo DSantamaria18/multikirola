@@ -16,7 +16,7 @@ class ParticipanteImplService {
         String movilQuery = (params?.movil)? "AND p.movil LIKE '%${params.movil}%' ": ""
         String emailQuery = (params?.email)? "AND p.email LIKE '%${params.email}%' " : ""
         String centroQuery = (params.centro != '')? "AND p.centro_id = ${params.centro} " : ""
-        String cursoQuery = (params.curso != '')? "AND p.centro_id = ${params.curso} " : ""
+        String cursoQuery = (params.curso != '')? "AND p.curso_id = ${params.curso} " : ""
         String fechaQuery = ((params.fdesde != "-") && (params.fhasta !="-")) ? "AND p.fecha_nacimiento BETWEEN '${params.fdesde}-01' " +
                 "AND '${params.fhasta}-01' " : ""
 
