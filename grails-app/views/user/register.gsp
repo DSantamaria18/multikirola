@@ -214,7 +214,7 @@
                                             •    Helbide Soziala: Ganeta plaza 4, behea. 48930 Getxo. Bizkaia.<br>
                                             •    IFZ: B-95571873<br>
                                             •    Telefonoa: 946081888<br>
-                                            •    e-Maila: cima@cimadidaktika.com<br>
+                                            •    e-Maila: ilacruz@getxo.eus<br>
                                             •    Bizkaiko Merkataritza Erregistroan inskribatua, 3452 tomoa, 13 folioa, BI 17754 orria, 1. Inskripzioa.<br>
                                             <br>
                                             Domeinuen izena: getxomultikirolak.eus, www.getxomultikirolak.eus
@@ -373,7 +373,7 @@
                                                         <li>CIF: B95571873</li>
                                                         <li>Dirección postal: Plaza Ganeta nº 4. 48930 Getxo. Bizkaia.</li>
                                                         <li>Teléfono de contacto: 94 608 18 88</li>
-                                                        <li>Correo electrónico de contacto: cima@cimadidaktika.com</li>
+                                                        <li>Correo electrónico de contacto: ilacruz@getxo.eus</li>
                                                     </ul>
                                                 </li>
                                                 <br>
@@ -556,7 +556,7 @@
                                 <li>IFK: B95571873</li>
                                 <li>Posta helbidea: Plaza Ganeta nº 4. 48930 Getxo. Bizkaia.</li>
                                 <li>Harremanetarako telefonoa: 94 608 18 88</li>
-                                <li>Harremanetarako posta elektronikoa: cima@cimadidaktika.com</li>
+                                <li>Harremanetarako posta elektronikoa: ilacruz@getxo.eus</li>
                             </ul>
                         </li>
                         <br>
@@ -678,7 +678,7 @@
                                 <strong>Nora jo behar duzu eskubideak aitortzeko?</strong>
                                 <br>
                                 Onartutako eskubideak aitortzeko, interesatua aipatutako sozietatearekin harremanetan
-                                jarri ahal izango da hurrengo posta elektronikoaren helbidearen bidez: cima@cimadidaktika.com
+                                jarri ahal izango da hurrengo posta elektronikoaren helbidearen bidez: ilacruz@getxo.eus
                                 edo idatzi bat <strong>GOBELA 21, S.L.</strong>, sozietateari zuzenduta, Tratamenduaren
                             Arduradunari buruzko lehenengo atalean adierazitako Helbidean.
                             </li>
