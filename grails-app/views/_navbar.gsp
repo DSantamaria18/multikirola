@@ -1,6 +1,6 @@
 <content tag="nav">
 
-    <li><a href="/multikirola"><g:message code="default.home.label"></g:message></a></li>
+    %{--<li><a href="/multikirola"><g:message code="default.home.label"></g:message></a></li>
 
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -8,7 +8,7 @@
         <ul class="dropdown-menu">
             <li><g:link controller="static" action="presentacion"><g:message code="default.label.zerdamultikirola"/></g:link></li>
         </ul>
-    </li>
+    </li>--}%
 
     <sec:ifAnyGranted roles='ROLE_ADMIN'>
         <li class="dropdown">
@@ -53,8 +53,6 @@
         </li>
     </sec:ifAnyGranted>
 
-
-
     <sec:ifAnyGranted roles='ROLE_ADMIN'>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -66,6 +64,14 @@
             </ul>
         </li>
     </sec:ifAnyGranted>
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+           aria-expanded="false"><g:message code="default.languages.label"/> <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
+        </ul>
+    </li>
 
     <sec:ifLoggedIn>
         <li class="dropdown">
@@ -85,14 +91,6 @@
             </ul>
         </li>
     </sec:ifLoggedIn>
-
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-           aria-expanded="false"><g:message code="default.languages.label"/> <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
-        </ul>
-    </li>
 
     <sec:ifNotLoggedIn><li><g:link controller='login'><g:message code="default.login.label"/></g:link></li></sec:ifNotLoggedIn>
 </content>
