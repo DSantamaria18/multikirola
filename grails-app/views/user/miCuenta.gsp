@@ -28,7 +28,6 @@
          class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
-                %{--<div class="panel-title">Mi Cuenta</div>--}%
                 <div class="panel-title"><g:message code="default.label.micuenta"/></div>
             </div>
 
@@ -58,7 +57,6 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="username" type="text" class="form-control"
                                name="${securityConfig.apf.usernameParameter}" value="${this.user?.username}"
-                               %{--placeholder="Nombre de usuario"--}%
                                placeholder="<g:message code="default.label.nombreUsuario"/>"
                                onchange="$('.error').attr('hidden', true);" readonly/>
                     </div>
@@ -81,24 +79,21 @@
                         <label id="error-email" class="error" style="color: red" hidden>ERROR!!!</label>
                     </div>
 
-                    <div style="margin-top: 10px" class="input-group">
+                   %{-- <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                         <input id="userphone" type="text" class="form-control" name="telefono"
                                value="${this.user?.telefono}"
-                               %{--placeholder="Teléfono" --}%
                                placeholder="<g:message code="default.label.telefono"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
-
                     <div>
                         <label id="error-userphone" class="error" style="color: red" hidden>ERROR!!!</label>
-                    </div>
+                    </div>--}%
 
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                         <input id="usercellphone" type="text" class="form-control" name="movil"
                                value="${this.user?.movil}"
-                               %{--placeholder="Teléfono móvil" --}%
                                placeholder="<g:message code="default.label.telefonoMovil"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
@@ -112,18 +107,15 @@
                             <label>
                                 <g:checkBox id="whatsapp" name="whatsapp"
                                        value="${this.user?.whatsapp}"/>
-                                %{--Notificadme por Whatsapp--}%
                                 <g:message code="default.label.notificadmeWhatsapp"/>
                             </label>
                         </div>
                     </div>
-
                     <div>
                         <label id="error-whatsapp" class="error" style="color: red" hidden>ERROR!!!</label>
                     </div>
 
                     <!-- PASSWORD -->
-                    %{--<button type="button" class="btn collapsed" data-toggle="collapse" data-target="#password-group" >Actualizar contraseña</button>--}%
                     <button type="button" class="btn collapsed" data-toggle="collapse" data-target="#password-group" ><g:message code="default.label.actualizarContrasena"/></button>
 
                     <div id="password-group" class="collapse">
@@ -131,11 +123,9 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                             <input id="password" type="password" class="form-control"
                                    name="${securityConfig.apf.passwordParameter}"
-                                   %{--placeholder="Nueva Contraseña"--}%
                                    placeholder="<g:message code="default.label.nuevaContrasena"/>"
                                    onchange="$('.error').attr('hidden', true); "/>
                         </div>
-
                         <div>
                             <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>
                         </div>
@@ -144,7 +134,6 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                             <input id="password2" type="password" class="form-control"
                                    name="password2"
-                                   %{--placeholder="Confirmar contraseña"--}%
                                    placeholder="<g:message code="default.label.confirmarContrasena"/>"
                                    onchange="$('.error').attr('hidden', true);"/>
                         </div>
@@ -160,7 +149,6 @@
                         <div class="col-md-9">
                             <input id="btn-myaccount" type="submit" class="btn btn-info save"
                                    name="register"
-                                   %{--value="Actualizar"/>--}%
                                    value="<g:message code="default.label.actualizar"/>"/>
                         </div>
                     </div>

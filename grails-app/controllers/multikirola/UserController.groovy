@@ -90,7 +90,6 @@ class UserController {
         try {
             if (updUser.username == user.username) {
                 updUser.email = user.email
-                updUser.telefono = user.telefono
                 updUser.movil = user.movil
                 updUser.whatsapp = user.whatsapp
                 if (user.password != null) {

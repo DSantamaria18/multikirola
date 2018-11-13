@@ -15,7 +15,6 @@ class User implements Serializable {
     String username
     String password
     String email
-    String telefono
     String movil
     boolean whatsapp = false
     boolean enabled = true
@@ -33,7 +32,6 @@ class User implements Serializable {
         password nullable: false, blank: false, password: true, display: false
         username nullable: false, blank: false, unique: true
         email nullable: false, blank: false, email: true
-        telefono nullable: true, blank: true
         movil nullable: true, blank: true
         whatsapp()
         enabled display: false
