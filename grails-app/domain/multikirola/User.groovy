@@ -21,6 +21,8 @@ class User implements Serializable {
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
+    Date dateCreated
+    Date lastUpdated
 
     static hasMany = [participantes: Participante]
 
