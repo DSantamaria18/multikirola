@@ -2,13 +2,13 @@
 
     <li><a href="/multikirola"><g:message code="default.home.label"></g:message></a></li>
 
-    <li class="dropdown">
+    %{--<li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
            aria-expanded="false">Multikirolak<span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><g:link controller="static" action="presentacion"><g:message code="default.label.zerdamultikirola"/></g:link></li>
         </ul>
-    </li>
+    </li>--}%
 
     <sec:ifAnyGranted roles='ROLE_ADMIN'>
         <li class="dropdown">
