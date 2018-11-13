@@ -134,7 +134,7 @@ function validateForm() {
     }
 
     /* validación de password */
-    if ($('#password-group.in').size() > 0 || $('#password-group').size < 1) {
+    if ($('#password-group.in').size() > 0 || $('#password-group').size() < 1) {
         if (!isValidPassword()) {
             formOk = false;
         } else {
