@@ -39,21 +39,33 @@
                         </ul>
                     </g:hasErrors>
 
+                    <input id="username" type="hidden"
+                           name="${securityConfig.apf.usernameParameter}"
+                           value=""/>
+
                     <div style="margin-top: 20px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="username" type="text" class="form-control" data-toggle="tooltip-user"
-                               title="Tu identificador de acceso a la aplicación. Debe ser único."
-                               name="${securityConfig.apf.usernameParameter}" value=""
+                        <input id="nombre" type="text" class="form-control" data-toggle="tooltip-user"
+                               title="Tu nombre" name="nombre"
+                               value=""
                                placeholder="<g:message code="default.label.nombreUsuario"/>"
+                               onchange="$('.error').attr('hidden', true);"/>
+                        <input id="apellidos" type="text" class="form-control" data-toggle="tooltip-user"
+                               title="Tus apellidos" name="apellidos"
+                               value=""
+                               placeholder="<g:message code="default.label.apellidosUsuario"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
                     <div>
-                        <label id="error-username" class="error" style="color: red" hidden><g:message
+                        <label id="error-nombre" class="error" style="color: red" hidden><g:message
                                 code="default.error.nombreUsuario"/></label>
                         <label id="error-caracteresUsername" class="error" style="color: red" hidden><g:message
                                 code="default.error.caracteresNombreUsuario"/></label>
+                        <label id="error-apellidos" class="error" style="color: red" hidden><g:message
+                                code="default.error.apellidos"/></label>
+                        <label id="error-caracteresApellidos" class="error" style="color: red" hidden><g:message
+                                code="default.error.caracteresApellidos"/></label>
                     </div>
-
 
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -111,8 +123,6 @@
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
                     <div>
-                        <label id="error-password" class="error" style="color: red" hidden><g:message
-                                code="default.error.password"/></label>
                         <label id="error-longitudPassword" class="error" style="color: red" hidden><g:message
                                 code="default.error.longitudPassword"/></label>
                         <label id="error-digitoPassword" class="error" style="color: red" hidden><g:message
@@ -680,5 +690,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

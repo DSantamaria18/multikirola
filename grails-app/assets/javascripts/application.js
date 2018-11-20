@@ -51,27 +51,11 @@ function validateForm() {
     let nombre = $('#nombre').val();
     let apellidos = $('#apellidos').val();
     const email = $('#useremail').val();
-    // var telefono = $('#userphone').val();
     const movil = $('#usercellphone').val();
     const whatsapp = $('#whatsapp').prop('checked');
 
+       /* validación de nombre y apellidos */
     const nombre_regex =/^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
-
-    /* validación de username */
-    /*if (username == "") {
-        // $('#error-username').text('Debes introducir un nombre de usuario.');
-        $('#error-username').attr('hidden', false);
-        formRegistroOk = false;
-    } else {
-        var user_re = /^\w+$/; // Sólo caracteres y números
-        if (!user_re.test(username)) {
-            // $('#error-caracteresUsername').text('Caracteres no válidos en el nombre de usuario.');
-            $('#error-caracteresUsername').attr('hidden', false);
-            formRegistroOk = false;
-        }
-    }*/
-
-    /* validación de nombre y apellidos */
     if (nombre == "" || nombre.length < 2) {
         $('#error-nombre').attr('hidden', false);
         formRegistroOk = false;
@@ -101,17 +85,9 @@ function validateForm() {
         formRegistroOk = false;
     }
 
-    /* validación de telefono */
-    var telefono_re = /^(\+34|0034|34)?[6|7|9][0-9]{8}$/;
-    /*if (telefono == "" || !telefono_re.test(telefono)) {
-        // $('#error-userphone').text('Debes introducir un teléfono válido.');
-        $('#error-userphone').attr('hidden', false);
-        formRegistroOk = false;
-    }*/
-
     /* validación de movil */
+    var telefono_re = /^(\+34|0034|34)?[6|7|9][0-9]{8}$/;
     if (movil == "" || !telefono_re.test(movil)) {
-        // $('#error-usercellphone').text('Debes introducir un teléfono válido.');
         $('#error-usercellphone').attr('hidden', false);
         formRegistroOk = false;
     }

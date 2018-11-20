@@ -53,12 +53,27 @@
                         </ul>
                     </g:hasErrors>
 
+                    <input id="username" type="hidden"
+                           name="${securityConfig.apf.usernameParameter}"
+                           value="${this.user?.username}"/>
+
                     <div style="margin-top: 20px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        %{--<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="username" type="text" class="form-control"
-                               name="${securityConfig.apf.usernameParameter}" value="${this.user?.username}"
+                               value="${this.user?.nombre + ' ' + this.user?.apellidos}"
                                placeholder="<g:message code="default.label.nombreUsuario"/>"
-                               onchange="$('.error').attr('hidden', true);" readonly/>
+                               onchange="$('.error').attr('hidden', true);" readonly/>--}%
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="nombre" type="text" class="form-control" data-toggle="tooltip-user"
+                               title="Tu nombre" name="nombre"
+                               value="${this.user?.nombre}"
+                               placeholder="<g:message code="default.label.nombreUsuario"/>"
+                               onchange="$('.error').attr('hidden', true);"/>
+                        <input id="apellidos" type="text" class="form-control" data-toggle="tooltip-user"
+                               title="Tus apellidos" name="apellidos"
+                               value="${this.user?.apellidos}"
+                               placeholder="<g:message code="default.label.apellidosUsuario"/>"
+                               onchange="$('.error').attr('hidden', true);"/>
                     </div>
 
                     <div>
@@ -69,26 +84,14 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                         <input id="useremail" type="text" class="form-control"
                                name="email"
-                               %{--placeholder="Email" --}%
                                placeholder="<g:message code="default.label.correoElectronico"/>"
                                value="${this.user?.email}"
-                               onchange="$('.error').attr('hidden', true); "/>
+                               onchange="$('.error').attr('hidden', true); " readonly/>
                     </div>
 
                     <div>
                         <label id="error-email" class="error" style="color: red" hidden>ERROR!!!</label>
                     </div>
-
-                   %{-- <div style="margin-top: 10px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input id="userphone" type="text" class="form-control" name="telefono"
-                               value="${this.user?.telefono}"
-                               placeholder="<g:message code="default.label.telefono"/>"
-                               onchange="$('.error').attr('hidden', true); "/>
-                    </div>
-                    <div>
-                        <label id="error-userphone" class="error" style="color: red" hidden>ERROR!!!</label>
-                    </div>--}%
 
                     <div style="margin-top: 10px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
