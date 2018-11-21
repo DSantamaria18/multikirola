@@ -167,14 +167,11 @@ server:
 ---
 environments:
     development:
-        uploadFolder: "c:/temp/uploads"
-        pdfTemplates: "c:/temp/uploads/subvenciones/pdfTemplates"
+        uploadFolder: "c:/temp/uploads/multikirolak"
     test:
-        uploadFolder: "c:/temp/uploads"
-        pdfTemplates: "c:/temp/uploads/subvenciones/pdfTemplates"
+        uploadFolder: "c:/temp/uploads/multikirolak"
     production:
-        uploadFolder: "/root/ficheros"
-        pdfTemplates: "/root/ficheros/subvenciones/pdfTemplates"
+        uploadFolder: "/root/ficheros/multikirolak"
 ---
 grails:
     controllers:

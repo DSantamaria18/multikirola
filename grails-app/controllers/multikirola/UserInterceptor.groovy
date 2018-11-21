@@ -14,6 +14,7 @@ class UserInterceptor {
                 .excludes(controller: 'static')
                 .excludes(uri: '/multikirola/error')
                 .excludes(uri: '/multikirola/notFound')
+                .excludes(controller: 'ficheros')
     }
 
     boolean before() {
@@ -32,7 +33,7 @@ class UserInterceptor {
     }
 
     boolean isExcludedURI(final String requestedURI) {
-        def excludedURIs = ['/multikirola/', '/multikirola/error', '/multikirola/notFound', '/multikirola/static/presentacion']
+        def excludedURIs = ['/multikirola/', '/multikirola/error', '/multikirola/notFound', '/multikirola/static/presentacion', '/multikirola/ficheros/*']
         boolean result = false
 
         if (requestedURI in excludedURIs) result = true

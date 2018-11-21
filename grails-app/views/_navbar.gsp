@@ -10,6 +10,15 @@
         </ul>
     </li>--}%
 
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+           aria-expanded="false">Multikirolak<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><g:link controller="Ficheros" action="index"><g:message
+                    code="default.label.descargas"/></g:link></li>
+        </ul>
+    </li>
+
     <sec:ifAnyGranted roles='ROLE_ADMIN'>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
