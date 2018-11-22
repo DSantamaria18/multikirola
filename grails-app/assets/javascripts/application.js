@@ -25,45 +25,18 @@ function isValidPassword() {
     var password = $('#password').val();
     var password2 = $('#password2').val();
 
-
-    if (password === undefined) {
-        // $('#error-password').text('Debes introducir una contraseña');
-        $('#error-password').attr('hidden', false);
-        return false;
-    }
-
     if (password.length < 8) {
-        // $('#error-password').text('La contraseña debe tener al menos 8 caracteres');
         $('#error-longitudPassword').attr('hidden', false);
-        return false;
-    }
 
-    if (!/\d/.test(password)) {
-        // $('#error-password').text('La contraseña debe tener al menos un dígito');
-        $('#error-digitoPassword').attr('hidden', false);
-        return false;
-    }
-
-    if (!/[a-z]/.test(password)) {
-        // $('#error-password').text('La contraseña debe tener al menos una letra minúscula');
-        $('#error-minusculasPassword').attr('hidden', false);
-        return false;
-    }
-
-    if (!/[A-Z]/.test(password)) {
-        // $('#error-password').text('La contraseña debe tener al menos una letra mayúscula');
-        $('#error-mayusculasPassword').attr('hidden', false);
         return false;
     }
 
     if (/[^0-9a-zA-Z]/.test(password)) {
-        // $('#error-password').text('La contraseña debe tener al menos 8 caracteres');
         $('#error-contenidoPassword').attr('hidden', false);
         return false;
     }
 
     if (password !== password2) {
-        // $('#error-password2').text('Las contraseñas no coinciden');
         $('#error-password2').attr('hidden', false);
         return false;
     }
@@ -72,56 +45,58 @@ function isValidPassword() {
 
 function validateForm() {
     console.log("Validando datos de registro");
-    var formOk = true;
+    var formRegistroOk = true;
 
-    var username = $('#username').val();
-    var email = $('#useremail').val();
-    var telefono = $('#userphone').val();
-    var movil = $('#usercellphone').val();
-    var whatsapp = $('#whatsapp').prop('checked');
+    // var username = $('#username').val();
+    let nombre = $('#nombre').val();
+    let apellidos = $('#apellidos').val();
+    const email = $('#useremail').val();
+    const movil = $('#usercellphone').val();
+    const whatsapp = $('#whatsapp').prop('checked');
 
-
-    /* validación de username */
-    if (username == "") {
-        // $('#error-username').text('Debes introducir un nombre de usuario.');
-        $('#error-username').attr('hidden', false);
-        formOk = false;
+       /* validación de nombre y apellidos */
+    const nombre_regex =/^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
+    if (nombre == "" || nombre.length < 2) {
+        $('#error-nombre').attr('hidden', false);
+        formRegistroOk = false;
     } else {
-        var user_re = /^\w+$/; // Sólo caracteres y números
-        if (!user_re.test(username)) {
-            // $('#error-caracteresUsername').text('Caracteres no válidos en el nombre de usuario.');
+        const nombreOk = nombre_regex.test(nombre);
+        if (nombreOk === false) {
             $('#error-caracteresUsername').attr('hidden', false);
-            formOk = false;
+            formRegistroOk = false;
+        }
+    }
+
+    if (apellidos == "" || apellidos.length < 2) {
+        $('#error-apellidos').attr('hidden', false);
+        formRegistroOk = false;
+    } else {
+        const apellidosOk = nombre_regex.test(apellidos);
+        if (apellidosOk === false) {
+            $('#error-caracteresApellidos').attr('hidden', false);
+            formRegistroOk = false;
         }
     }
 
     /* validación de email */
     var email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (email == "" || !email_re.test(email)) {
-        // $('#error-email').text('Debes introducir un email válido.');
         $('#error-email').attr('hidden', false);
-        formOk = false;
+        formRegistroOk = false;
     }
 
-    /* validación de telefono */
-    var telefono_re = /^(\+34|0034|34)?[6|7|9][0-9]{8}$/;
-    if (telefono == "" || !telefono_re.test(telefono)) {
-        // $('#error-userphone').text('Debes introducir un teléfono válido.');
-        $('#error-userphone').attr('hidden', false);
-        formOk = false;
-    }
     /* validación de movil */
+    var telefono_re = /^(\+34|0034|34)?[6|7|9][0-9]{8}$/;
     if (movil == "" || !telefono_re.test(movil)) {
-        // $('#error-usercellphone').text('Debes introducir un teléfono válido.');
         $('#error-usercellphone').attr('hidden', false);
-        formOk = false;
+        formRegistroOk = false;
     }
 
     /* validación de whatsapp sin movil */
-    if (movil == "" && whatsapp == true) {
+    if (movil == "" && whatsapp === true) {
         $('#error-whatsapp').text('Debes introducir un móvil.');
         $('#error-whatsapp').attr('hidden', false);
-        formOk = false;
+        formRegistroOk = false;
     }
 
     if ($('#legal').size() > 0) {
@@ -129,20 +104,20 @@ function validateForm() {
         if (legal == false) {
             $('#error-legal').text('Debes aceptar las condiciones.');
             $('#error-legal').attr('hidden', false);
-            formOk = false;
+            formRegistroOk = false;
         }
     }
 
     /* validación de password */
-    if ($('#password-group.in').size() > 0 || $('#password-group').size < 1) {
+    if ($('#password-group.in').size() > 0 || $('#password-group').size() < 1) {
         if (!isValidPassword()) {
-            formOk = false;
+            formRegistroOk = false;
         } else {
             console.log("No es necesario validar la contraseña");
         }
     }
 
-    return formOk;
+    return formRegistroOk;
 }
 
 function passEvent(elem){

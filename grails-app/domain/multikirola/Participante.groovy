@@ -13,6 +13,8 @@ class Participante {
     String email
     Date fechaNacimiento
     String token
+    Date dateCreated
+    Date lastUpdated
 
     static belongsTo = [usuario: User]
 

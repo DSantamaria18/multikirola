@@ -21,10 +21,10 @@
                 <form id="loginform" class="form-horizontal" role="form" action='${postUrl}' method="post">
 
                     <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                         <input id="login-username" type="text" class="form-control"
                                %{--name="${securityConfig.apf.usernameParameter}" value="" placeholder="Usuario">--}%
-                               name="${securityConfig.apf.usernameParameter}" value="" placeholder=<g:message code="default.label.usuario"/>>
+                               name="${securityConfig.apf.usernameParameter}" value="" placeholder=<g:message code="default.label.email"/>>
                     </div>
 
                     <div style="margin-bottom: 25px" class="input-group">

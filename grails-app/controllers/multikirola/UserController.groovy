@@ -4,8 +4,7 @@ import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import org.springframework.validation.Errors
-
-import static org.springframework.http.HttpStatus.*
+import org.apache.commons.lang.WordUtils
 
 class UserController {
 
@@ -52,6 +51,11 @@ class UserController {
         }
 
         try {
+            user.email = user.email.toLowerCase()
+            user.username = user.email
+            user.nombre = WordUtils.capitalizeFully(user.nombre)
+            user.apellidos = WordUtils.capitalizeFully(user.apellidos)
+
             userService.save(user)
 
             def role = Role.findByAuthority('ROLE_CUSTOMER')
@@ -89,8 +93,8 @@ class UserController {
         User updUser = getAuthenticatedUser()
         try {
             if (updUser.username == user.username) {
-                updUser.email = user.email
-                updUser.telefono = user.telefono
+                updUser.nombre = WordUtils.capitalizeFully(user.nombre)
+                updUser.apellidos = WordUtils.capitalizeFully(user.apellidos)
                 updUser.movil = user.movil
                 updUser.whatsapp = user.whatsapp
                 if (user.password != null) {
@@ -106,7 +110,7 @@ class UserController {
             render(view: 'miCuenta', model: [user: updUser])
             return
         } catch (Exception ex) {
-            flash.message = "No se han podido actualizar los datos del usuario ${user.username.toUpperCase()}"
+            flash.message = "No se han podido actualizar los datos del usuario ${user.username.toLowerCase()}"
             render(view: 'miCuenta', model: [user: updUser])
             return
         }

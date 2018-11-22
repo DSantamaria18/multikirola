@@ -8,7 +8,8 @@
         Multikirolak
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <asset:link rel="icon" href="favicon-gk.jpg" type="image/x-ico" />
+    %{--<asset:link rel="icon" href="favicon-gk.jpg" type="image/x-ico" />--}%
+    <asset:link rel="icon" href="favicon_blanco.png" type="image/x-ico" />
     %{--<asset:link rel="icon" href="favicon.ico" type="image/x-ico" />--}%
 
     <asset:stylesheet src="application.css"/>
@@ -27,7 +28,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/multikirola/">
-		    <asset:image src="icon_kirolak.png" alt="Grails Logo"/>
+		    %{--<asset:image src="icon_kirolak.png" alt="Grails Logo"/>--}%
+		    <asset:image src="logo_gris.jpg" alt="Grails Logo"/>
 		    %{--<asset:image src="grails.svg" alt="Grails Logo"/>--}%
                 </a>
             </div>
