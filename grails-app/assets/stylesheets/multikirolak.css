@@ -9,15 +9,18 @@
 }
 
 .home-img-multikirola {
-    content: url("/multikirola/assets/multikirolak.jpg");
+    content: url("/multikirola/assets/imagen_rojo.jpg");
+    /*content: url("/multikirola/assets/multikirolak.jpg");*/
 }
 
 .multikirolak-logo-container {
     text-align: center;
+    background-color: #89001c;
 }
 
 @media only screen and (max-width: 600px) {
     .home-img-multikirola {
-        content: url("/multikirola/assets/multikirolak-small.jpg");
+        content: url("/multikirola/assets/imagen_rojo.jpg");
+        /*content: url("/multikirola/assets/multikirolak-small.jpg");*/
     }
 }
