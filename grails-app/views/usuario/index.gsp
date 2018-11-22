@@ -12,14 +12,9 @@
     <div class="nav" role="navigation">
         <ul>
             <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-            <li><g:link controller="Usuario" action="exportarUsuarios">
-                <span><i class="glyphicon glyphicon-cloud-download"></i></span>
-                <span><g:message code="default.label.exportar" default="Exportar"/></span>
-            </g:link>
-            </li>
         </ul>
     </div>
-
+    <br/>
     <div class="row" id="filter-options">
         <div class="panel-group" id="accordion-cat-1">
             <div class="panel panel-default panel-faq">
@@ -34,12 +29,12 @@
 
                 <div id="faq-cat-1-sub-1" class="panel-collapse collapse">
                 <div class="panel-body form-group">
-                    <g:form resource="${this.query}" method="POST" action="exportEventosFiltrados">
+                    <g:form resource="${this.query}" method="POST" controller="Usuario" action="exportarUsuarios">
 
                         <div class="form-group">
-                            <label for="solo-whatsapp"><g:message code="default.label.notificacionesWhatsapp"
+                            <label for="qWhatsApp"><g:message code="default.label.notificacionesWhatsapp"
                                                                   default="Notificaciones WhatsApp"/></label>
-                            <g:select name="solo-whatsapp"
+                            <g:select name="qWhatsApp"
                                       id="qWhatsApp"
                                       from="${[g.message(code: "default.boolean.true", default: "SI"), g.message(code: "default.boolean.false", default: "NO")]}"
                                       noSelection="${['null': g.message(code: "default.label.cualquiera", default: "CUALQUIERA")]}"
@@ -47,9 +42,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fecha-desde"><g:message code="default.label.fechaDesde"
+                            <label for="qFechaDesde"><g:message code="default.label.fechaDesde"
                                                                 default="Fecha Desde:"/></label>
-                            <input name="fecha-desde" id="fecha-desde" type="date" step="day">
+                            <input name="qFechaDesde" id="fecha-desde" type="date" step="day">
                         </div>
 
                         <div class="row fieldcontain">
@@ -57,6 +52,8 @@
                                     onclick="filtrarUsuarios();">
                                 <g:message code="default.label.filtrarUsuarios" default="FILTRAR USUARIOS"/>
                             </button>
+                            <g:actionSubmit class="btn-block btn-info" value="${g.message(code: "default.label.exportar", default: "Exportar")}"
+                                            action="exportarUsuarios"/>
                         </div>
                         </div>
                     </g:form>
@@ -97,6 +94,25 @@
         }
         );
     };
+
+    /*function exportarUsuarios() {
+        const qWhatsApp = $('#qWhatsApp option:selected').val();
+        const fecha = '1900-01-01';
+        let qFechaDesde = $('#fecha-desde').val();
+        if (qFechaDesde === "") {
+            qFechaDesde = fecha;
+        }
+
+        $.post("/multikirola/Usuario/exportarUsuarios",
+                {
+                    qWhatsApp: qWhatsApp,
+                    qFechaDesde: qFechaDesde
+                }, function (data, status) {
+            console.log(status);
+            // $('#tabla-usuarios').html(data);
+        }
+        );
+    };*/
 </g:javascript>
 </body>
 </html>
