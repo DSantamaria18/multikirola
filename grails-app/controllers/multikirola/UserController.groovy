@@ -3,13 +3,13 @@ package multikirola
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
-import org.springframework.validation.Errors
 import org.apache.commons.lang.WordUtils
 
 class UserController {
 
     SpringSecurityService springSecurityService
     UserService userService
+    def mailService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 //    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -160,6 +160,15 @@ class UserController {
             Long userId = getAuthenticatedUser().id
             User user = userService.get(userId)
             render(view: 'miCuenta', model: [user: user])
+        }
+    }
+
+    def recuperarContraseña(){
+        mailService.sendMail {
+            from "qualit18@gmail.com"
+            to "dsantamaria18@gmail.com"
+            subject "recuperar contraseña"
+            text "He olvidado mi contraseña"
         }
     }
 

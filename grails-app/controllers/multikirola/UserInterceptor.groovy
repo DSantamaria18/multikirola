@@ -10,6 +10,7 @@ class UserInterceptor {
                 .excludes(controller: 'login')
                 .excludes(controller: 'user', action: 'register')
                 .excludes(controller: 'user', action: 'save')
+                .excludes(controller: 'user', action: 'recuperarContraseña')
                 .excludes(controller: 'actividadMultikirola')
                 .excludes(controller: 'static')
                 .excludes(uri: '/multikirola/error')
