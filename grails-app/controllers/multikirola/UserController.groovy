@@ -170,6 +170,8 @@ class UserController {
             subject "recuperar contraseña"
             text "He olvidado mi contraseña"
         }
+
+        redirect url: '/'
     }
 
 
