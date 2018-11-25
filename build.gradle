@@ -79,10 +79,12 @@ dependencies {
 
     //Spring Security
     compile 'org.grails.plugins:spring-security-core:3.2.0'
-//    compile 'org.grails.plugins:spring-security-ui:3.1.1'
 
     //PDFBox
     compile group: 'org.apache.pdfbox', name: 'pdfbox-app', version: '2.0.8'
+
+    //Mail Plugin
+    compile 'org.grails.plugins:mail:2.0.0'
 }
 
 bootRun {
