@@ -55,11 +55,18 @@ class UserController {
             user.username = user.email
             user.nombre = WordUtils.capitalizeFully(user.nombre)
             user.apellidos = WordUtils.capitalizeFully(user.apellidos)
-
             userService.save(user)
 
             def role = Role.findByAuthority('ROLE_CUSTOMER')
             UserRole.create(user, role, true)
+
+            mailService.sendMail {
+                async true
+                from "qualit18@gmail.com"
+                to "ilacruz@getxo.eus"
+                subject "Alta de nuevo usuario en Multikirolak"
+                html g.render(template:"/emailTemplates/newUserEmailTemplate", model: [user: user])
+            }
 
             springSecurityService.reauthenticate user.username
 
@@ -165,14 +172,14 @@ class UserController {
 
     def recuperarContraseña(){
         mailService.sendMail {
+            async true
             from "qualit18@gmail.com"
             to "dsantamaria18@gmail.com"
-            subject "recuperar contraseña"
+            subject "[MULTIKIROLAK] recuperar contraseña"
             text "He olvidado mi contraseña"
         }
 
         redirect url: '/'
     }
-
 
 }
