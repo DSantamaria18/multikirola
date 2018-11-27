@@ -26,6 +26,8 @@ class User implements Serializable {
     Date lastUpdated
     String nombre
     String apellidos
+    String resetToken
+    Date resetTokenFecha
 
     static hasMany = [participantes: Participante]
 
@@ -45,6 +47,8 @@ class User implements Serializable {
         passwordExpired display: false
         nombre nullable: false, blank: false
         apellidos nullable: false, blank: false
+        resetToken nullable: true, unique: true
+        resetTokenFecha nullable: true
     }
 
     static mapping = {

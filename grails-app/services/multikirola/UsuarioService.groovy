@@ -1,14 +1,19 @@
 package multikirola
 
+import com.sun.org.apache.xpath.internal.operations.Bool
+import grails.core.GrailsApplication
 import grails.gorm.transactions.Transactional
+import grails.web.mapping.LinkGenerator
 import groovy.sql.Sql
-
 import java.text.SimpleDateFormat
+
 
 @Transactional
 class UsuarioService {
 
+    UserService userService
     def dataSource
+    LinkGenerator linkGenerator
 
     def getAllUsersInfo() {
         return User.findAll()
@@ -32,4 +37,16 @@ class UsuarioService {
         return usuariosList
     }
 
+    void createPasswordResetTokenForUser(User user, String token){
+        user.resetToken = token
+        Date currentDate = new Date()
+        user.resetTokenFecha = currentDate.plus(1)
+        userService.save(user)
+    }
+
+    boolean isValidResetPasswordToken(User user){
+        Date currentDate = new Date()
+        boolean isValidToken = user.resetTokenFecha >= currentDate
+        return isValidToken
+    }
 }

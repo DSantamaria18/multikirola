@@ -4,10 +4,13 @@ import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import org.apache.commons.lang.WordUtils
+import org.springframework.web.servlet.support.RequestContextUtils as RCU
+
 
 class UserController {
 
     SpringSecurityService springSecurityService
+    UsuarioService usuarioService
     UserService userService
     def mailService
 
@@ -26,7 +29,7 @@ class UserController {
             if (Role.findByAuthority('ROLE_USER') in currentUser.getAuthorities()) {
                 def userRoleList = UserRole.findAllByRole(Role.findByAuthority('ROLE_CUSTOMER'))
                 List<User> userList = []
-                for(user in userRoleList.user) {
+                for (user in userRoleList.user) {
                     userList.add(user)
                 }
                 respond userList(params), model: [userCount: userList.size()]
@@ -65,7 +68,7 @@ class UserController {
                 from "qualit18@gmail.com"
                 to "ilacruz@getxo.eus"
                 subject "Alta de nuevo usuario en Multikirolak"
-                html g.render(template:"/emailTemplates/newUserEmailTemplate", model: [user: user])
+                html g.render(template: "/emailTemplates/newUserEmailTemplate", model: [user: user])
             }
 
             springSecurityService.reauthenticate user.username
@@ -97,7 +100,7 @@ class UserController {
             notFound()
             return
         }
-        User updUser = getAuthenticatedUser()
+        User updUser = getAuthenticatedUser() as User
         try {
             if (updUser.username == user.username) {
                 updUser.nombre = WordUtils.capitalizeFully(user.nombre)
@@ -170,23 +173,58 @@ class UserController {
         }
     }
 
-    def recuperarContraseña(){
+    def recuperarContraseña() {
 
-        String username = params?.userid
+        String email = params?.userid
+        User user = User.findByEmail(email)
 
-        if (username.length() > 0) {
+        if (user) {
+            String token = UUID.randomUUID().toString()
+            usuarioService.createPasswordResetTokenForUser(user, token)
+            Locale locale = RCU.getLocale(request)
+            String link = createLink(controller: 'user', action: 'resetPassword', params: [token: token, lang: locale], absolute: true)
+
             mailService.sendMail {
                 async true
                 from "qualit18@gmail.com"
                 to "dsantamaria18@gmail.com"
-                subject "[MULTIKIROLAK] recuperar contraseña"
-                text "El usuario ${username} ha solicitado recuperar su contraseña"
+                subject "${g.message(code: 'default.email.subject.recuperarContrasena', locale: locale)}"
+                text "El usuario ${user.email} ha solicitado recuperar su contraseña"
             }
 
-            redirect url: '/'
+            mailService.sendMail {
+                async true
+                from "qualit18@gmail.com"
+//                to user.email
+                to "dsantamaria18@gmail.com"
+                subject "${g.message(code: 'default.email.subject.recuperarContrasena', locale: locale)}"
+                html g.render(template: "/emailTemplates/resetPasswordEmail", model: [username: user.nombre, link: link, locale: locale])
+            }
+            render(view: 'resetPasswordEmailEnviado', model: [user: user, locale: locale])
+        } else {
+            throw new NullPointerException("No se ha encontrado el usuario con email ${email}")
         }
+    }
 
+    def resetPassword() {
+        String token = params.token
+        User user = User.findByResetToken(token)
+        if (user) {
+            if (usuarioService.isValidResetPasswordToken(user)) {
+                [usuario: user]
+            } else {
+                flash.message = "El enlace ha expirado..."
+                render(view: '/error')
+                return
+            }
+        } else {
+            throw new NullPointerException("No se ha encontrado el usuario con email ${email}")
+        }
+    }
+
+    def updatePassword() {
 
     }
+
 
 }

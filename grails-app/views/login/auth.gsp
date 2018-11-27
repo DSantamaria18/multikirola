@@ -192,7 +192,7 @@
 
 </div>--}%
 
-
+    <!-- MODAL RESET PASSWORD -->
     <div class="modal fade" id="modalRecuperarContraseña" tabindex="-1" role="dialog"
          aria-labelledby="modalRecuperarContraseña"
          aria-hidden="true">
@@ -220,7 +220,7 @@
                                 <!-- Button -->
                                 <div class="col-md-9">
                                     <input id="btn-recuperar-contrasena" type="submit" class="btn btn-info save"
-                                           name="recuperar-contrasena" onclick="mensajeContraseña()"
+                                           name="recuperar-contrasena"
                                            value="<g:message code="default.label.enviar"/>"/>
                                 </div>
                             </div>
@@ -230,16 +230,7 @@
             </div>
         </div>
     </div>
-
 </div>
 
-<g:javascript>
-
-    function mensajeContraseña(){
-        const email = $('#userid').val();
-
-        alert(g.message(code='default.text.recuperarContraseña', args=[email]));
-    }
-</g:javascript>
 </body>
 </html>
