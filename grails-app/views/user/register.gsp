@@ -56,6 +56,7 @@
                                placeholder="<g:message code="default.label.apellidosUsuario"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
+
                     <div>
                         <label id="error-nombre" class="error" style="color: red" hidden><g:message
                                 code="default.error.nombreUsuario"/></label>
@@ -74,6 +75,7 @@
                                placeholder="<g:message code="default.label.correoElectronico"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
+
                     <div>
                         <label id="error-email" class="error" style="color: red" hidden><g:message
                                 code="default.error.email"/></label>
@@ -97,6 +99,7 @@
                                placeholder="<g:message code="default.label.telefonoMovil"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
+
                     <div>
                         <label id="error-usercellphone" class="error" style="color: red" hidden><g:message
                                 code="default.error.telefono"/></label>
@@ -110,6 +113,7 @@
                             </label>
                         </div>
                     </div>
+
                     <div>
                         <label id="error-whatsapp" class="error" style="color: red" hidden><g:message
                                 code="default.error.whatsapp"/></label>
@@ -122,6 +126,7 @@
                                placeholder="<g:message code="default.label.contrasena"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
+
                     <div>
                         <label id="error-longitudPassword" class="error" style="color: red" hidden><g:message
                                 code="default.error.longitudPassword"/></label>
@@ -142,6 +147,7 @@
                                placeholder="<g:message code="default.label.confirmarContrasena"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
+
                     <div>
                         <label id="error-password2" class="error" style="color: red" hidden><g:message
                                 code="default.error.password2"/></label>
@@ -155,6 +161,7 @@
                             </label>
                         </div>
                     </div>
+
                     <div>
                         <label id="error-legal" class="error" style="color: red" hidden><g:message
                                 code="default.error.checkCondiciones"/></label>

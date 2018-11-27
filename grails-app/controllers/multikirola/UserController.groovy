@@ -171,15 +171,22 @@ class UserController {
     }
 
     def recuperarContraseña(){
-        mailService.sendMail {
-            async true
-            from "qualit18@gmail.com"
-            to "dsantamaria18@gmail.com"
-            subject "[MULTIKIROLAK] recuperar contraseña"
-            text "He olvidado mi contraseña"
+
+        String username = params?.userid
+
+        if (username.length() > 0) {
+            mailService.sendMail {
+                async true
+                from "qualit18@gmail.com"
+                to "dsantamaria18@gmail.com"
+                subject "[MULTIKIROLAK] recuperar contraseña"
+                text "El usuario ${username} ha solicitado recuperar su contraseña"
+            }
+
+            redirect url: '/'
         }
 
-        redirect url: '/'
+
     }
 
 }

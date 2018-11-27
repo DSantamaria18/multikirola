@@ -6,6 +6,8 @@
 </head>
 
 <body>
+<g:render template="/navbar"/>
+
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
@@ -23,13 +25,15 @@
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                         <input id="login-username" type="text" class="form-control"
-                               name="${securityConfig.apf.usernameParameter}" value="" placeholder=<g:message code="default.label.email"/>>
+                               name="${securityConfig.apf.usernameParameter}" value="" placeholder= <g:message
+                                code="default.label.email"/>>
                     </div>
 
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="login-password" type="password" class="form-control"
-                               name="${securityConfig.apf.passwordParameter}" placeholder=<g:message code="default.label.contrasena"/>>
+                               name="${securityConfig.apf.passwordParameter}" placeholder= <g:message
+                                code="default.label.contrasena"/>>
                     </div>
 
 
@@ -37,7 +41,8 @@
                         <!-- Button -->
 
                         <div class="col-sm-12 controls">
-                            <button type="submit" class="btn btn-success"><g:message code="default.label.entrar"/></button>
+                            <button type="submit" class="btn btn-success"><g:message
+                                    code="default.label.entrar"/></button>
                         </div>
                     </div>
 
@@ -56,9 +61,9 @@
                     <div class="form-group">
                         <div class="col-md-12 control">
                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                                <a href="/multikirola/user/recuperarContraseña">
-                                    <g:message code="default.label.recuperarContrasena"/>
-                                </a>
+                                %{--<a href="/multikirola/user/recuperarContraseña">--}%
+                                <g:message code="default.label.recuperarContrasena" htmlEscape="false"/>
+                                %{--</a>--}%
                             </div>
                         </div>
                     </div>
@@ -186,6 +191,55 @@
          </div>
 
 </div>--}%
+
+
+    <div class="modal fade" id="modalRecuperarContraseña" tabindex="-1" role="dialog"
+         aria-labelledby="modalRecuperarContraseña"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalRecuperarContraseñaTitle"><g:message
+                            code="default.title.recuperarContrasena" default="Recuperar Contraseña"/></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container">
+                        <form id="recuperar-contrasena-form" class="form-horizontal" role="form"
+                              action="/multikirola/user/recuperarContraseña" method="post">
+                            <div style="margin-top: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input id="userid" type="text" class="form-control"
+                                       name="userid" value=""
+                                       placeholder="<g:message code="default.label.correoElectronico"/>"
+                                       onchange="$('.error').attr('hidden', true); "/>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 20px">
+                                <!-- Button -->
+                                <div class="col-md-9">
+                                    <input id="btn-recuperar-contrasena" type="submit" class="btn btn-info save"
+                                           name="recuperar-contrasena" onclick="mensajeContraseña()"
+                                           value="<g:message code="default.label.enviar"/>"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<g:javascript>
+
+    function mensajeContraseña(){
+        const email = $('#userid').val();
+
+        alert(g.message(code='default.text.recuperarContraseña', args=[email]));
+    }
+</g:javascript>
 </body>
 </html>
