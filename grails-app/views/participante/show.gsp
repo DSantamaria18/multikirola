@@ -86,16 +86,6 @@
             </li>
         </g:if>
 
-        <g:if test="${participante?.telefono}">
-            <li class="fieldcontain">
-                <span id="telefono-label" class="property-label"><g:message code="default.label.telefono"
-                                                                            default="Teléfono:"/></span>
-                <span class="property-value" aria-labelledby="telefono-label"><g:fieldValue
-                        bean="${participante}"
-                        field="telefono"/></span>
-            </li>
-        </g:if>
-
         <g:if test="${participante?.movil}">
             <li class="fieldcontain">
                 <span id="movil-label" class="property-label"><g:message code="default.label.movil"
