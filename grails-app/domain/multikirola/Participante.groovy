@@ -9,7 +9,6 @@ class Participante {
     Curso curso
     String sexo
     String movil
-    String telefono
     String email
     Date fechaNacimiento
     String token
@@ -24,8 +23,6 @@ class Participante {
         apellido2(nullable: true, blank: true)
         fechaNacimiento(nullable: false, blank: false, max: new Date())
         sexo(inList: ['F', 'M'])
-//        sexo(inList: ['EMAKUMEZKOA - FEMENINO', 'GIZONEZKOA - MASCULINO'])
-        telefono()
         movil(nullable: false, blank: false)
         email(nullable: false, email: true, blank: false)
         centro(nullable: false, blank: false)

@@ -35,16 +35,6 @@
         </ul>
     </g:hasErrors>
 
-%{-- <g:form resource="${this.participante}" method="POST">
-     <fieldset class="form">
-         <f:all bean="participante"/>
-     </fieldset>
-     <fieldset class="buttons">
-         <g:submitButton name="create" class="save"
-                         value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-     </fieldset>
- </g:form>--}%
-
     <div class="container">
         <g:form resource="${this.participante}" method="POST">
             <fieldset class="form">
@@ -109,14 +99,6 @@
                 </div>
                 <br>
 
-                <div class="input-group" id="div-telefono">
-                    <span class="input-group-addon"><g:message code="default.label.telefono"/></span>
-                    <input id="telefono" type="text" class="form-control"
-                           name="participante.telefono" value="${this.participante?.telefono}"
-                           onchange="$('#div-telefono').removeClass('has-error')"/>
-                </div>
-                <br>
-
                 <div class="input-group" id="div-email">
                     <span class="input-group-addon">Email</span>
                     <input id="email" type="text" class="form-control"
@@ -132,13 +114,6 @@
                            onchange="$('#div-fecha').removeClass('has-error')"/>
                 </div>
                 <br>
-                %{--
-                                <div class="form-group">
-                                    <input id="btn-myaccount" type="submit" class="btn btn-info save"
-                                           name="register"
-                                           value="<g:message code="default.button.create.label"/>"/>
-                                </div>
-                --}%
 
                 <div class="form-group">
                     <input id="btn-myaccount" type="button" class="btn btn-info save"
@@ -161,11 +136,9 @@
             const centro = $('[name="participante.centro.id"]').val();
             const curso = $('[name="participante.curso.id"]').val();
             const sexo = $('[name="participante.sexo"]').val();
-            const telefono = $('#telefono').val();
             const movil = $('#movil').val();
             const email = $('#email').val();
             const fechaNacimiento = new Date($('#fechaNacimiento').val()).toISOString();
-            // const fechaNacimiento = $('#fechaNacimiento').val();
 
             const datos = {
                 nombre: nombre,
@@ -175,7 +148,6 @@
                 curso: curso,
                 sexo: sexo,
                 movil: movil,
-                telefono: telefono,
                 email: email,
                 fechaNacimiento: fechaNacimiento
             };
@@ -208,7 +180,7 @@
 
     function validaDatosParticipante() {
         var validacionOK = true;
-        validacionOK = validaNombre() && validaApellido1() && validaApellido2() && validaCentro() && validaCurso() && validaSexo() && validaTelefono() && validaMovil() && validaEmail();
+        validacionOK = validaNombre() && validaApellido1() && validaApellido2() && validaCentro() && validaCurso() && validaSexo() && validaMovil() && validaEmail();
         return validacionOK;
     }
 

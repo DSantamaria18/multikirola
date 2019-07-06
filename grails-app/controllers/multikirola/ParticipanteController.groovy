@@ -25,11 +25,6 @@ class ParticipanteController {
         render(view: "index", controller: "participante", model: [participantesList: participantesList, actividadMultikirolaList: actividadMultikirolaList])
     }
 
-    /*def show(Long id) {
-        respond participanteService.get(id)
-    }*/
-
-//    def show(Participante participante) {
     def show(Long id) {
         User currentUser = getAuthenticatedUser() as User
         Participante participante = Participante.findById(id)
@@ -43,39 +38,14 @@ class ParticipanteController {
     def create() {
         User currentUser = getAuthenticatedUser() as User
         params.email = currentUser.email
-        params.telefono= currentUser.telefono
-        params.movil = currentUser.movil
+        params.movil= currentUser.getMovil()
 
         respond new Participante(params)
     }
 
-    /*def save(Participante participante) {
-        if (participante == null) {
-            notFound()
-            return
-        }
-
-
-        try {
-            participanteService.save(participante)
-        } catch (ValidationException e) {
-            respond participante.errors, view:'create'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'participante.label', default: 'Participante'), participante.id])
-                redirect participante
-            }
-            '*' { respond participante, [status: CREATED] }
-        }
-    }*/
-
     @Transactional
     def save(Participante participante) {
         if (participante == null) {
-//            transactionStatus.setRollbackOnly()
             notFound()
             return
         }
@@ -114,10 +84,6 @@ class ParticipanteController {
         }
     }
 
-    /*def edit(Long id) {
-        respond participanteService.get(id)
-    }*/
-
     def edit(Participante participante) {
         User currentUser = getAuthenticatedUser()
         if (participante && participante.usuario == currentUser){
@@ -126,28 +92,6 @@ class ParticipanteController {
             redirect(uri: '/')
         }
     }
-
-    /* def update(Participante participante) {
-         if (participante == null) {
-             notFound()
-             return
-         }
-
-         try {
-             participanteService.save(participante)
-         } catch (ValidationException e) {
-             respond participante.errors, view:'edit'
-             return
-         }
-
-         request.withFormat {
-             form multipartForm {
-                 flash.message = message(code: 'default.updated.message', args: [message(code: 'participante.label', default: 'Participante'), participante.id])
-                 redirect participante
-             }
-             '*'{ respond participante, [status: OK] }
-         }
-     }*/
 
     @Transactional
     def update(Participante participante) {
@@ -173,23 +117,6 @@ class ParticipanteController {
             '*' { respond participante, [status: OK] }
         }
     }
-
-    /* def delete(Long id) {
-         if (id == null) {
-             notFound()
-             return
-         }
-
-         participanteService.delete(id)
-
-         request.withFormat {
-             form multipartForm {
-                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'participante.label', default: 'Participante'), id])
-                 redirect action:"index", method:"GET"
-             }
-             '*'{ render status: NO_CONTENT }
-         }
-     }*/
 
     @Transactional
     def delete(Participante participante) {
@@ -245,15 +172,6 @@ class ParticipanteController {
             redirect(uri:'/login/auth')
             return
         }
-
-        /*def c = Participante.createCriteria()
-        def participantesList = c.list{
-            and{
-                order("apellido1", "asc")
-                order("apellido2", "asc")
-                order("nombre", "asc")
-            }
-        }*/
 
         params.apellido1 = ''
         params.movil= ''
