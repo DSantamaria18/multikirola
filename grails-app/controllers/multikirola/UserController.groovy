@@ -26,7 +26,7 @@ class UserController {
             if (Role.findByAuthority('ROLE_USER') in currentUser.getAuthorities()) {
                 def userRoleList = UserRole.findAllByRole(Role.findByAuthority('ROLE_CUSTOMER'))
                 List<User> userList = []
-                for(user in userRoleList.user) {
+                for (user in userRoleList.user) {
                     userList.add(user)
                 }
                 respond userList(params), model: [userCount: userList.size()]
@@ -64,10 +64,9 @@ class UserController {
             springSecurityService.reauthenticate user.username
 
         } catch (ValidationException e) {
-//            respond user.errors, view: 'register'
             log.error("ERROR AL GUARDAR EL USUARIO: ${user.errors}")
-            redirect(action: 'register')
-//            respond user.errors, view:'create'
+            respond user.errors, view: 'register'
+//            redirect(action: 'register')
             return
         }
 
@@ -162,6 +161,4 @@ class UserController {
             render(view: 'miCuenta', model: [user: user])
         }
     }
-
-
 }

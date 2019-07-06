@@ -31,5 +31,4 @@ class UsuarioService {
         def usuariosList = sql.rows(query)
         return usuariosList
     }
-
 }
