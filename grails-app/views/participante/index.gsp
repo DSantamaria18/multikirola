@@ -27,7 +27,6 @@
 <div class="container">
     <div class="row">
         <div id="list-participante" class="content scaffold-list" role="main">
-            %{--<h1><g:message code="default.list.label" args="[entityName]"/></h1>--}%
             <h1><g:message code="default.list.listaParticipantes"/></h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
@@ -36,7 +35,6 @@
                 <thead>
                 <th><g:message code="default.label.nombre"/></th>
                 <th><g:message code="default.label.fechaNacimiento"/></th>
-                <th><g:message code="default.label.telefono"/></th>
                 <th><g:message code="default.label.movil"/></th>
                 </thead>
                 <tbody>
@@ -44,9 +42,7 @@
                     <tr>
                         <td><g:link action="show" controller="participante"
                                     id="${participante.id}">${participante.toString()}</g:link></td>
-                        %{--<td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>--}%
                         <td><g:formatDate date="${participante.fechaNacimiento}" formatName="default.date.format"/></td>
-                        <td>${participante.telefono}</td>
                         <td>${participante.movil}</td>
                     </tr>
                 </g:each>
@@ -58,7 +54,6 @@
     <div class="row">
         <g:if test="${actividadMultikirolaList.size() > 0}">
             <div id="list-inscripciones" class="content scaffold-list">
-                %{--<h1>Inscripciones Activas</h1>--}%
                 <h1><g:message code="default.label.inscripcionesActivas"/></h1>
                 <table class="table-responsive" style="display: table">
                     <thead>
@@ -72,10 +67,7 @@
                     <tbody>
                     <g:each in="${actividadMultikirolaList}" var="am" status="i">
                         <tr id="registros">
-                            %{--<td id="event-id" data-id="${am.evento_id}" hidden></td>--}%
                             <td id="event-name"><g:link uri="/actividadMultikirola/registrarParticipantes?eventId=${am.evento_id}">${am.evento}</g:link></td>
-                            %{--<td id="event-date"><g:formatDate date="${am.fecha}" format="EEEE dd-MMMM-yyyy" style="MEDIUM"/></td>--}%
-                            %{--<td id="event-date"><g:formatDate date="${am.fecha}" format="dd-MM-yyyy" style="MEDIUM"/></td>--}%
                             <td id="event-date"><g:formatDate date="${am.fecha}" formatName="default.date.format" style="MEDIUM"/></td>
                             <td id="participant-name"
                                 data-id="${am.participante_id}">${am.nombre_participante} ${am.apellido1_participante} ${am.apellido2_participante}</td>
