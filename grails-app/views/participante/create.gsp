@@ -180,7 +180,7 @@
 
     function validaDatosParticipante() {
         var validacionOK = true;
-        validacionOK = validaNombre() && validaApellido1() && validaApellido2() && validaCentro() && validaCurso() && validaSexo() && validaMovil() && validaEmail();
+        validacionOK = validaNombre() && validaApellido1() && validaApellido2() && validaCentro() && validaCurso() && validaSexo() && validaMovil() && validaEmail() && validaFechaNacimiento();
         return validacionOK;
     }
 
@@ -301,7 +301,7 @@
         return formOk;
     }
 
-    function validaTelefono() {
+    /*function validaTelefono() {
         console.log("validando Telefono");
         var formOk = true;
         var telefono = $('#telefono').val();
@@ -318,7 +318,7 @@
         }
         console.log(formOk);
         return formOk;
-    }
+    }*/
 
     function validaEmail() {
         console.log("validando Email");
@@ -332,6 +332,25 @@
             var email_re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
             if(!email_re.test(email)) {
                 $('#div-email').addClass('has-error');
+                formOk = false;
+            }
+        }
+        console.log(formOk);
+        return formOk;
+    }
+
+    function validaFechaNacimiento() {
+        console.log("validando Fecha Nacimiento");
+        var formOk = true;
+        var fecha = $('#fechaNacimiento').val();
+        console.log('Fecha Nacimiento: ' + fecha);
+        if (fecha == "" || fecha == undefined) {
+            $('#div-fecha').addClass('has-error');
+            formOk = false;
+        } else {
+            var fecha_re = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+            if(!fecha_re.test(fecha)) {
+                $('#div-fecha').addClass('has-error');
                 formOk = false;
             }
         }

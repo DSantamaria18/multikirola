@@ -76,8 +76,19 @@
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
 
+%{--                    <div>--}%
+%{--                        <label id="error-username" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+%{--                    </div>--}%
+
                     <div>
-                        <label id="error-username" class="error" style="color: red" hidden>ERROR!!!</label>
+                        <label id="error-nombre" class="error" style="color: red" hidden><g:message
+                                code="default.error.nombreUsuario"/></label>
+                        <label id="error-caracteresUsername" class="error" style="color: red" hidden><g:message
+                                code="default.error.caracteresNombreUsuario"/></label>
+                        <label id="error-apellidos" class="error" style="color: red" hidden><g:message
+                                code="default.error.apellidos"/></label>
+                        <label id="error-caracteresApellidos" class="error" style="color: red" hidden><g:message
+                                code="default.error.caracteresApellidos"/></label>
                     </div>
 
                     <div style="margin-top: 10px" class="input-group">

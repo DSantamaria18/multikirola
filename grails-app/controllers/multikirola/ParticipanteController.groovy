@@ -71,14 +71,15 @@ class ParticipanteController {
         }catch (ValidationException e) {
             log.error(e.message)
             log.error(e.stackTrace)
-            respond participante.errors, view: "create"
+            respond participante.errors, view: 'create'
             return
         }
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'default.label.participante', default: 'Participante'), participante.token])
-                redirect action: "index", method: "GET"
+//                redirect action: 'index', method: 'GET'
+                redirect action: 'index'
             }
             '*' { respond participante, [status: CREATED] }
         }

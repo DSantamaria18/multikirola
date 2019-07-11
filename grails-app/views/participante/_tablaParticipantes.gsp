@@ -13,8 +13,8 @@
             %{--<th>Apellido 2</th>--}%
             <th><g:message code="default.label.apellido2"/></th>
             %{--<th>Teléfono</th>--}%
-            <th><g:message code="default.label.telefono"/></th>
-            %{--<th>Móvil</th>--}%
+%{--            <th><g:message code="default.label.telefono"/></th>--}%
+%{--            <th>Móvil</th>--}%
             <th><g:message code="default.label.telefonoMovil"/></th>
             <th>Email</th>
             %{--<th>F. Nacimiento</th>--}%
@@ -32,7 +32,7 @@
                 <td class="text-capitalize">${participante.nombre}</td>
                 <td class="text-capitalize">${participante.apellido1}</td>
                 <td class="text-capitalize">${participante.apellido2}</td>
-                <td>${participante.telefono}</td>
+%{--                <td>${participante.telefono}</td>--}%
                 <td>${participante.movil}</td>
                 <td>${participante.email}</td>
                 %{--<td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>--}%

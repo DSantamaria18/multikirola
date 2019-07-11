@@ -54,8 +54,8 @@ function validateForm() {
     const movil = $('#usercellphone').val();
     const whatsapp = $('#whatsapp').prop('checked');
 
-       /* validación de nombre y apellidos */
-    const nombre_regex =/^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
+    /* validación de nombre y apellidos */
+    const nombre_regex = /^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
     if (nombre == "" || nombre.length < 2) {
         $('#error-nombre').attr('hidden', false);
         formRegistroOk = false;
@@ -120,7 +120,7 @@ function validateForm() {
     return formRegistroOk;
 }
 
-function passEvent(elem){
+function passEvent(elem) {
     var eventId = $(elem).data('event');
     $('#eventId').val(eventId);
 };
@@ -157,8 +157,8 @@ function calcularEdad(fnacimiento) { // birthday is a date
 function inscribirParticipante() {
     var eventId = $('#eventId').val();
     var participanteId = $('#selected-participant-id').val();
-    var telefono =  $('#participante-telefono').val();
-    var movil =  $('#participante-mobile').val();
+    // var telefono =  $('#participante-telefono').val();
+    var movil = $('#participante-mobile').val();
     var fnacimiento = new Date($('#participante-fnacimiento').val());
     var edadMinima = parseInt($('#edadMinima').val());
 
@@ -168,14 +168,15 @@ function inscribirParticipante() {
     } else {
 
 
-        if (telefono.length < 9 || movil.length < 9) {
+        // if (telefono.length < 9 || movil.length < 9) {
+        if (movil.length < 9) {
             alert("Los datos de contacto del participante no son correctos...")
         }
 
         var params = {
             eventId: eventId,
             participanteId: participanteId,
-            telefono: telefono,
+            // telefono: telefono,
             movil: movil
         }
 
@@ -210,7 +211,7 @@ function showContactInfo() {
 
 };
 
-function unsubscribeParticipant(elem){
+function unsubscribeParticipant(elem) {
     var eventId = $(elem).parent().siblings('#event-id').data('id');
     var nombre_participante = $(elem).parent().siblings('#participant-name').text();
     var participanteId = $(elem).parent().siblings('#participant-name').data('id');
@@ -219,7 +220,7 @@ function unsubscribeParticipant(elem){
     var msg = nombre_participante.toUpperCase() + " no participará en el evento. ¿Estás seguro?";
     var result = confirm(msg);
 
-    if(result){
+    if (result) {
         $.post("/multikirola/actividadMultikirola/delete",
             {
                 eventId: eventId,
@@ -233,12 +234,12 @@ function unsubscribeParticipant(elem){
 };
 
 $('#username').hover(function () {
-   $(this).tooltip();
+    $(this).tooltip();
 });
 
 function goToEvent(elem) {
     var eventId = $(elem).data('id');
-    window.location= "/multikirola/actividadMultikirola/eventInfo?event=" + eventId;
+    window.location = "/multikirola/actividadMultikirola/eventInfo?event=" + eventId;
 };
 
 
@@ -248,12 +249,12 @@ function filtrarEventos(fechaIniDesde, fechaIniHasta) {
             'fechaDesde': fechaIniDesde,
             'fechaHasta': fechaIniHasta
         }).done(function (data, status) {
-            console.log(status);
-            $('#tabla-eventos').html(data);
+        console.log(status);
+        $('#tabla-eventos').html(data);
     })
 };
 
-function filtrarParticipantes(apellido1, movil, email, centro, curso, fDesde, fHasta){
+function filtrarParticipantes(apellido1, movil, email, centro, curso, fDesde, fHasta) {
 
     $.get("/multikirola/participante/filtrarParticipantes/",
         {

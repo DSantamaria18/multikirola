@@ -72,7 +72,7 @@ class ActividadMultikirolaController {
             ActividadMultikirola actividadMultikirola = new ActividadMultikirola()
             actividadMultikirola.evento = eventId as Long
             actividadMultikirola.participante = params.participanteId as Long
-            actividadMultikirola.telefono = params.telefono
+//            actividadMultikirola.telefono = params.telefono
             actividadMultikirola.movil = params.movil
 
             try {
@@ -242,8 +242,8 @@ class ActividadMultikirolaController {
             sheet.addCell(new Label(columna, fila, "SEXO ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "EMAIL ", headerFormat))
-            columna++
-            sheet.addCell(new Label(columna, fila, "TELEFONO ", headerFormat))
+//            columna++
+//            sheet.addCell(new Label(columna, fila, "TELEFONO ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "MOVIL ", headerFormat))
             columna++
@@ -265,8 +265,8 @@ class ActividadMultikirolaController {
                 sheet.addCell(new Label(columna, fila, "${it.sexo}" , cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.email}".toUpperCase() , cellFormat))
-                columna++
-                sheet.addCell(new Label(columna, fila, "${it.telefono}" , cellFormat))
+//                columna++
+//                sheet.addCell(new Label(columna, fila, "${it.telefono}" , cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.movil}" , cellFormat))
                 columna++
