@@ -78,7 +78,7 @@
                 <th>Apellidos</th>
                 <th>Nombre</th>
                 <th>F. Nacimiento</th>
-                <th>Teléfono</th>
+%{--                <th>Teléfono</th>--}%
                 <th>Movil</th>
                 <th>Email</th>
                 <th>Centro</th>
@@ -93,7 +93,7 @@
                     <td class="text-capitalize">${participante.nombre}</td>
                     %{--<td><g:formatDate date="${participante.fnacimiento}" format="dd-MM-yyyy"/></td>--}%
                     <td><g:formatDate date="${participante.fnacimiento}" formatName="default.date.format"/></td>
-                    <td>${participante.telefono}</td>
+%{--                    <td>${participante.telefono}</td>--}%
                     <td>${participante.movil}</td>
                     <td>${participante.email}</td>
                     <td>${participante.centro}</td>
