@@ -4,16 +4,11 @@ import grails.validation.ValidationException
 
 import java.text.SimpleDateFormat
 
-import static org.springframework.http.HttpStatus.*
-
-
-
 import jxl.Workbook
 import jxl.WorkbookSettings
 import jxl.write.Border
 import jxl.write.BorderLineStyle
 import jxl.write.Colour
-import jxl.write.DateTime
 import jxl.write.Label
 import jxl.write.Number
 import jxl.write.WritableCellFormat
@@ -31,15 +26,6 @@ class ActividadMultikirolaController {
     def showEvents(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def eventList = actividadMultikirolaService.getEvents()
-//        def eventList = actividadMultikirolaService.findEvents(params.modalidad)
-
-        /*if (eventList.size() == 0) {
-            flash.message = "Lo sentimos, no hay actividades programadas para esta modalidad..."
-        }*/
-
-    /*    if (eventList.size() == 0) {
-            flash.message = "Recuerda que debes dar de alta al menos un participante"
-        }*/
         [eventList: eventList]
     }
 
@@ -68,11 +54,9 @@ class ActividadMultikirolaController {
         User currentUser = getAuthenticatedUser()
         def eventId = params.eventId as Long
 
-//        participantes.each() {
             ActividadMultikirola actividadMultikirola = new ActividadMultikirola()
             actividadMultikirola.evento = eventId as Long
             actividadMultikirola.participante = params.participanteId as Long
-//            actividadMultikirola.telefono = params.telefono
             actividadMultikirola.movil = params.movil
 
             try {
@@ -82,19 +66,9 @@ class ActividadMultikirolaController {
                 return
             }
 
-//        }
-
         def participantesList = actividadMultikirolaService.findAvailableParticipants(eventId, currentUser.id)
         def participantesRegistradosList = actividadMultikirolaService.findRegisteredParticipants(eventId, currentUser.id)
 
-        /* request.withFormat {
-             form multipartForm {
-                 flash.message = "Participantes inscritos correctamente..."
- //                flash.message = message(code: 'default.created.message', args: [message(code: 'participantes.label', default: 'Curso'), participantes.id])
-                 redirect showEvents()
-             }
-             '*' { respond actividadMultikirola, [status: CREATED] }
-         }*/
         render(template: "selectorParticipantes", model: [participantesList: participantesList])
         render(template: "participantesRegistrados", model: [participantesRegistradosList: participantesRegistradosList])
     }
@@ -108,14 +82,6 @@ class ActividadMultikirolaController {
         actividadMultikirolaService.deletePArticipantFromEvent(eventId, participanteId)
 
         redirect(action: "registrarParticipantes", params:[eventId: eventId])
-
-        /*request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'curso.label', default: 'Curso'), id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }*/
     }
 
     def getNextEvents(){
@@ -135,7 +101,6 @@ class ActividadMultikirolaController {
 
         def evento = actividadMultikirolaService.findEvent(eventId).first()
         def participantesList = actividadMultikirolaService.findRegisteredParticipants(eventId)
-//        def participantesDisponiblesList = actividadMultikirolaService.findAvailableParticipants(eventId)
 
         [evento: evento,  participantesList: participantesList]
     }
@@ -155,7 +120,7 @@ class ActividadMultikirolaController {
 
         // Fichero
         response.setContentType('application/vnd.ms-excel')
-        response.setHeader('Content-Disposition', "Attachment;Filename='Participantes_${modalidad}_${fecha}.xls'")
+        response.setHeader('Content-Disposition', "Attachment;Filename=Participantes_${modalidad}_${fecha}.xls")
         WorkbookSettings ws = new WorkbookSettings()
         ws.setLocale(new Locale("es", "ES"))
         WritableWorkbook workbook = Workbook.createWorkbook(response.outputStream, ws)
@@ -242,8 +207,6 @@ class ActividadMultikirolaController {
             sheet.addCell(new Label(columna, fila, "SEXO ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "EMAIL ", headerFormat))
-//            columna++
-//            sheet.addCell(new Label(columna, fila, "TELEFONO ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "MOVIL ", headerFormat))
             columna++
