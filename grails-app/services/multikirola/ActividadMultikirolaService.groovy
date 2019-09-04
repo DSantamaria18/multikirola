@@ -55,7 +55,7 @@ class ActividadMultikirolaService {
     }
 
     def findNextEvents(Integer limit = null) {
-        String query = "select e.id, e.edad_minima, e.tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
+        String query = "select e.id, e.nombre, e.edad_minima, e.tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
                 "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
                 "FROM evento e " +
                 "LEFT JOIN lugar l ON e.lugar_id = l.id " +
