@@ -193,7 +193,7 @@
             $('#div-nombre').addClass('has-error');
             formOk = false;
         } else {
-            var nombre_re = /^[a-zA-Z]+$/; // Sólo caracteres
+            var nombre_re = /^[a-zñA-ZÑ]+$/; // Sólo caracteres
             if (!nombre_re.test(nombre)) {
                 $('#div-nombre').addClass('has-error');
                 formOk = false;
@@ -212,7 +212,7 @@
             $('#div-apellido1').addClass('has-error');
             formOk = false;
         } else {
-            var apellido1_re = /^[a-zA-Z]+$/; // Sólo caracteres
+            var apellido1_re = /^[a-zñA-ZÑ]+$/; // Sólo caracteres
             if (!apellido1_re.test(apellido1)) {
                 $('#div-apellido1').addClass('has-error');
                 formOk = false;
@@ -227,7 +227,7 @@
         var formOk = true;
         var apellido2 = $('#apellido2').val();
         console.log('Apellido2: ' + apellido2);
-        var apellido2_re = /^[a-zA-Z]+$/; // Sólo caracteres
+        var apellido2_re = /^[a-zñA-ZÑ]+$/; // Sólo caracteres
         if (apellido2.length > 0 && !apellido2_re.test(apellido2)) {
             $('#div-apellido2').addClass('has-error');
             formOk = false;
