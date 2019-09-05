@@ -197,4 +197,5 @@ grails:
             mail.smtp.socketFactory.fallback: "false"
 email:
     from: "appmultikirola@gmail.com"
-    userChangeNotificationsTo: "dsantamaria18@gmail.com"
+    userChangeNotificationsTo: "getxomultikirolak@gmail.com"
+#    userChangeNotificationsTo: "dsantamaria18@gmail.com"

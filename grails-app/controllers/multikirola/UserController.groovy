@@ -67,8 +67,6 @@ class UserController {
         } catch (ValidationException e) {
             log.error("ERROR AL GUARDAR EL USUARIO: ${user.errors}")
             respond user.errors, view: 'register'
-//            redirect(action: 'register')+
-
             return
         }
 
