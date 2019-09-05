@@ -1,5 +1,6 @@
 package multikirola
 
+import grails.core.GrailsApplication
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
@@ -10,6 +11,7 @@ class UserController {
 
     SpringSecurityService springSecurityService
     UserService userService
+    GrailsApplication grailsApplication
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 //    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -100,6 +102,12 @@ class UserController {
                     updUser.password = user.password
                 }
                 userService.save(updUser)
+                sendMail {
+                    from grailsApplication.config.getProperty('email.from')
+                    to grailsApplication.config.getProperty('email.userChangeNotificationsTo')
+                    subject("Cambios en la cuenta del usuario ${updUser.nombre} ${updUser.apellidos} [${updUser.id}]")
+                    text('prueba!!!')
+                }
             } else {
                 throw new Exception("Error de validación del usuario")
             }
