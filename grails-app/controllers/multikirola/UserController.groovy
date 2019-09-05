@@ -1,5 +1,6 @@
 package multikirola
 
+import grails.core.GrailsApplication
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
@@ -10,9 +11,9 @@ class UserController {
 
     SpringSecurityService springSecurityService
     UserService userService
+    GrailsApplication grailsApplication
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
-//    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
@@ -66,7 +67,6 @@ class UserController {
         } catch (ValidationException e) {
             log.error("ERROR AL GUARDAR EL USUARIO: ${user.errors}")
             respond user.errors, view: 'register'
-//            redirect(action: 'register')
             return
         }
 
@@ -112,6 +112,13 @@ class UserController {
             flash.message = "No se han podido actualizar los datos del usuario ${user.username.toLowerCase()}"
             render(view: 'miCuenta', model: [user: updUser])
             return
+        }
+
+        sendMail {
+            from grailsApplication.config.getProperty('email.from')
+            to grailsApplication.config.getProperty('email.userChangeNotificationsTo')
+            subject("Cambios en la cuenta del usuario ${updUser.nombre} ${updUser.apellidos} [${updUser.id}]")
+            html g.render(template: 'notificacion', model: [user: updUser])
         }
 
         request.withFormat {
