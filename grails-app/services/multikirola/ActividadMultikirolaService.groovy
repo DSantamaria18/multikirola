@@ -7,22 +7,6 @@ import groovy.sql.Sql
 class ActividadMultikirolaService {
     def dataSource
 
-    /*def findEvents(final String modalidadId) {
-        final String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
-                "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
-                "FROM evento e " +
-                "LEFT JOIN lugar l ON e.lugar_id = l.id " +
-                "LEFT JOIN recinto r ON e.recinto_id = r.id " +
-                "LEFT JOIN instalacion i ON e.instalacion_id = i.id " +
-                "LEFT JOIN modalidad m ON e.modalidad_id = m.id " +
-                "WHERE multikirola = TRUE and fecha >= now() " +
-                "AND modalidad_id = ${modalidadId} ORDER BY fecha DESC"
-
-        final Sql sql = new Sql(dataSource)
-        final results = sql.rows(query)
-        return results
-    }*/
-
     def getEvents() {
         final String query = "select e.id, tipo_actividad, r.nombre as recinto, fecha, l.nombre_lugar as lugar, horario, " +
                 "i.nombre_instalacion as instalacion, m.nombre as modalidad,  m.id as modalidad_id " +
@@ -63,7 +47,7 @@ class ActividadMultikirolaService {
                 "LEFT JOIN instalacion i ON e.instalacion_id = i.id " +
                 "LEFT JOIN modalidad m ON e.modalidad_id = m.id " +
                 "WHERE multikirola = TRUE and fecha >= now() " +
-                "AND modalidad_id IN (1,3,5,6,7,8,13,19,20,22,24,26,28,32,34,39,44,49,52,54,62) " +
+                "AND modalidad_id IN (1,3,5,6,7,8,13,15,19,20,22,24,26,28,32,34,35,37,39,44,49,52,54,62,67,68) " +
                 "ORDER BY fecha ASC "
 
         if (limit) query += "LIMIT ${limit} "
@@ -84,7 +68,6 @@ class ActividadMultikirolaService {
     }
 
     def findRegisteredParticipants(Long eventId) {
-//        final String query = "SELECT p.id, p.apellido1, p.apellido2, p.nombre, p.telefono, p.movil, p.email, c.nombre as centro, " +
         final String query = "SELECT p.id, p.apellido1, p.apellido2, p.nombre, p.movil, p.email, c.nombre as centro, " +
                 "cu.nombre as curso, p.sexo, p.fecha_nacimiento as fnacimiento FROM actividad_multikirola am, participante p, centro c, curso cu " +
                 "WHERE am.participante = p.id  AND p.centro_id = c.id AND p.curso_id = cu.id " +
