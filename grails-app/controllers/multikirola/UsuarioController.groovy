@@ -55,7 +55,7 @@ class UsuarioController {
 
         if (usuariosList.size() > 0) {
             response.setContentType('application/vnd.ms-excel')
-            response.setHeader('Content-Disposition', "Attachment;Filename='Usuarios.xls'")
+            response.setHeader('Content-Disposition', "Attachment;Filename=Usuarios.xls")
             WorkbookSettings ws = new WorkbookSettings()
             ws.setLocale(new Locale("es", "ES"))
             WritableWorkbook workbook = Workbook.createWorkbook(response.outputStream, ws)
