@@ -7,6 +7,27 @@
 
 <body>
 <div class="container">
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+    <g:hasErrors bean="${this.user}">
+        <ul class="errors" role="alert">
+        <g:eachError bean="${this.user}" var="error">
+            <g:if test="${this.user.errors?.getFieldError('username').getCode() == 'unique' }">
+                <li data-field-id="${error.field}>
+                <g:message code="register.user.duplicated"
+                           args="${[this.user.errors?.getFieldError('username').getRejectedValue()]}"
+                           default="El usuario ${this.user.errors?.getFieldError('username').getRejectedValue()} ya existe" />
+                </li>
+            </g:if>
+            <g:else>
+                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
+                    error="${error}"/></li>
+            </g:else>
+        </g:eachError>
+        </ul>
+    </g:hasErrors>
+
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
