@@ -57,6 +57,20 @@ class UserController {
             user.nombre = WordUtils.capitalizeFully(user.nombre)
             user.apellidos = WordUtils.capitalizeFully(user.apellidos)
 
+            sendMail {
+                from grailsApplication.config.getProperty('email.from')
+                to user.email
+                subject("Registro en Multikirola")
+                html g.render(template: 'emailRegistro', model: [user: user])
+            }
+
+            sendMail {
+                from grailsApplication.config.getProperty('email.from')
+                to grailsApplication.config.getProperty('email.userChangeNotificationsTo')
+                subject("Nuevo usuario registrado en Multikirola")
+                html g.render(template: 'notificacion', model: [user: user])
+            }
+
             userService.save(user)
 
             def role = Role.findByAuthority('ROLE_CUSTOMER')
