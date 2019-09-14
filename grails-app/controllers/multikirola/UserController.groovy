@@ -13,7 +13,7 @@ class UserController {
     UserService userService
     GrailsApplication grailsApplication
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", borrarCuenta: "POST"]
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
@@ -118,7 +118,7 @@ class UserController {
                 throw new Exception("Error de validación del usuario")
             }
         } catch (ValidationException e) {
-//            redirect(action: 'miCuenta')
+            //            redirect(action: 'miCuenta')
             flash.message = "Se ha producido un error. Por favor, revisa los datos introducidos e inténtalo de nuevo..."
             render(view: 'miCuenta', model: [user: updUser])
             return
@@ -181,5 +181,16 @@ class UserController {
             User user = userService.get(userId)
             render(view: 'miCuenta', model: [user: user])
         }
+    }
+
+    def borrarCuenta() {
+        if (isLoggedIn()) {
+            final Long userId = getAuthenticatedUser().id
+            final String nombre = params.nombre
+            final String apellidos = params.nombre
+            final String email = params.email
+            final String movil = params.movil
+        }
+
     }
 }
