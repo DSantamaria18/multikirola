@@ -4,6 +4,10 @@ import grails.core.GrailsApplication
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices
 import org.springframework.validation.Errors
 import org.apache.commons.lang.WordUtils
 
@@ -185,12 +189,28 @@ class UserController {
 
     def borrarCuenta() {
         if (isLoggedIn()) {
-            final Long userId = getAuthenticatedUser().id
+            final User user = getAuthenticatedUser()
             final String nombre = params.nombre
-            final String apellidos = params.nombre
+            final String apellidos = params.apellidos
             final String email = params.email
             final String movil = params.movil
+
+            if (user.email == email && user.nombre == nombre && user.apellidos == apellidos && user.movil == movil) {
+                user.enabled = false
+                userService.save(user)
+
+                Authentication auth = SecurityContextHolder.context.authentication
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+                new PersistentTokenBasedRememberMeServices().logout(request, response, auth);
+
+                redirect(controller: 'home', action: 'index')
+
+            } else {
+                // TODO: error de concurrencia
+            }
         }
+
+
 
     }
 }
