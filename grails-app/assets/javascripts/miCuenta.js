@@ -23,11 +23,10 @@ function borrarCuenta(){
         data: datos,
         success: function(response) {
             console.log(response);
-            // window.location ="/multikirola/participante/index" ;
+            window.location ="/multikirola/login/auth" ;
         },
         error: function(error) {
             console.log(error);
-            // window.location ="/multikirola/participante/create" ;
         }
     })
 

@@ -199,18 +199,26 @@ class UserController {
                 user.enabled = false
                 userService.save(user)
 
-                Authentication auth = SecurityContextHolder.context.authentication
+                sendMail {
+                    from grailsApplication.config.getProperty('email.from')
+                    to grailsApplication.config.getProperty('email.userChangeNotificationsTo')
+                    subject("Solicitud de borrado de cuenta ${user.nombre} ${user.apellidos} [${user.id}]")
+                    html g.render(template: 'notificacionBorrado', model: [user: user])
+                }
+
+                sendMail {
+                    from grailsApplication.config.getProperty('email.from')
+                    to user.email
+                    subject("Borrado de cuenta de Multikirolak")
+                    text "Tu cuenta se ha dado de baja en Multikirolak. Si necesitas contactar con nosotros puedes " +
+                            "enviarnos un email a ${grailsApplication.config.getProperty('email.userChangeNotificationsTo')}"
+                }
+
+                final Authentication auth = SecurityContextHolder.context.authentication
                 new SecurityContextLogoutHandler().logout(request, response, auth);
-                new PersistentTokenBasedRememberMeServices().logout(request, response, auth);
 
-                redirect(controller: 'home', action: 'index')
-
-            } else {
-                // TODO: error de concurrencia
+                redirect uri: '/'
             }
         }
-
-
-
     }
 }
