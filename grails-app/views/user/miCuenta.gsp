@@ -197,7 +197,7 @@
 
             <div class="modal-body">
                 <p><g:message code="micuenta.modal.eliminarCuenta.texto"
-                              default="Sabes que se borrará tu cuenta, no?"/></p>
+                              default="¿Estás seguro/a de querer eliminar completamente tu cuenta?"/></p>
             </div>
 
             <div class="modal-footer">
