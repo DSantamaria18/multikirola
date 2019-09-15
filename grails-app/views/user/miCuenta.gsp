@@ -12,11 +12,14 @@
         float: right;
         margin-left: 15px;
     }
+
     /* Icon when the collapsible content is hidden */
     .btn.collapsed:after {
         content: "\e080";
     }
     </style>
+
+    <asset:javascript src="miCuenta.js"/>
 </head>
 
 <body>
@@ -58,11 +61,6 @@
                            value="${this.user?.username}"/>
 
                     <div style="margin-top: 20px" class="input-group">
-                        %{--<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="username" type="text" class="form-control"
-                               value="${this.user?.nombre + ' ' + this.user?.apellidos}"
-                               placeholder="<g:message code="default.label.nombreUsuario"/>"
-                               onchange="$('.error').attr('hidden', true);" readonly/>--}%
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="nombre" type="text" class="form-control" data-toggle="tooltip-user"
                                title="Tu nombre" name="nombre"
@@ -75,10 +73,6 @@
                                placeholder="<g:message code="default.label.apellidosUsuario"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
-
-%{--                    <div>--}%
-%{--                        <label id="error-username" class="error" style="color: red" hidden>ERROR!!!</label>--}%
-%{--                    </div>--}%
 
                     <div>
                         <label id="error-nombre" class="error" style="color: red" hidden><g:message
@@ -120,17 +114,20 @@
                         <div class="checkbox">
                             <label>
                                 <g:checkBox id="whatsapp" name="whatsapp"
-                                       value="${this.user?.whatsapp}"/>
+                                            value="${this.user?.whatsapp}"/>
                                 <g:message code="default.label.notificadmeWhatsapp"/>
                             </label>
                         </div>
                     </div>
+
                     <div>
                         <label id="error-whatsapp" class="error" style="color: red" hidden>ERROR!!!</label>
                     </div>
 
                     <!-- PASSWORD -->
-                    <button type="button" class="btn collapsed" data-toggle="collapse" data-target="#password-group" ><g:message code="default.label.actualizarContrasena"/></button>
+                    <button type="button" class="btn collapsed" data-toggle="collapse"
+                            data-target="#password-group"><g:message
+                            code="default.label.actualizarContrasena"/></button>
 
                     <div id="password-group" class="collapse">
                         <div style="margin-top: 25px" class="input-group">
@@ -140,6 +137,7 @@
                                    placeholder="<g:message code="default.label.nuevaContrasena"/>"
                                    onchange="$('.error').attr('hidden', true); "/>
                         </div>
+
                         <div>
                             <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>
                         </div>
@@ -160,17 +158,64 @@
 
                     <div class="form-group" style="margin-top: 20px">
                         <!-- Button -->
-                        <div class="col-md-9">
+                        <div class="row"></div>
+
+                        <div class="col-md-6 mb-3">
                             <input id="btn-myaccount" type="submit" class="btn btn-info save"
                                    name="register"
                                    value="<g:message code="default.label.actualizar"/>"/>
                         </div>
-                    </div>
 
-                </form>
+                        <br/>
 
+                        <div class="col-md-6 mb-3">
+                            <input id="btn-borrar-cuenta" type="button" class="btn btn-danger delete"
+                                   name="borrar-cuenta" data-toggle="modal" data-target="#modal-eliminar-cuenta"
+                                   value="<g:message code="micuenta.button.borrarCuenta" default="Eliminar cuenta"/>"/>
+                        </div>
+                    </div
+            </div>
+
+        </form>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal -->
+<div id="modal-eliminar-cuenta" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><g:message code="micuenta.modal.eliminarCuenta.header"
+                                                   default="Eliminar Cuenta"/></h4>
+            </div>
+
+            <div class="modal-body">
+                <p><g:message code="micuenta.modal.eliminarCuenta.texto"
+                              default="¿Estás seguro/a de querer eliminar completamente tu cuenta?"/></p>
+            </div>
+
+            <div class="modal-footer">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                           id="check-modal-eliminar-cuenta"
+                            onchange="modalButtonEnable()">
+                    <label class="custom-control-label" for="check-modal-eliminar-cuenta">
+                        <g:message code="micuenta.modal.check.label" default="Sí, estoy seguro"/>
+                    </label>
+                </div>
+                <button type="button" id="btn-modal-eliminar-cuenta" class="btn btn-danger"
+                        data-dismiss="modal" disabled onclick="borrarCuenta()">
+                    <g:message code="default.label.enviar"/>
+                </button>
             </div>
         </div>
+
     </div>
 </div>
 </body>

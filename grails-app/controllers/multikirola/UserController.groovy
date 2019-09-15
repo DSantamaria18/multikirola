@@ -4,6 +4,10 @@ import grails.core.GrailsApplication
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices
 import org.springframework.validation.Errors
 import org.apache.commons.lang.WordUtils
 
@@ -13,7 +17,7 @@ class UserController {
     UserService userService
     GrailsApplication grailsApplication
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", borrarCuenta: "POST"]
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
@@ -118,7 +122,7 @@ class UserController {
                 throw new Exception("Error de validación del usuario")
             }
         } catch (ValidationException e) {
-//            redirect(action: 'miCuenta')
+            //            redirect(action: 'miCuenta')
             flash.message = "Se ha producido un error. Por favor, revisa los datos introducidos e inténtalo de nuevo..."
             render(view: 'miCuenta', model: [user: updUser])
             return
@@ -180,6 +184,41 @@ class UserController {
             Long userId = getAuthenticatedUser().id
             User user = userService.get(userId)
             render(view: 'miCuenta', model: [user: user])
+        }
+    }
+
+    def borrarCuenta() {
+        if (isLoggedIn()) {
+            final User user = getAuthenticatedUser()
+            final String nombre = params.nombre
+            final String apellidos = params.apellidos
+            final String email = params.email
+            final String movil = params.movil
+
+            if (user.email == email && user.nombre == nombre && user.apellidos == apellidos && user.movil == movil) {
+                user.enabled = false
+                userService.save(user)
+
+                sendMail {
+                    from grailsApplication.config.getProperty('email.from')
+                    to grailsApplication.config.getProperty('email.userChangeNotificationsTo')
+                    subject("Solicitud de borrado de cuenta ${user.nombre} ${user.apellidos} [${user.id}]")
+                    html g.render(template: 'notificacionBorrado', model: [user: user])
+                }
+
+                sendMail {
+                    from grailsApplication.config.getProperty('email.from')
+                    to user.email
+                    subject("Borrado de cuenta de Multikirolak")
+                    text "Tu cuenta se ha dado de baja en Multikirolak. Si necesitas contactar con nosotros puedes " +
+                            "enviarnos un email a ${grailsApplication.config.getProperty('email.userChangeNotificationsTo')}"
+                }
+
+                final Authentication auth = SecurityContextHolder.context.authentication
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+
+                redirect uri: '/'
+            }
         }
     }
 }
