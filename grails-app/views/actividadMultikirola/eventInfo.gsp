@@ -48,7 +48,7 @@
     <h1>Participantes <span class="badge">${participantesList.size()}</span>
         <span style="text-decoration: none; margin-left: 25%">
 
-            <g:link class="btn btn-primary" action="descargarParticipantes" params="[eventId: evento.id ]">
+            <g:link class="btn btn-primary" action="descargarParticipantes" params="[eventId: evento.id]">
                 <i class="glyphicon glyphicon-download"></i>
             </g:link>
         </span>
@@ -67,6 +67,7 @@
                 <th>Centro</th>
                 <th>Curso</th>
                 <th>Sexo</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -81,6 +82,12 @@
                     <td>${participante.centro}</td>
                     <td>${participante.curso}</td>
                     <td>${participante.sexo}</td>
+                    <td>
+                        <div class="btn btn-danger btn-sm push eliminar-push borrar-participante-btn"
+                             id="borrarParticipanteBtn-${i}">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </div>
+                    </td>
                 </tr>
             </g:each>
             </tbody>
