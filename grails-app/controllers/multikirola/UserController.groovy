@@ -4,6 +4,7 @@ import grails.core.GrailsApplication
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
+import org.apache.commons.lang.StringEscapeUtils
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
@@ -61,9 +62,11 @@ class UserController {
             user.nombre = WordUtils.capitalizeFully(user.nombre)
             user.apellidos = WordUtils.capitalizeFully(user.apellidos)
 
+            final String emailTo = (user.email.contains('ñ') || user.email.contains('Ñ')) ? StringEscapeUtils.escapeJava(user.email) : user.email
+
             sendMail {
                 from grailsApplication.config.getProperty('email.from')
-                to user.email
+                to emailTo
                 subject("Registro en Multikirola")
                 html g.render(template: 'emailRegistro', model: [user: user])
             }
@@ -210,8 +213,7 @@ class UserController {
                     from grailsApplication.config.getProperty('email.from')
                     to user.email
                     subject("Borrado de cuenta de Multikirolak")
-                    text "Tu cuenta se ha dado de baja en Multikirolak. Si necesitas contactar con nosotros puedes " +
-                            "enviarnos un email a ${grailsApplication.config.getProperty('email.userChangeNotificationsTo')}"
+                    text "Tu cuenta se ha dado de baja en Multikirolak. Si necesitas contactar con nosotros puedes " + "enviarnos un email a ${grailsApplication.config.getProperty('email.userChangeNotificationsTo')}"
                 }
 
                 final Authentication auth = SecurityContextHolder.context.authentication
