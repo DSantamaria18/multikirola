@@ -11,7 +11,12 @@ class UsuarioService {
     def dataSource
 
     def getAllUsersInfo() {
-        return User.findAll()
+        def userRoleList = UserRole.findAllByRole(Role.findByAuthority('ROLE_CUSTOMER'))
+        List<User> userList = []
+        for (user in userRoleList.user) {
+            userList.add(user)
+        }
+        return userList
     }
 
     def filtraUsuarios(Boolean qWhatsApp, Date qFechaDesde){
