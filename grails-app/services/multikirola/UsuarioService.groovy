@@ -27,8 +27,8 @@ class UsuarioService {
             qSoloW = " AND u.whatsapp = ${qWhatsApp}"
         }
 
-        String qFecha = " WHERE u.date_created >= '${fDesde}'"
-        String baseQuery = "Select * FROM user u"
+        String qFecha = " AND u.date_created >= '${fDesde}'"
+        String baseQuery = "Select * FROM user u INNER JOIN user_role ur ON ur.user_id = u.id WHERE ur.role_id = 7"
         String orderQuery = " ORDER BY u.nombre ASC, u.apellidos ASC"
 
         String query = baseQuery + qFecha + qSoloW + orderQuery
