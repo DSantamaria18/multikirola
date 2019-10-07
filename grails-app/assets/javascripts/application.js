@@ -55,8 +55,7 @@ function validateForm() {
     const whatsapp = $('#whatsapp').prop('checked');
 
     /* validación de nombre y apellidos */
-    // const nombre_regex = /^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
-    const nombre_regex = /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/g;
+    const nombre_regex = /^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
     if (nombre == "" || nombre.length < 2) {
         $('#error-nombre').attr('hidden', false);
         formRegistroOk = false;

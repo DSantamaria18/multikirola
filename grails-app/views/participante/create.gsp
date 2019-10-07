@@ -193,7 +193,7 @@
             $('#div-nombre').addClass('has-error');
             formOk = false;
         } else {
-            const nombre_re = /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/g;
+            const nombre_re = /^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
             if (!nombre_re.test(nombre)) {
                 $('#div-nombre').addClass('has-error');
                 formOk = false;
@@ -212,7 +212,7 @@
             $('#div-apellido1').addClass('has-error');
             formOk = false;
         } else {
-            const apellido1_re = /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/g;
+            const apellido1_re = /^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
             if (!apellido1_re.test(apellido1)) {
                 $('#div-apellido1').addClass('has-error');
                 formOk = false;
@@ -227,7 +227,7 @@
         var formOk = true;
         var apellido2 = $('#apellido2').val();
         console.log('Apellido2: ' + apellido2);
-        const apellido2_re = /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/g;
+        const apellido2_re = /^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
         if (apellido2.length > 0 && !apellido2_re.test(apellido2)) {
             $('#div-apellido2').addClass('has-error');
             formOk = false;
