@@ -47,7 +47,7 @@ class ActividadMultikirolaService {
                 "LEFT JOIN instalacion i ON e.instalacion_id = i.id " +
                 "LEFT JOIN modalidad m ON e.modalidad_id = m.id " +
                 "WHERE multikirola = TRUE and fecha >= now() " +
-                "AND modalidad_id IN (1,2,3,5,6,7,8,13,15,19,20,22,24,26,28,32,34,35,37,39,44,49,52,54,62,67,68) " +
+                "AND modalidad_id IN (1,2,3,5,6,7,8,13,15,19,20,22,24,26,28,32,34,35,37,39,44,49,50,52,54,62,67,68) " +
                 "ORDER BY fecha ASC "
 
         if (limit) query += "LIMIT ${limit} "
