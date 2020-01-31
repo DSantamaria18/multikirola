@@ -17,6 +17,11 @@
     .btn.collapsed:after {
         content: "\e080";
     }
+
+    .botones{
+        display: flex;
+        justify-content: space-around;
+    }
     </style>
 
     <asset:javascript src="miCuenta.js"/>
@@ -42,7 +47,6 @@
                         <p>Error:</p>
                         <span></span>
                     </div>
-
 
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
@@ -155,32 +159,29 @@
                         </div>
                     </div>
 
-
                     <div class="form-group" style="margin-top: 20px">
                         <!-- Button -->
-                        <div class="row"></div>
+                        <div class="row botones">
 
-                        <div class="col-md-6 mb-3">
-                            <input id="btn-myaccount" type="submit" class="btn btn-info save"
-                                   name="register"
-                                   value="<g:message code="default.label.actualizar"/>"/>
+                            <div class="col-md-6 mb-3" >
+                                <input id="btn-myaccount" type="submit" class="btn btn-info save"
+                                       name="register"
+                                       value="<g:message code="default.label.actualizar" default="Actualizar"/>"/>
+                            </div>
+
+                            <br/>
+
+                            <div class="col-md-6 mb-3">
+                                <input id="btn-borrar-cuenta" type="button" class="btn btn-danger delete"
+                                       name="borrar-cuenta" data-toggle="modal" data-target="#modal-eliminar-cuenta"
+                                       value="<g:message code="micuenta.button.borrarCuenta"
+                                                         default="Eliminar cuenta"/>"/>
+                            </div>
                         </div>
-
-                        <br/>
-
-                        <div class="col-md-6 mb-3">
-                            <input id="btn-borrar-cuenta" type="button" class="btn btn-danger delete"
-                                   name="borrar-cuenta" data-toggle="modal" data-target="#modal-eliminar-cuenta"
-                                   value="<g:message code="micuenta.button.borrarCuenta" default="Eliminar cuenta"/>"/>
-                        </div>
-                    </div
+                    </div>
             </div>
-
         </form>
-
-        </div>
     </div>
-</div>
 </div>
 
 <!-- Modal -->
@@ -204,7 +205,7 @@
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input"
                            id="check-modal-eliminar-cuenta"
-                            onchange="modalButtonEnable()">
+                           onchange="modalButtonEnable()">
                     <label class="custom-control-label" for="check-modal-eliminar-cuenta">
                         <g:message code="micuenta.modal.check.label" default="Sí, estoy seguro"/>
                     </label>
