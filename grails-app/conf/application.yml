@@ -162,8 +162,8 @@ environments:
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 ---
 server:
-    port: 8082
-    contextPath: /multikirola
+    port: 80
+#    port: 8082
 ---
 environments:
     development:

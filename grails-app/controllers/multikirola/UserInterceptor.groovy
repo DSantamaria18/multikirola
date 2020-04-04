@@ -5,15 +5,15 @@ class UserInterceptor {
     def springSecurityService
 
     UserInterceptor(){
-        matchAll().excludes(uri:'/multikirola/')
+        matchAll().excludes(uri:'/')
                 .excludes(controller: 'home')
                 .excludes(controller: 'login')
                 .excludes(controller: 'user', action: 'register')
                 .excludes(controller: 'user', action: 'save')
                 .excludes(controller: 'actividadMultikirola')
                 .excludes(controller: 'static')
-                .excludes(uri: '/multikirola/error')
-                .excludes(uri: '/multikirola/notFound')
+                .excludes(uri: '/error')
+                .excludes(uri: '/notFound')
                 .excludes(controller: 'ficheros')
     }
 
@@ -33,7 +33,7 @@ class UserInterceptor {
     }
 
     boolean isExcludedURI(final String requestedURI) {
-        def excludedURIs = ['/multikirola/', '/multikirola/error', '/multikirola/notFound', '/multikirola/static/presentacion', '/multikirola/ficheros/*']
+        def excludedURIs = ['/', '/error', '/notFound', '/static/presentacion', '/ficheros/*']
         boolean result = false
 
         if (requestedURI in excludedURIs) result = true

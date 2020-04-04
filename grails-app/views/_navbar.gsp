@@ -1,14 +1,6 @@
 <content tag="nav">
 
-    <li><a href="/multikirola"><g:message code="default.home.label"></g:message></a></li>
-
-    %{--<li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-           aria-expanded="false">Multikirolak<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><g:link controller="static" action="presentacion"><g:message code="default.label.zerdamultikirola"/></g:link></li>
-        </ul>
-    </li>--}%
+    <li><a href="/"><g:message code="default.home.label"></g:message></a></li>
 
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -56,8 +48,6 @@
         </li>
     </sec:ifAnyGranted>
 
-
-
     <sec:ifAnyGranted roles='ROLE_ADMIN'>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -75,7 +65,6 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="false">
                 <i class="glyphicon glyphicon-user"></i>
-                %{--<sec:username/>--}%
                 <g:userName/>
                 <span class="caret"></span>
             </a>
