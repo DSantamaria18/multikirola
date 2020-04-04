@@ -3,6 +3,7 @@
 <head>
     <meta name="layout" content="main">
     <title>Document List</title>
+    <asset:javascript src="ficheros.js"/>
 </head>
 
 <body>
@@ -19,6 +20,12 @@
         <div class="table table-responsive">
             <table>
                 <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tamaño (KB)</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
                 <g:each in="${fileList}" status="i" var="file">
@@ -31,7 +38,14 @@
                                            value="${file.nombre.decodeURL()}"/>
                                 </g:link>
                             </span>
-                            %{--<span style="padding-left: 10px;">
+                        </td>
+                        <td>
+                            <span>
+                                <label>${file.tamaño.decodeURL()}</label>
+                            </span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px;">
                                 <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
                                     <g:link class="delete"
                                             action="deleteFile"
@@ -40,7 +54,7 @@
                                                onclick="return confirm('El fichero se borrará. ¿Estás seguro/a?');"/>
                                     </g:link>
                                 </sec:ifAnyGranted>
-                            </span>--}%
+                            </span>
                         </td>
                     </tr>
                 </g:each>
@@ -48,7 +62,7 @@
             </table>
         </div>
 
-        %{--<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
+        <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
             <div class="container">
                 <div class="col-md-8 col-md-offset-2">
                     <h3>Subir Fichero</h3>
@@ -58,23 +72,22 @@
                             <div class="input-group input-file" name="infoFiles">
                                 <span class="input-group-btn">
                                     <button class="btn btn-dark btn-choose" type="button"
-                                            onclick="buscar('info')">Buscar</button>
+                                            onclick="buscar()">Buscar</button>
                                 </span>
-                                <input type="text" class="form-control" id="infoFileNameInput"
+                                <input type="text" class="form-control" id="FileNameInput"
                                        placeholder='Selecciona un fichero...' readonly/>
-                                --}%%{--<input type="hidden" name="tipo" value="info"/>--}%%{--
                                 <span class="input-group-btn">
-                                    <g:actionSubmit class="btn btn-primary" value="Subir" action="uploadInfoFile"/>
+                                    <g:actionSubmit class="btn btn-primary" value="Subir" action="uploadFile"/>
                                 </span>
-                                <input type="file" class="form-control" id="infoFileUpload" name="infoFileUpload"
-                                       onchange="copyFileName('info')"
+                                <input type="file" class="form-control" id="FileUpload" name="FileUpload"
+                                       onchange="copyFileName()"
                                        style="visibility:hidden" ;/>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </sec:ifAnyGranted>--}%
+        </sec:ifAnyGranted>
     </div>
 </div>
 

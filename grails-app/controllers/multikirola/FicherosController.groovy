@@ -14,7 +14,7 @@ class FicherosController {
                 if (!file.isDirectory()) {
                     Map fileInfo = [:]
                     fileInfo.nombre = file.name
-//                    fileInfo.tamaño = file.size()
+                    fileInfo.tamaño = file.size()/1024
                     fileList.add(fileInfo)
                 }
             }
@@ -46,7 +46,7 @@ class FicherosController {
     }
 
     def uploadFile() {
-        def f = request.getFile('infoFileUpload')
+        def f = request.getFile('FileUpload')
         String ruta = "${UPLOAD_FOLDER}/"
         File folder = new File(ruta)
         if (!folder.exists()) {
