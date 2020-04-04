@@ -19,32 +19,33 @@
 
             <div class="panel-body">
                 <form id="signup-form" class="form-horizontal" role="form" onsubmit="return validateForm()"
-                      action="/multikirola/user/save" method="post">
+                      action="/user/save" method="post">
 
                     <div id="signup-alert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
                         <span></span>
                     </div>
 
-
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
+
                     <g:hasErrors bean="${this.user}">
                         <ul class="errors" role="alert">
-                            <g:eachError bean="${this.user}" var="error">
-                                <g:if test="${this.user.errors?.getFieldError('username').getCode() == 'unique' }">
-                                    <li data-field-id="${error.field}>
-                                        <g:message code="register.user.duplicated"
-                                                   args="${[this.user.errors?.getFieldError('username').getRejectedValue()]}"
-                                                   default="El usuario ${this.user.errors?.getFieldError('username').getRejectedValue()} ya existe" />
-                                    </li>
-                                </g:if>
-                                <g:else>
-                                    <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
-                                            error="${error}"/></li>
-                                </g:else>
-                            </g:eachError>
+                        <g:eachError bean="${this.user}" var="error">
+                            <g:if test="${this.user.errors?.getFieldError('username').getCode() == 'unique'}">
+                                <li data-field-id="${error.field}>
+                                <g:message code="register.user.duplicated"
+                                           args="${[this.user.errors?.getFieldError('username').getRejectedValue()]}"
+                                           default="El usuario ${this.user.errors?.getFieldError('username').getRejectedValue()} ya existe"/>
+                                </li>
+                            </g:if>
+                            <g:else>
+                                <li <g:if
+                                    test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
+                                    error="${error}"/></li>
+                            </g:else>
+                        </g:eachError>
                         </ul>
                     </g:hasErrors>
 
@@ -65,6 +66,7 @@
                                placeholder="<g:message code="default.label.apellidosUsuario"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
+
                     <div>
                         <label id="error-nombre" class="error" style="color: red" hidden><g:message
                                 code="default.error.nombreUsuario"/></label>
@@ -83,6 +85,7 @@
                                placeholder="<g:message code="default.label.correoElectronico"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
+
                     <div>
                         <label id="error-email" class="error" style="color: red" hidden><g:message
                                 code="default.error.email"/></label>
@@ -94,6 +97,7 @@
                                placeholder="<g:message code="default.label.telefonoMovil"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
+
                     <div>
                         <label id="error-usercellphone" class="error" style="color: red" hidden><g:message
                                 code="default.error.telefono"/></label>
@@ -107,6 +111,7 @@
                             </label>
                         </div>
                     </div>
+
                     <div>
                         <label id="error-whatsapp" class="error" style="color: red" hidden><g:message
                                 code="default.error.whatsapp"/></label>
@@ -119,6 +124,7 @@
                                placeholder="<g:message code="default.label.contrasena"/>"
                                onchange="$('.error').attr('hidden', true); "/>
                     </div>
+
                     <div>
                         <label id="error-longitudPassword" class="error" style="color: red" hidden><g:message
                                 code="default.error.longitudPassword"/></label>
@@ -139,6 +145,7 @@
                                placeholder="<g:message code="default.label.confirmarContrasena"/>"
                                onchange="$('.error').attr('hidden', true);"/>
                     </div>
+
                     <div>
                         <label id="error-password2" class="error" style="color: red" hidden><g:message
                                 code="default.error.password2"/></label>
@@ -152,6 +159,7 @@
                             </label>
                         </div>
                     </div>
+
                     <div>
                         <label id="error-legal" class="error" style="color: red" hidden><g:message
                                 code="default.error.checkCondiciones"/></label>
@@ -182,8 +190,6 @@
             <div class="modal-body">
                 <div class="container">
                     <p><g:message code="default.info.condiciones"/></p>
-
-
 
                 </div>
 

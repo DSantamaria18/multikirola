@@ -84,7 +84,7 @@
             qFechaDesde = fecha;
         }
 
-        $.post("/multikirola/Usuario/filtrarUsuarios",
+        $.post("/Usuario/filtrarUsuarios",
                 {
                     qWhatsApp: qWhatsApp,
                     qFechaDesde: qFechaDesde
@@ -95,24 +95,6 @@
         );
     };
 
-    /*function exportarUsuarios() {
-        const qWhatsApp = $('#qWhatsApp option:selected').val();
-        const fecha = '1900-01-01';
-        let qFechaDesde = $('#fecha-desde').val();
-        if (qFechaDesde === "") {
-            qFechaDesde = fecha;
-        }
-
-        $.post("/multikirola/Usuario/exportarUsuarios",
-                {
-                    qWhatsApp: qWhatsApp,
-                    qFechaDesde: qFechaDesde
-                }, function (data, status) {
-            console.log(status);
-            // $('#tabla-usuarios').html(data);
-        }
-        );
-    };*/
 </g:javascript>
 </body>
 </html>

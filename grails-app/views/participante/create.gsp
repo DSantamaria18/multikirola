@@ -152,24 +152,24 @@
                 fechaNacimiento: fechaNacimiento
             };
 
-            $.post("/multikirola/participante/save", datos,
+            $.post("/participante/save", datos,
                 function (data, status) {
                     console.log(status);
-                    window.location ="/multikirola/participante/index" ;
+                    window.location ="/participante/index" ;
                 }
             );
 
             $.ajax({
                 type: "POST",
-                url: "/multikirola/participante/save",
+                url: "/participante/save",
                 data: datos,
                 success: function(response) {
                   console.log(response);
-                  window.location ="/multikirola/participante/index" ;
+                  window.location ="/participante/index" ;
                 },
                 error: function(error) {
                   console.log(error);
-                  window.location ="/multikirola/participante/create" ;
+                  window.location ="/participante/create" ;
                 }
             })
 
@@ -300,25 +300,6 @@
         console.log(formOk);
         return formOk;
     }
-
-    /*function validaTelefono() {
-        console.log("validando Telefono");
-        var formOk = true;
-        var telefono = $('#telefono').val();
-        console.log('Telefono: ' + telefono);
-        if (telefono == "" || telefono == undefined) {
-            $('#div-telefono').addClass('has-error');
-            formOk = false;
-        } else {
-            var telefono_re = /(\+34|0034|34)?[ -]*(9)[ -]*([0-9][ -]*){8}/; // Sólo caracteres
-            if (!telefono_re.test(telefono)) {
-                $('#div-telefono').addClass('has-error');
-                formOk = false;
-            }
-        }
-        console.log(formOk);
-        return formOk;
-    }*/
 
     function validaEmail() {
         console.log("validando Email");

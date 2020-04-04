@@ -11,7 +11,7 @@
 </ul>
 </p>
 
-<p>Puedes acceder a la aplicación haciendo <span><a href="http://getxomultikirolak.eus:8082/multikirola/">click aquí</a>
+<p>Puedes acceder a la aplicación haciendo <span><a href="http://getxomultikirolak.eus">click aquí</a>
 </span></p>
 
 

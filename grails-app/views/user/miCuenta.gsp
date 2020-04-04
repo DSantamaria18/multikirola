@@ -41,7 +41,7 @@
 
             <div class="panel-body">
                 <form id="myaccount-form" class="form-horizontal" onsubmit="return validateForm()"
-                      role="form" action="/multikirola/user/update" method="post">
+                      role="form" action="/user/update" method="post">
 
                     <div id="myaccount-alert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
