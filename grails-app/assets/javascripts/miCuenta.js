@@ -19,11 +19,13 @@ function borrarCuenta(){
 
     $.ajax({
         type: "POST",
-        url: "/multikirola/user/borrarCuenta",
+        // url: "/multikirola/user/borrarCuenta",
+        url: "/user/borrarCuenta",
         data: datos,
         success: function(response) {
             console.log(response);
-            window.location ="/multikirola/login/auth" ;
+            // window.location ="/multikirola/login/auth" ;
+            window.location ="/login/auth" ;
         },
         error: function(error) {
             console.log(error);
