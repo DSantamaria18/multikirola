@@ -163,7 +163,6 @@ environments:
 ---
 server:
     port: 8082
-    contextPath: /multikirola
 ---
 environments:
     development:
