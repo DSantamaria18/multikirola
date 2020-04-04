@@ -9,8 +9,7 @@
 }
 
 .home-img-multikirola {
-    content: url("/multikirola/assets/imagen_rojo.jpg");
-    /*content: url("/multikirola/assets/multikirolak.jpg");*/
+    content: url('../images/imagen_rojo.jpg');
 }
 
 .multikirolak-logo-container {
@@ -20,7 +19,6 @@
 
 @media only screen and (max-width: 600px) {
     .home-img-multikirola {
-        content: url("/multikirola/assets/imagen_rojo.jpg");
-        /*content: url("/multikirola/assets/multikirolak-small.jpg");*/
+        content: url('../images/imagen_rojo.jpg');
     }
 }
