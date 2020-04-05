@@ -29,23 +29,23 @@ class ActividadMultikirolaController {
         [eventList: eventList]
     }
 
-    def registrarParticipantes(Long eventId){
+    def registrarParticipantes(Long eventId) {
         User currentUser = getAuthenticatedUser()
 
-        if(!currentUser){
-            redirect(uri:'/login/auth')
+        if (!currentUser) {
+            redirect(uri: '/login/auth')
             return
         }
 
-        if(!actividadMultikirolaService.isMultikirolaEvent(eventId))  redirect(uri:'/')
+        if (!actividadMultikirolaService.isMultikirolaEvent(eventId)) redirect(uri: '/')
         def evento = actividadMultikirolaService.findEvent(eventId).first()
         def participantesRegistradosList = actividadMultikirolaService.findRegisteredParticipants(eventId, currentUser.id)
         def participantesList = actividadMultikirolaService.findAvailableParticipants(eventId, currentUser.id)
 
-        [evento: evento,  participantesList: participantesList, participantesRegistradosList: participantesRegistradosList]
+        [evento: evento, participantesList: participantesList, participantesRegistradosList: participantesRegistradosList]
     }
 
-    def save(params){
+    def save(params) {
         if (params['eventId'] == null || params.participanteId == null) {
 //            notFound()
             return
@@ -54,17 +54,17 @@ class ActividadMultikirolaController {
         User currentUser = getAuthenticatedUser()
         def eventId = params.eventId as Long
 
-            ActividadMultikirola actividadMultikirola = new ActividadMultikirola()
-            actividadMultikirola.evento = eventId as Long
-            actividadMultikirola.participante = params.participanteId as Long
-            actividadMultikirola.movil = params.movil
+        ActividadMultikirola actividadMultikirola = new ActividadMultikirola()
+        actividadMultikirola.evento = eventId as Long
+        actividadMultikirola.participante = params.participanteId as Long
+        actividadMultikirola.movil = params.movil
 
-            try {
-                actividadMultikirola.save(flush: true)
-            } catch (ValidationException e) {
-                respond actividadMultikirola.errors, view: 'registrarParticipantes'
-                return
-            }
+        try {
+            actividadMultikirola.save(flush: true)
+        } catch (ValidationException e) {
+            respond actividadMultikirola.errors, view: 'registrarParticipantes'
+            return
+        }
 
         def participantesList = actividadMultikirolaService.findAvailableParticipants(eventId, currentUser.id)
         def participantesRegistradosList = actividadMultikirolaService.findRegisteredParticipants(eventId, currentUser.id)
@@ -81,31 +81,31 @@ class ActividadMultikirolaController {
 
         actividadMultikirolaService.deletePArticipantFromEvent(eventId, participanteId)
 
-        redirect(action: "registrarParticipantes", params:[eventId: eventId])
+        redirect(action: "registrarParticipantes", params: [eventId: eventId])
     }
 
-    def getNextEvents(){
+    def getNextEvents() {
         def eventList = actividadMultikirolaService.findNextEvents()
 
-        render(template: "listaEventos", model:[eventList: eventList])
+        render(template: "listaEventos", model: [eventList: eventList])
     }
 
-    def eventInfo(params){
+    def eventInfo(params) {
         def eventId = params.event as Long
         User currentUser = getAuthenticatedUser()
 
-        if(!currentUser){
-            redirect(uri:'/login/auth')
+        if (!currentUser) {
+            redirect(uri: '/login/auth')
             return
         }
 
         def evento = actividadMultikirolaService.findEvent(eventId).first()
         def participantesList = actividadMultikirolaService.findRegisteredParticipants(eventId)
 
-        [evento: evento,  participantesList: participantesList]
+        [evento: evento, participantesList: participantesList]
     }
 
-    def descargarParticipantes(params){
+    def descargarParticipantes(params) {
         def eventId = params.eventId as Long
         def evento = actividadMultikirolaService.findEvent(eventId).first()
         def participantesList = actividadMultikirolaService.findRegisteredParticipants(eventId)
@@ -117,6 +117,9 @@ class ActividadMultikirolaController {
         String lugar = evento?.lugar
         String recinto = evento?.recinto
         String instalacion = evento?.instalacion
+        Integer num_chicas = participantesList.findAll { it['sexo'] == "F" }.size()
+        Integer num_chicos = participantesList.findAll { it['sexo'] == "M" }.size()
+        Integer total_participantes = participantesList.size()
 
         // Fichero
         response.setContentType('application/vnd.ms-excel')
@@ -160,35 +163,47 @@ class ActividadMultikirolaController {
 
             // Datos del evento
             sheet.addCell(new Label(columna, fila, "Nº Evento: ", headerFormat))
-            sheet.addCell(new Number(columna + 1, fila, eventId , cellFormat))
+            sheet.addCell(new Number(columna + 1, fila, eventId, cellFormat))
             fila++
 
             sheet.addCell(new Label(columna, fila, "Modalidad: ", headerFormat))
-            sheet.addCell(new Label(columna + 1, fila, modalidad , cellFormat))
+            sheet.addCell(new Label(columna + 1, fila, modalidad, cellFormat))
             fila++
 
             sheet.addCell(new Label(columna, fila, "Tipo: ", headerFormat))
-            sheet.addCell(new Label(columna + 1, fila, actividad , cellFormat))
+            sheet.addCell(new Label(columna + 1, fila, actividad, cellFormat))
             fila++
 
             sheet.addCell(new Label(columna, fila, "Fecha: ", headerFormat))
-            sheet.addCell(new Label(columna + 1, fila, fecha , cellFormat))
+            sheet.addCell(new Label(columna + 1, fila, fecha, cellFormat))
             fila++
 
             sheet.addCell(new Label(columna, fila, "Horario: ", headerFormat))
-            sheet.addCell(new Label(columna + 1, fila, horario , cellFormat))
+            sheet.addCell(new Label(columna + 1, fila, horario, cellFormat))
             fila++
 
             sheet.addCell(new Label(columna, fila, "Lugar: ", headerFormat))
-            sheet.addCell(new Label(columna + 1, fila, lugar , cellFormat))
+            sheet.addCell(new Label(columna + 1, fila, lugar, cellFormat))
             fila++
 
             sheet.addCell(new Label(columna, fila, "Recinto: ", headerFormat))
-            sheet.addCell(new Label(columna + 1, fila, recinto , cellFormat))
+            sheet.addCell(new Label(columna + 1, fila, recinto, cellFormat))
             fila++
 
             sheet.addCell(new Label(columna, fila, "Instalación: ", headerFormat))
-            sheet.addCell(new Label(columna + 1, fila, instalacion , cellFormat))
+            sheet.addCell(new Label(columna + 1, fila, instalacion, cellFormat))
+            fila++
+
+            sheet.addCell(new Label(columna, fila, "Chicas: ", headerFormat))
+            sheet.addCell(new Number(columna + 1, fila, num_chicas, cellFormat))
+            fila++
+
+            sheet.addCell(new Label(columna, fila, "Chicos: ", headerFormat))
+            sheet.addCell(new Number(columna + 1, fila, num_chicos, cellFormat))
+            fila++
+
+            sheet.addCell(new Label(columna, fila, "Participantes: ", headerFormat))
+            sheet.addCell(new Number(columna + 1, fila, total_participantes, cellFormat))
             fila = fila + 3
 
             //Título listado de participantes
@@ -217,21 +232,19 @@ class ActividadMultikirolaController {
 
             // Datos de los participantes
             participantesList.each {
-                sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase() , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase(), cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase() , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase(), cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.nombre}".toUpperCase() , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.nombre}".toUpperCase(), cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.apellido1} ${it.apellido2}".toUpperCase()  , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.apellido1} ${it.apellido2}".toUpperCase(), cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.sexo}" , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.sexo}", cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.email}".toUpperCase() , cellFormat))
-//                columna++
-//                sheet.addCell(new Label(columna, fila, "${it.telefono}" , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.email}".toUpperCase(), cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.movil}" , cellFormat))
+                sheet.addCell(new Label(columna, fila, "${it.movil}", cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${formatDate(format: "dd/MM/yyyy", date: it.fnacimiento)}", cellFormat))
 
@@ -252,8 +265,8 @@ class ActividadMultikirolaController {
 
     }
 
-    def filtrarEventos(params){
+    def filtrarEventos(params) {
         def eventList = actividadMultikirolaService.filtrarEventos(params)
-        render(template: "tablaEventos", model:[eventList: eventList])
+        render(template: "tablaEventos", model: [eventList: eventList])
     }
 }
