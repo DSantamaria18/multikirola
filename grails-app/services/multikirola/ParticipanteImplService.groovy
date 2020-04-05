@@ -10,7 +10,6 @@ class ParticipanteImplService {
     def filtrarParticipantes(params) {
 
         String baseQuery = "SELECT p.id, p.apellido1, p.apellido2, p.nombre, p.sexo, p.fecha_nacimiento AS fechaNacimiento, " +
-//                "p.telefono, p.movil, p.email, p.token, c.nombre as centro, cu.nombre as curso " +
                 "p.movil, p.email, p.token, c.nombre as centro, cu.nombre as curso " +
                 "FROM participante p, centro c, curso cu WHERE p.centro_id = c.id AND p.curso_id = cu.id "
         String apellido1Query = (params?.apellido1)? "AND p.apellido1 LIKE '%${params.apellido1}%' " : ""

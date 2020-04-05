@@ -1,8 +1,20 @@
 package multikirola
 
 import grails.plugin.springsecurity.annotation.Secured
+import jxl.Workbook
+import jxl.WorkbookSettings
+import jxl.write.Border
+import jxl.write.BorderLineStyle
+import jxl.write.Colour
+import jxl.write.Label
+import jxl.write.Number
+import jxl.write.WritableCellFormat
+import jxl.write.WritableFont
+import jxl.write.WritableSheet
+import jxl.write.WritableWorkbook
 
 import javax.xml.bind.ValidationException
+import java.text.SimpleDateFormat
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -184,6 +196,124 @@ class ParticipanteController {
         def participantesList = participanteImplService.filtrarParticipantes(params)
 
         [participantesList: participantesList]
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def descargarParticipantes() {
+        params.apellido1 = ''
+        params.movil= ''
+        params.email= ''
+        params.centro= ''
+        params.curso= ''
+        params.fdesde = '-'
+        params.fhasta = '-'
+        def participantesList = participanteImplService.filtrarParticipantes(params)
+
+        // Fichero
+        response.setContentType('application/vnd.ms-excel')
+        response.setHeader('Content-Disposition', "Attachment;Filename=Participantes.xls")
+        WorkbookSettings ws = new WorkbookSettings()
+        ws.setLocale(new Locale("es", "ES"))
+        WritableWorkbook workbook = Workbook.createWorkbook(response.outputStream, ws)
+
+        // Estilos
+        WritableFont titleFont = new WritableFont(WritableFont.ARIAL, 16, WritableFont.BOLD)
+        WritableCellFormat titleFormat = new WritableCellFormat()
+        titleFormat.setFont(titleFont)
+
+        WritableFont headerFont = new WritableFont(WritableFont.ARIAL, 11, WritableFont.BOLD)
+        WritableCellFormat headerFormat = new WritableCellFormat()
+        headerFormat.with {
+            setBackground(Colour.GREY_25_PERCENT)
+            setBorder(Border.ALL, BorderLineStyle.THIN)
+            setFont(headerFont)
+            setWrap(true)
+        }
+
+        WritableFont cellFont = new WritableFont(WritableFont.ARIAL, 10)
+        WritableCellFormat cellFormat = new WritableCellFormat()
+        cellFormat.with {
+            setFont(cellFont)
+            setBorder(Border.ALL, BorderLineStyle.THIN)
+            setWrap(true)
+        }
+
+        // Nombre de la hoja
+        String nombreHoja = "Participantes"
+        WritableSheet sheet = workbook.createSheet(nombreHoja, 0)
+
+        // Título
+        sheet.addCell(new Label(1, 1, "Listado de Participantes", titleFormat))
+
+        int columna = 1
+        int fila = 3
+
+        try {
+            //Título listado de participantes
+            sheet.addCell(new Label(1, 1, "Participantes", titleFormat))
+            fila = fila + 2
+
+            // Cabecera listado participantes
+            sheet.addCell(new Label(columna, fila, "ID", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "CENTRO", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "CURSO", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "APELLIDO 1", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "APELLIDO 2", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "NOMBRE", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "SEXO", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "EMAIL", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "MOVIL", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "F.NACIMIENTO", headerFormat))
+
+            fila++
+            columna = 1
+
+            // Datos de los participantes
+            participantesList.each {
+                sheet.addCell(new Number(columna, fila, it.id, cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase(), cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase(), cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.apellido1}".toUpperCase(), cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.apellido2}".toUpperCase(), cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.nombre}".toUpperCase(), cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.sexo}", cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.email}".toUpperCase(), cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${it.movil}", cellFormat))
+                columna++
+                sheet.addCell(new Label(columna, fila, "${formatDate(format: "dd/MM/yyyy", date: it.fechaNacimiento)}", cellFormat))
+
+                columna = 1
+                fila++
+            }
+
+
+            for (int c = 1; c < 15; c++) {
+                sheet.setColumnView(c, 30)
+            }
+        } catch (Exception e) {
+            e.printStackTrace()
+        }
+
+        workbook.write()
+        workbook.close()
+
     }
 
     def filtrarParticipantes(params){

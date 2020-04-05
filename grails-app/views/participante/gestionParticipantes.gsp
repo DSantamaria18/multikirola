@@ -119,6 +119,12 @@
 
     </div>
 
+    <div>
+        <g:link class="btn btn-primary" action="descargarParticipantes">
+            <g:message default="Descargar" code="default.label.descargar"/> <i class="glyphicon glyphicon-download"></i>
+        </g:link>
+    </div>
+
     <div id="tabla-participantes">
         <g:render template="tablaParticipantes" model="[participantesList: participantesList]"/>
     </div>
