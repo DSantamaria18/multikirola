@@ -14,7 +14,7 @@ class FicherosController {
                 if (!file.isDirectory()) {
                     Map fileInfo = [:]
                     fileInfo.nombre = file.name
-                    fileInfo.tamaño = file.size()/1024
+                    fileInfo.tamaño = Math.round(file.size()/1024)
                     fileList.add(fileInfo)
                 }
             }
@@ -58,6 +58,15 @@ class FicherosController {
         } else {
             flash.message = 'Debes seleccionar un fichero'
         }
+        redirect(action: 'index')
+    }
+
+    def deleteFile() {
+        def filename = params.fileId.replace('###', '.')
+        String ruta = "${UPLOAD_FOLDER}/"
+        def file = new File(ruta + File.separatorChar + filename)
+        file.delete()
+        flash.message = "El fichero ${filename} ha sido borrado"
         redirect(action: 'index')
     }
 }

@@ -71,7 +71,7 @@
                         <div class="form-group">
                             <div class="input-group input-file" name="infoFiles">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-dark btn-choose" type="button"
+                                    <button class="btn btn-warning btn-choose" type="button"
                                             onclick="buscar()">Buscar</button>
                                 </span>
                                 <input type="text" class="form-control" id="FileNameInput"
