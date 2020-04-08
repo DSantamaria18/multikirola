@@ -66,7 +66,7 @@ function validateForm() {
         }
     }
 
-    if (apellidos == "" || apellidos.length < 2) {
+    if (apellidos === "" || apellidos.length < 2) {
         $('#error-apellidos').attr('hidden', false);
         formRegistroOk = false;
     } else {
