@@ -97,7 +97,10 @@ dataSource:
     driverClassName: org.h2.Driver
     username: sa
     password: ''
-
+---
+email:
+    testToAddress: "dsantamaria18@gmail.com"
+---
 environments:
     development:
         email:
@@ -203,5 +206,3 @@ grails:
             mail.smtp.socketFactory.port: "465"
             mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
             mail.smtp.socketFactory.fallback: "false"
-
-
