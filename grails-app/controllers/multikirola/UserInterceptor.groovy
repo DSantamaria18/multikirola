@@ -10,6 +10,9 @@ class UserInterceptor {
                 .excludes(controller: 'login')
                 .excludes(controller: 'user', action: 'register')
                 .excludes(controller: 'user', action: 'save')
+                .excludes(controller: 'user', action: 'forgotPassword')
+                .excludes(controller: 'user', action: 'resetPassword')
+                .excludes(controller: 'user', action: 'updatePassword')
                 .excludes(controller: 'actividadMultikirola')
                 .excludes(controller: 'static')
                 .excludes(uri: '/error')
@@ -19,8 +22,10 @@ class UserInterceptor {
 
     boolean before() {
         if (springSecurityService.isLoggedIn() || isExcludedURI(request.requestURI)) {
+            log.info("***** Before filter is true")
             return true
         } else {
+            log.warn("***** Redirigiendo a la vista de login")
             redirect(controller: "login", action: "auth")
             return false
         }
@@ -33,7 +38,7 @@ class UserInterceptor {
     }
 
     boolean isExcludedURI(final String requestedURI) {
-        def excludedURIs = ['/', '/error', '/notFound', '/static/presentacion', '/ficheros/*']
+        def excludedURIs = ['/', '/error', '/notFound', '/static/presentacion', '/ficheros/*', '/resetPassword/*']
         boolean result = false
 
         if (requestedURI in excludedURIs) result = true
