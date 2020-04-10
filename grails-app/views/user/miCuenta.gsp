@@ -143,7 +143,10 @@
                         </div>
 
                         <div>
-                            <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>
+%{--                            <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                            <label id="error-longitudPassword" class="error" style="color: red" hidden>La contraseña de tener al menos 8 caracteres</label>
+                            <label id="error-contenidoPassword" class="error" style="color: red" hidden>La contraseña contiene caracteres no válidos</label>
+                            <label id="error-password" class="error" style="color: red" hidden>Las contraseñas no coinciden</label>
                         </div>
 
                         <div style="margin-top: 10px" class="input-group">
@@ -155,7 +158,10 @@
                         </div>
 
                         <div>
-                            <label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>
+                            <label id="error-longitudPassword" class="error" style="color: red" hidden>La contraseña de tener al menos 8 caracteres</label>
+                            <label id="error-contenidoPassword" class="error" style="color: red" hidden>La contraseña contiene caracteres no válidos</label>
+                            <label id="error-password" class="error" style="color: red" hidden>Las contraseñas no coinciden</label>
+%{--                            <label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>--}%
                         </div>
                     </div>
 
