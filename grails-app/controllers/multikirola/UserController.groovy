@@ -207,7 +207,7 @@ class UserController {
         }
 
         usuarioService.sendResetPasswordEmail(user);
-        flash.message = message(code: 'spring.security.forgotPassword.sent', defaulT: "Email enviado a ${email}! Revisa tu buzón...")
+        flash.message = message(code: 'spring.security.forgotPassword.sent', default: "Email enviado a ${email}! Revisa tu buzón...")
         render view: "/user/forgotPassword"
     }
 
