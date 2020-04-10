@@ -234,7 +234,6 @@ function goToEvent(elem) {
     window.location = "/actividadMultikirola/eventInfo?event=" + eventId;
 };
 
-
 function filtrarEventos(fechaIniDesde, fechaIniHasta) {
     $.get("/actividadMultikirola/filtrarEventos/",
         {
