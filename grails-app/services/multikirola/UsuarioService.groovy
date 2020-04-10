@@ -2,13 +2,13 @@ package multikirola
 
 import grails.gorm.transactions.Transactional
 import groovy.sql.Sql
-
 import java.text.SimpleDateFormat
 
 @Transactional
 class UsuarioService {
 
     def dataSource
+    EmailService emailService
 
     def getAllUsersInfo() {
         def userRoleList = UserRole.findAllByRole(Role.findByAuthority('ROLE_CUSTOMER'))
@@ -37,5 +37,14 @@ class UsuarioService {
 
         def usuariosList = sql.rows(query)
         return usuariosList
+    }
+
+    void sendResetPasswordEmail(User user){
+        def token = Token.findByEmail(user.email)
+        if(!token) {
+            token = new Token(email: user.email)
+            token.save(flush: true);
+        }
+        emailService.sendResetPasswordEmail(user, token)
     }
 }

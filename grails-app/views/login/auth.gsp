@@ -70,6 +70,16 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="col-md-12 control">
+                            <div style="padding-top:15px; font-size:85%">
+                                %{--¿Has olvidado la contraseña?--}%
+                                <g:message code="default.label.recuperarContrasena"/>
+                                <a href="/user/forgotPassword">
+                                    %{--Regístrate aquí--}%
+                                    <g:message code="default.label.reset" default="Recuperar contraseña"/>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </form>
 

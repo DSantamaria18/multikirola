@@ -66,7 +66,7 @@ function validateForm() {
         }
     }
 
-    if (apellidos == "" || apellidos.length < 2) {
+    if (apellidos === "" || apellidos.length < 2) {
         $('#error-apellidos').attr('hidden', false);
         formRegistroOk = false;
     } else {
@@ -233,7 +233,6 @@ function goToEvent(elem) {
     var eventId = $(elem).data('id');
     window.location = "/actividadMultikirola/eventInfo?event=" + eventId;
 };
-
 
 function filtrarEventos(fechaIniDesde, fechaIniHasta) {
     $.get("/actividadMultikirola/filtrarEventos/",
