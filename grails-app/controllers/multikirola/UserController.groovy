@@ -8,8 +8,6 @@ import org.apache.commons.lang.StringEscapeUtils
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices
-import org.springframework.validation.Errors
 import org.apache.commons.lang.WordUtils
 
 class UserController {
@@ -17,8 +15,10 @@ class UserController {
     SpringSecurityService springSecurityService
     UserService userService
     GrailsApplication grailsApplication
+    UsuarioService usuarioService
+    EmailService emailService
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", borrarCuenta: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", borrarCuenta: "POST", updatePassword: "POST"]
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
@@ -64,19 +64,22 @@ class UserController {
 
             final String emailTo = (user.email.contains('ñ') || user.email.contains('Ñ')) ? StringEscapeUtils.escapeJava(user.email) : user.email
 
-            sendMail {
+            /*sendMail {
                 from grailsApplication.config.getProperty('email.from')
                 to emailTo
                 subject("Registro en Multikirola")
                 html g.render(template: 'emailRegistro', model: [user: user])
-            }
+            }*/
 
-            sendMail {
+            /*sendMail {
                 from grailsApplication.config.getProperty('email.from')
                 to grailsApplication.config.getProperty('email.userChangeNotificationsTo')
                 subject("Nuevo usuario registrado en Multikirola")
                 html g.render(template: 'notificacion', model: [user: user])
-            }
+            }*/
+
+            emailService.sendEmailRegistro(user, emailTo)
+            emailService.sendChangeNotificacion(user)
 
             userService.save(user)
 
@@ -125,7 +128,6 @@ class UserController {
                 throw new Exception("Error de validación del usuario")
             }
         } catch (ValidationException e) {
-            //            redirect(action: 'miCuenta')
             flash.message = "Se ha producido un error. Por favor, revisa los datos introducidos e inténtalo de nuevo..."
             render(view: 'miCuenta', model: [user: updUser])
             return
@@ -135,12 +137,14 @@ class UserController {
             return
         }
 
-        sendMail {
+        /*sendMail {
             from grailsApplication.config.getProperty('email.from')
             to grailsApplication.config.getProperty('email.userChangeNotificationsTo')
             subject("Cambios en la cuenta del usuario ${updUser.nombre} ${updUser.apellidos} [${updUser.id}]")
             html g.render(template: 'notificacion', model: [user: updUser])
-        }
+        }*/
+
+        emailService.sendChangeNotificacion(updUser)
 
         request.withFormat {
             form multipartForm {
@@ -180,6 +184,73 @@ class UserController {
 
     def register() {
         respond new User(params)
+    }
+
+    def forgotPassword() {
+        if (request.get) {
+            render view: "/user/forgotPassword"
+            return;
+        }
+
+        String email = params.email
+        if (!email) {
+            flash.error = message(code: 'spring.security.forgotPassword.username.missing', default: "ERROR: No se reconoce el nombre de usuario [${email}]...")
+            redirect action: 'forgotPassword'
+            return
+        }
+
+        def user = User.findByEmail(email);
+        if (!user) {
+            flash.error = message(code: 'spring.security.forgotPassword.user.notFound', default: "ERROR: No se encuentra el usuario con el email [${email}]...")
+            redirect action: 'forgotPassword'
+            return
+        }
+
+        usuarioService.sendResetPasswordEmail(user);
+        flash.message = message(code: 'spring.security.forgotPassword.sent', defaulT: "Email enviado a ${email}! Revisa tu buzón...")
+        render view: "/user/forgotPassword"
+    }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_ANONYMOUS'])
+    def resetPassword(params) {
+        flash.message = null;
+        String tokenValue = params.token
+        def token = tokenValue ? Token.findByValue(tokenValue) : null
+        if (!token) {
+            flash.error = message(code: 'spring.security.resetPassword.badCode', default: "El token es incorrecto [${token}]")
+            redirect controller: "user", action: "forgotPassword"
+            return
+        }
+
+        if (request.get) {
+            render view: "/user/resetPassword", model: [token: token]
+            return
+        }
+
+    }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_ANONYMOUS'])
+    def updatePassword(params) {
+        String tokenValue = params.token
+        def token = tokenValue ? Token.findByValue(tokenValue) : null
+        if (!token) {
+            flash.error = message(code: 'spring.security.resetPassword.badCode', default: "El token es incorrecto [${token}]")
+            redirect controller: "user", action: "forgotPassword"
+            return
+        }
+
+        Token.withTransaction { status ->
+            def user = User.findByEmail(token.email);
+            user.password = params.password
+            user.save(flush: true)
+            token.delete(flush: true);
+        }
+
+        springSecurityService.reauthenticate token.email
+
+        flash.message = message(code: 'spring.security.resetPassword.success', default: "Contraseña actualizada!")
+        redirect controller: "user", action: "miCuenta"
+        return
     }
 
     def miCuenta() {
