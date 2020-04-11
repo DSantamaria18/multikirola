@@ -7,6 +7,7 @@ class UserInterceptor {
     UserInterceptor(){
         matchAll().excludes(uri:'/')
                 .excludes(controller: 'home')
+                .excludes(controller: 'home', action: 'renderActivityImage')
                 .excludes(controller: 'login')
                 .excludes(controller: 'user', action: 'register')
                 .excludes(controller: 'user', action: 'save')
@@ -22,10 +23,8 @@ class UserInterceptor {
 
     boolean before() {
         if (springSecurityService.isLoggedIn() || isExcludedURI(request.requestURI)) {
-            log.info("***** Before filter is true")
             return true
         } else {
-            log.warn("***** Redirigiendo a la vista de login")
             redirect(controller: "login", action: "auth")
             return false
         }
