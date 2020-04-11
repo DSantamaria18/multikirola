@@ -1,6 +1,9 @@
 <div class="list-event-item thumbnail" eventId="${evento?.id}">
-    <g:link controller="actividadMultikirola" action="registrarParticipantes"  params="[eventId: evento.id]" class="link-evento" >
-        <g:img dir="images" file="${evento.modalidad_id}.jpg" class="img-responsive img-rounded"/>
+    <g:link controller="actividadMultikirola" action="registrarParticipantes" params="[eventId: evento.id]"
+            class="link-evento">
+
+        <img src='${createLink(controller: "home", action: "renderActivityImage", params: [img: "${evento.modalidad_id}.jpg"])}'
+             alt="actividad"/>
 
         <div class="caption">
             <h1 class="text-center text-uppercase"><strong>${evento?.nombre}</strong></h1>
@@ -9,7 +12,7 @@
                 <i class="glyphicon glyphicon-calendar"></i>
                 <span class="text-capitalize">
                     <g:formatDate date="${evento.fecha}" formatName="default.date.format" style="MEDIUM"/>
-                </span>
+                </span>a
             </div>
 
             <div class="list-event-time">
@@ -24,7 +27,8 @@
             </div>
 
             <g:if test="${evento?.edad_minima > 0}">
-                <p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span> <g:message code="default.label.avisoEdadMinima" args="[evento?.edad_minima]"/></span></p>
+                <p class="text-danger"><i class="glyphicon glyphicon-alert"></i><span><g:message
+                        code="default.label.avisoEdadMinima" args="[evento?.edad_minima]"/></span></p>
             </g:if>
 
         </div>
