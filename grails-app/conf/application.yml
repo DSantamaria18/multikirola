@@ -87,6 +87,7 @@ endpoints:
 
 ---
 hibernate:
+  format_sql: true
   cache:
     queries: false
     use_second_level_cache: false
@@ -119,6 +120,7 @@ environments:
       from: "appmultikirola@gmail.com"
       userChangeNotificationsTo: "dsantamaria18@gmail.com"
     dataSource:
+      logSql: true
       pooled: true
       dbCreate: update
       url: jdbc:mysql://vps389236.ovh.net:3306/testdb
@@ -207,3 +209,8 @@ grails:
       mail.smtp.socketFactory.fallback: "false"
 ---
 defaultModalidadImg: 'default-modalidad.jpg'
+---
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
