@@ -40,10 +40,11 @@ class UsuarioService {
     }
 
     void sendResetPasswordEmail(User user){
-        def token = Token.findByEmail(user.email)
+        def token = UserToken.findByEmail(user.email)
         if(!token) {
-            token = new Token(email: user.email)
-            token.save(flush: true);
+            token = new UserToken(email: user.email)
+            token.validate()
+            token.save(flush: true, failOnError: true);
         }
         emailService.sendResetPasswordEmail(user, token)
     }

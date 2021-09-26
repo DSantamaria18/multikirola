@@ -1,96 +1,97 @@
 ---
 grails:
-    profile: web
-    codegen:
-        defaultPackage: multikirola
-    spring:
-        transactionManagement:
-            proxies: false
-    gorm:
-        reactor:
-            # Whether to translate GORM events into Reactor events
-            # Disabled by default for performance reasons
-            events: false
+  profile: web
+  codegen:
+    defaultPackage: multikirola
+  spring:
+    transactionManagement:
+      proxies: false
+  gorm:
+    reactor:
+      # Whether to translate GORM events into Reactor events
+      # Disabled by default for performance reasons
+      events: false
 info:
-    app:
-        name: '@info.app.name@'
-        version: '@info.app.version@'
-        grailsVersion: '@info.app.grailsVersion@'
+  app:
+    name: '@info.app.name@'
+    version: '@info.app.version@'
+    grailsVersion: '@info.app.grailsVersion@'
 spring:
-    main:
-        banner-mode: "off"
-    groovy:
-        template:
-            check-template-location: false
+  main:
+    banner-mode: "off"
+  groovy:
+    template:
+      check-template-location: false
 
 # Spring Actuator Endpoints are Disabled by Default
 endpoints:
-    enabled: false
-    jmx:
-        enabled: true
+  enabled: false
+  jmx:
+    enabled: true
 
 ---
 grails:
-    mime:
-        disable:
-            accept:
-                header:
-                    userAgents:
-                        - Gecko
-                        - WebKit
-                        - Presto
-                        - Trident
-        types:
-            all: '*/*'
-            atom: application/atom+xml
-            css: text/css
-            csv: text/csv
-            form: application/x-www-form-urlencoded
-            html:
-              - text/html
-              - application/xhtml+xml
-            js: text/javascript
-            json:
-              - application/json
-              - text/json
-            multipartForm: multipart/form-data
-            pdf: application/pdf
-            rss: application/rss+xml
-            text: text/plain
-            hal:
-              - application/hal+json
-              - application/hal+xml
-            xml:
-              - text/xml
-              - application/xml
-    urlmapping:
-        cache:
-            maxsize: 1000
-    controllers:
-        defaultScope: singleton
-    converters:
-        encoding: UTF-8
-    views:
-        default:
-            codec: html
-        gsp:
-            encoding: UTF-8
-            htmlcodec: xml
-            codecs:
-                expression: html
-                scriptlets: html
-                taglib: none
-                staticparts: none
+  mime:
+    disable:
+      accept:
+        header:
+          userAgents:
+            - Gecko
+            - WebKit
+            - Presto
+            - Trident
+    types:
+      all: '*/*'
+      atom: application/atom+xml
+      css: text/css
+      csv: text/csv
+      form: application/x-www-form-urlencoded
+      html:
+        - text/html
+        - application/xhtml+xml
+      js: text/javascript
+      json:
+        - application/json
+        - text/json
+      multipartForm: multipart/form-data
+      pdf: application/pdf
+      rss: application/rss+xml
+      text: text/plain
+      hal:
+        - application/hal+json
+        - application/hal+xml
+      xml:
+        - text/xml
+        - application/xml
+  urlmapping:
+    cache:
+      maxsize: 1000
+  controllers:
+    defaultScope: singleton
+  converters:
+    encoding: UTF-8
+  views:
+    default:
+      codec: html
+    gsp:
+      encoding: UTF-8
+      htmlcodec: xml
+      codecs:
+        expression: html
+        scriptlets: html
+        taglib: none
+        staticparts: none
 endpoints:
-    jmx:
-        unique-names: true
+  jmx:
+    unique-names: true
 
 ---
 hibernate:
-    cache:
-        queries: false
-        use_second_level_cache: false
-        use_query_cache: false
+  format_sql: true
+  cache:
+    queries: false
+    use_second_level_cache: false
+    use_query_cache: false
 dataSource:
     pooled: true
     jmxExport: true
@@ -103,6 +104,8 @@ email:
 ---
 environments:
     development:
+        uploadFolder: "c:/temp/uploads/multikirolak"
+        imgUploadFolder: "c:/temp/uploads/multikirolak/images"
         email:
             from: "appmultikirola@gmail.com"
             userChangeNotificationsTo: "dsantamaria18@gmail.com"
@@ -110,6 +113,8 @@ environments:
             dbCreate: create-drop
             url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     test:
+        uploadFolder: "c:/temp/uploads/multikirolak"
+        imgUploadFolder: "c:/temp/uploads/multikirolak/images"
         email:
             from: "appmultikirola@gmail.com"
             userChangeNotificationsTo: "dsantamaria18@gmail.com"
@@ -140,6 +145,8 @@ environments:
                 jdbcInterceptors: ConnectionState;StatementCache(max=200)
                 defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED
     production:
+        uploadFolder: "/root/ficheros/multikirolak"
+        imgUploadFolder: "/root/ficheros/multikirolak/images"
         email:
             from: "appmultikirola@gmail.com"
             userChangeNotificationsTo: "getxomultikirolak@gmail.com"
@@ -176,33 +183,32 @@ environments:
 server:
     port: 80
 ---
-environments:
-    development:
-        uploadFolder: "c:/temp/uploads/multikirolak"
-    test:
-        uploadFolder: "c:/temp/uploads/multikirolak"
-    production:
-        uploadFolder: "/root/ficheros/multikirolak"
----
 grails:
-    controllers:
-        upload:
-            maxFileSize: 5242880
-            maxRequestSize: 5242880
+  controllers:
+    upload:
+      maxFileSize: 5242880
+      maxRequestSize: 5242880
 ---
 guide:
-    languages:
-        - es
-        - eu
+  languages:
+    - es
+    - eu
 ---
 grails:
-    mail:
-        host: "smtp.gmail.com"
-        port: 465
-        username: "appmultikirola@gmail.com"
-        password: "Multikirola_2019"
-        props:
-            mail.smtp.auth: "true"
-            mail.smtp.socketFactory.port: "465"
-            mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
-            mail.smtp.socketFactory.fallback: "false"
+  mail:
+    host: "smtp.gmail.com"
+    port: 465
+    username: "appmultikirola@gmail.com"
+    password: "Multikirola_2019"
+    props:
+      mail.smtp.auth: "true"
+      mail.smtp.socketFactory.port: "465"
+      mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
+      mail.smtp.socketFactory.fallback: "false"
+---
+defaultModalidadImg: 'default-modalidad.jpg'
+---
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE

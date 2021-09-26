@@ -7,6 +7,7 @@ class UserInterceptor {
     UserInterceptor(){
         matchAll().excludes(uri:'/')
                 .excludes(controller: 'home')
+                .excludes(controller: 'home', action: 'renderActivityImage')
                 .excludes(controller: 'login')
                 .excludes(controller: 'user', action: 'register')
                 .excludes(controller: 'user', action: 'save')

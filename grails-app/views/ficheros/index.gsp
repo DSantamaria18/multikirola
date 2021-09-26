@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <span style="padding-left: 10px;">
-                                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
+                                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER, ROLE_USER">
                                     <g:link class="delete"
                                             action="deleteFile"
                                             params='[fileId: file.nombre.replace(".", "###")]'>
@@ -62,7 +62,7 @@
             </table>
         </div>
 
-        <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MANAGER">
+        <sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_MANAGER, ROLE_USER'>
             <div class="container">
                 <div class="col-md-8 col-md-offset-2">
                     <h3>Subir Fichero</h3>

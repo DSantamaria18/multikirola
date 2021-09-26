@@ -17,6 +17,12 @@
     background-color: #89001c;
 }
 
+.img-modalidad {
+    display: block;
+    margin: auto;
+    max-width: 50%;
+}
+
 @media only screen and (max-width: 600px) {
     .home-img-multikirola {
         content: url('../images/imagen_rojo.jpg');

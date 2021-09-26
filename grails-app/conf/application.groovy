@@ -5,7 +5,7 @@ grails.plugin.springsecurity.authority.className = 'multikirola.Role'
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         [pattern: '/', access: ['permitAll']],
-        [pattern: '/Home', access: ['permitAll']],
+        [pattern: '/Home/**', access: ['permitAll']],
         [pattern: '/error', access: ['permitAll']],
         [pattern: '/index', access: ['permitAll']],
         [pattern: '/index.gsp', access: ['permitAll']],
@@ -28,7 +28,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         [pattern: '/ficheros/**', access: ['permitAll']],
         [pattern: '/forgotPassword/**', access: ['permitAll']],
         [pattern: '/resetPassword/**', access: ['permitAll']],
-        [pattern: '/Usuario/**', access: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER']]
+        [pattern: '/Usuario/**', access: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER']],
+        [pattern: '/Modalidad/**', access: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [
