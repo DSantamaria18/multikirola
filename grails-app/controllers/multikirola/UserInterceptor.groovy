@@ -23,8 +23,10 @@ class UserInterceptor {
 
     boolean before() {
         if (springSecurityService.isLoggedIn() || isExcludedURI(request.requestURI)) {
+            log.info("***** Before filter is true")
             return true
         } else {
+            log.warn("***** Redirigiendo a la vista de login")
             redirect(controller: "login", action: "auth")
             return false
         }

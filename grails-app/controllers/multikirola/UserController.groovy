@@ -63,7 +63,6 @@ class UserController {
             user.apellidos = WordUtils.capitalizeFully(user.apellidos)
 
             final String emailTo = (user.email.contains('ñ') || user.email.contains('Ñ')) ? StringEscapeUtils.escapeJava(user.email) : user.email
-
             emailService.sendEmailRegistro(user, emailTo)
             emailService.sendChangeNotificacion(user)
 

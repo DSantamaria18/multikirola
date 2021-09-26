@@ -50,7 +50,7 @@ class EmailService {
      * @param token
      * @return
      */
-    def sendResetPasswordEmail(User user, UserToken token) {
+    def sendResetPasswordEmail(User user, Token token) {
         log.info("Enviando email de cambio de password a ${user.email} con token ${token}")
         sendMail {
             from grailsApplication.config.getProperty('email.from')
