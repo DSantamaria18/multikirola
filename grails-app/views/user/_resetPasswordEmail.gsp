@@ -2,7 +2,7 @@
     <div>
         <p>
             Hola, ${user.nombre},
-            Para recuperar tu contraseña pulsa <a href='${createLink(absolute: true, controller: "user", action: "resetPassword", params: [token:"${token.value}", email:"${user.email}"])}'>este enlace</a>
+            Para recuperar tu contraseña pulsa <a href="http://getxomultikirolak.eus/resetPassword?token=${token.value}&email=${user.email}">este enlace</a>
         </p>
     </div>
 </div>
