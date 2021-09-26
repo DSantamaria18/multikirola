@@ -193,7 +193,7 @@ class UserController {
     def resetPassword(params) {
         flash.message = null;
         String tokenValue = params.token
-        def token = tokenValue ? UserToken.findByValue(tokenValue) : null
+        def token = tokenValue ? Token.findByValue(tokenValue) : null
         if (!token) {
             flash.error = message(code: 'spring.security.resetPassword.badCode', default: "El token es incorrecto [${token}]")
             redirect controller: "user", action: "forgotPassword"
@@ -209,14 +209,14 @@ class UserController {
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_ANONYMOUS'])
     def updatePassword(params) {
         String tokenValue = params.token
-        def token = tokenValue ? UserToken.findByValue(tokenValue) : null
+        def token = tokenValue ? Token.findByValue(tokenValue) : null
         if (!token) {
             flash.error = message(code: 'spring.security.resetPassword.badCode', default: "El token es incorrecto [${token}]")
             redirect controller: "user", action: "forgotPassword"
             return
         }
 
-        UserToken.withTransaction { status ->
+        Token.withTransaction { status ->
             def user = User.findByEmail(token.email);
             user.password = params.password
             user.validate()
