@@ -144,6 +144,27 @@ function borrarParticipante(elem) {
 
 };
 
+function borrarParticipanteAdm(elem) {
+    var eventId = $('#eventId').val();
+    console.log(eventId);
+
+    var participanteId = $(elem).attr('participante-id')
+    participanteId = parseInt(participanteId)
+    console.log(participanteId);
+
+    $.post("/actividadMultikirola/delete",
+        {
+            eventId: eventId,
+            participanteId: participanteId
+        }, function (data, status) {
+            console.log(status);
+        }
+    );
+
+    $(elem).closest('tr').remove();
+
+};
+
 function calcularEdad(fnacimiento) { // birthday is a date
     var ageDifMs = Date.now() - fnacimiento.getTime();
     var ageDate = new Date(ageDifMs); // miliseconds from epoch

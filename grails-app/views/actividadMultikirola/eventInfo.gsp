@@ -58,7 +58,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th hidden>Id</th>
+                <th>Id</th>
                 <th>Apellidos</th>
                 <th>Nombre</th>
                 <th>F. Nacimiento</th>
@@ -73,7 +73,7 @@
             <tbody>
             <g:each in="${participantesList}" var="participante" status="i">
                 <tr>
-                    <td hidden>${participante.id}</td>
+                    <td>${participante.id}</td>
                     <td class="text-capitalize">${participante.apellido1} ${participante.apellido2}</td>
                     <td class="text-capitalize">${participante.nombre}</td>
                     <td><g:formatDate date="${participante.fnacimiento}" formatName="default.date.format"/></td>
@@ -84,7 +84,7 @@
                     <td>${participante.sexo}</td>
                     <td>
                         <div class="btn btn-danger btn-sm push eliminar-push borrar-participante-btn"
-                             id="borrarParticipanteBtn-${i}">
+                             id="borrarParticipanteBtn-${i}" participante-id="${participante.id}"  onclick="borrarParticipanteAdm(this)">
                             <i class="glyphicon glyphicon-remove"></i>
                         </div>
                     </td>
