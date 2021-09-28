@@ -32,9 +32,8 @@ class LocaleNavbarTagLib implements GrailsConfigurationAware {
             queryString = queryString.replaceAll(/lang=es'/, '')
             queryString = queryString.replaceAll(/lang=eu/, '')
             queryString = queryString.replaceAll(/&/, '')
-            queryString?.concat('&')
 
-            out << "<li><a href='${baseUri}?${queryString}lang=${lang}'>${msg}</a></li>"
+            out << "<li><a href='${baseUri}?${queryString}&lang=${lang}'>${msg}</a></li>"
         }
     }
 }
