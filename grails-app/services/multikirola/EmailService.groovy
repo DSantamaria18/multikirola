@@ -32,8 +32,7 @@ class EmailService {
      * @param user
      * @return
      */
-    def sendChangeNotificacion(User user, String emailTo) {
-        log.info("Enviando notificación de nuevo registro a ${emailTo}")
+    def sendChangeNotificacion(User user) {
         sendMail {
             from grailsApplication.config.getProperty('email.from')
             if (Environment.current == Environment.PRODUCTION) {
