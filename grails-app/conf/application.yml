@@ -199,12 +199,15 @@ grails:
     host: "smtp.gmail.com"
     port: 465
     username: "appmultikirola@gmail.com"
-    password: "Multikirola_2019"
+    password: "ivwxffvgjqejwnks"
+    #password: "Multikirola_2019"
     props:
       mail.smtp.auth: "true"
       mail.smtp.socketFactory.port: "465"
       mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
       mail.smtp.socketFactory.fallback: "false"
+      mail.smtp.starttls.enable: "true"
+      mail.smtp.starttls.required: "true"
 ---
 defaultModalidadImg: 'default-modalidad.jpg'
 ---
