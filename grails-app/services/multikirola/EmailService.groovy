@@ -15,7 +15,7 @@ class EmailService {
      * @return
      */
     def sendEmailRegistro(User user, String emailTo) {
-        log.info("Enviando email a ${emailTo}")
+        log.info("Enviando email de registro a ${emailTo}")
         sendMail {
             from grailsApplication.config.getProperty('email.from')
             if (Environment.current == Environment.PRODUCTION) {
@@ -32,7 +32,8 @@ class EmailService {
      * @param user
      * @return
      */
-    def sendChangeNotificacion(User user) {
+    def sendChangeNotificacion(User user, String emailTo) {
+        log.info("Enviando notificación de nuevo registro a ${emailTo}")
         sendMail {
             from grailsApplication.config.getProperty('email.from')
             if (Environment.current == Environment.PRODUCTION) {
@@ -41,7 +42,7 @@ class EmailService {
                 to grailsApplication.config.getProperty('email.testToAddress')
             }
             subject("Nuevo usuario registrado en Multikirola")
-            html0(view: '_notificacion', model: [user: user])
+            html(view: '_notificacion', model: [user: user])
         }
     }
 
