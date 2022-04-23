@@ -30,9 +30,7 @@
                     <g:message code="default.label.activo"/>
                 </g:if>
                 <g:else>
-                    <g:if test="${usario.enabled}">
-                        <g:message code="default.label.inactivo"/>
-                    </g:if>
+                    <g:message code="default.label.inactivo"/>
                 </g:else>
             </td>
         </tr>

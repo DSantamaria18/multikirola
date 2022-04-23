@@ -15,6 +15,7 @@
         </ul>
     </div>
     <br/>
+
     <div class="row" id="filter-options">
         <div class="panel-group" id="accordion-cat-1">
             <div class="panel panel-default panel-faq">
@@ -33,7 +34,7 @@
 
                         <div class="form-group">
                             <label for="qWhatsApp"><g:message code="default.label.notificacionesWhatsapp"
-                                                                  default="Notificaciones WhatsApp"/></label>
+                                                              default="Notificaciones WhatsApp"/></label>
                             <g:select name="qWhatsApp"
                                       id="qWhatsApp"
                                       from="${[g.message(code: "default.boolean.true", default: "SI"), g.message(code: "default.boolean.false", default: "NO")]}"
@@ -52,9 +53,9 @@
                                     onclick="filtrarUsuarios();">
                                 <g:message code="default.label.filtrarUsuarios" default="FILTRAR USUARIOS"/>
                             </button>
-                            <g:actionSubmit class="btn-block btn-info" value="${g.message(code: "default.label.exportar", default: "Exportar")}"
+                            <g:actionSubmit class="btn-block btn-info"
+                                            value="${g.message(code: "default.label.exportar", default: "Exportar")}"
                                             action="exportarUsuarios"/>
-                        </div>
                         </div>
                     </g:form>
                 </div>
