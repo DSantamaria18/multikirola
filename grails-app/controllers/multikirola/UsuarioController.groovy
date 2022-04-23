@@ -51,7 +51,7 @@ class UsuarioController {
         }
         Date qFechaDesde = (params.qFechaDesde) ? Date.parse('yyyy-MM-dd', params.qFechaDesde) : Date.parse('yyyy-MM-dd', '1900-01-01')
 
-        def usuariosList = usuarioService.filtraUsuarios(qWhatsApp, qFechaDesde).collect{[Nombre: it.nombre, Apellidos: it.apellidos, Móvil: it.movil, Whatsapp: it.whatsapp, Email:it.email]}
+        def usuariosList = usuarioService.filtraUsuarios(qWhatsApp, qFechaDesde).collect{[Nombre: it.nombre, Apellidos: it.apellidos, Móvil: it.movil, Whatsapp: it.whatsapp, Email:it.email, Activo:it.enabled]}
 
         if (usuariosList.size() > 0) {
             response.setContentType('application/vnd.ms-excel')
