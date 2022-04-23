@@ -6,6 +6,7 @@
         <th><g:message code="default.label.movil"/></th>
         <th>WhatsApp</th>
         <th><g:message code="default.label.email"/></th>
+        <th><g:message code="default.label.estado"/></th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,16 @@
                 </g:else>
             </td>
             <td>${usario.email}</td>
+            <td>
+                <g:if test="${usario.enabled}">
+                    <g:message code="default.label.activo"/>
+                </g:if>
+                <g:else>
+                    <g:if test="${usario.enabled}">
+                        <g:message code="default.label.inactivo"/>
+                    </g:if>
+                </g:else>
+            </td>
         </tr>
     </g:each>
     </tbody>
