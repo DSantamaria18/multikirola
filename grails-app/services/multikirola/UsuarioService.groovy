@@ -21,19 +21,23 @@ class UsuarioService {
         return userList
     }
 
-    def filtraUsuarios(Boolean qWhatsApp, Date qFechaDesde){
+    def filtraUsuarios(Boolean qWhatsApp, Boolean qUserEnabled, Date qFechaDesde){
         Sql sql = new Sql(dataSource)
         def fDesde = new SimpleDateFormat('yyyy-MM-dd').format(qFechaDesde)
         String qSoloW = ''
+        String qEstadoUsuario = ''
         if (qWhatsApp != null){
             qSoloW = " AND u.whatsapp = ${qWhatsApp}"
+        }
+        if (qUserEnabled != null){
+            qEstadoUsuario = " AND u.enabled = ${qUserEnabled}"
         }
 
         String qFecha = " AND u.date_created >= '${fDesde}'"
         String baseQuery = "Select * FROM user u INNER JOIN user_role ur ON ur.user_id = u.id WHERE ur.role_id = 7"
         String orderQuery = " ORDER BY u.nombre ASC, u.apellidos ASC"
 
-        String query = baseQuery + qFecha + qSoloW + orderQuery
+        String query = baseQuery + qFecha + qSoloW + qEstadoUsuario + orderQuery
 
         def usuariosList = sql.rows(query)
         return usuariosList

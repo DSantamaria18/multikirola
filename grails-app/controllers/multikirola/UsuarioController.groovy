@@ -35,9 +35,17 @@ class UsuarioController {
         } else if (params.qWhatsApp == "false") {
             qWhatsApp = Boolean.FALSE
         }
+
+        Boolean qUserEnabled = null
+        if (params.qUserEnabled == "true") {
+            qUserEnabled = Boolean.TRUE
+        } else if (params.qUserEnabled == "false") {
+            qUserEnabled = Boolean.FALSE
+        }
+
         Date qFechaDesde = Date.parse('yyyy-MM-dd', params.qFechaDesde)
 
-        def usuariosList = usuarioService.filtraUsuarios(qWhatsApp, qFechaDesde)
+        def usuariosList = usuarioService.filtraUsuarios(qWhatsApp, qUserEnabled, qFechaDesde)
 
         render([template: 'tablaUsuarios', model: [usuariosList: usuariosList]])
     }
@@ -49,9 +57,15 @@ class UsuarioController {
         } else if (params.qWhatsApp == "false") {
             qWhatsApp = Boolean.FALSE
         }
+        Boolean qUserEnabled = null
+        if (params.qUserEnabled == "true") {
+            qUserEnabled = Boolean.TRUE
+        } else if (params.qUserEnabled == "false") {
+            qUserEnabled = Boolean.FALSE
+        }
         Date qFechaDesde = (params.qFechaDesde) ? Date.parse('yyyy-MM-dd', params.qFechaDesde) : Date.parse('yyyy-MM-dd', '1900-01-01')
 
-        def usuariosList = usuarioService.filtraUsuarios(qWhatsApp, qFechaDesde).collect{[Nombre: it.nombre, Apellidos: it.apellidos, Móvil: it.movil, Whatsapp: it.whatsapp, Email:it.email, Activo:it.enabled]}
+        def usuariosList = usuarioService.filtraUsuarios(qWhatsApp, qUserEnabled, qFechaDesde).collect{[Nombre: it.nombre, Apellidos: it.apellidos, Móvil: it.movil, Whatsapp: it.whatsapp, Email:it.email, Activo:it.enabled]}
 
         if (usuariosList.size() > 0) {
             response.setContentType('application/vnd.ms-excel')

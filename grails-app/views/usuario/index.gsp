@@ -29,86 +29,86 @@
                 </div>
 
                 <div id="faq-cat-1-sub-1" class="panel-collapse collapse">
-                <div class="panel-body form-group">
-                    <g:form resource="${this.query}" method="POST" controller="Usuario" action="exportarUsuarios">
+                    <div class="panel-body form-group">
+                        <g:form resource="${this.query}" method="POST" controller="Usuario" action="exportarUsuarios">
 
-                        <div class="form-group">
-                            <label for="qWhatsApp"><g:message code="default.label.notificacionesWhatsapp"
-                                                              default="Notificaciones WhatsApp"/></label>
-                            <g:select name="qWhatsApp"
-                                      id="qWhatsApp"
-                                      from="${[g.message(code: "default.boolean.true", default: "SI"), g.message(code: "default.boolean.false", default: "NO")]}"
-                                      noSelection="${['null': g.message(code: "default.label.cualquiera", default: "CUALQUIERA")]}"
-                                      keys="${[true, false]}"/>
-                        </div>
+                            <div class="form-group">
+                                <label for="qWhatsApp"><g:message code="default.label.notificacionesWhatsapp"
+                                                                  default="Notificaciones WhatsApp"/></label>
+                                <g:select name="qWhatsApp"
+                                          id="qWhatsApp"
+                                          from="${[g.message(code: "default.boolean.true", default: "SI"), g.message(code: "default.boolean.false", default: "NO")]}"
+                                          noSelection="${['null': g.message(code: "default.label.cualquiera", default: "CUALQUIERA")]}"
+                                          keys="${[true, false]}"/>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="qUserEnabled"><g:message code="default.label.EstadoUsuario"
-                                                              default="Estado Usuario"/></label>
-                            <g:select name="qUserEnabled"
-                                      id="qUserEnabled"
-                                      from="${[g.message(code: "default.boolean.true", default: "SI"), g.message(code: "default.boolean.false", default: "NO")]}"
-                                      noSelection="${['null': g.message(code: "default.label.cualquiera", default: "CUALQUIERA")]}"
-                                      keys="${[true, false]}"/>
-                        </div>
+                            <div class="form-group">
+                                <label for="qUserEnabled"><g:message code="default.label.UsuariosActivos"
+                                                                     default="Usuarios Activos"/></label>
+                                <g:select name="qUserEnabled"
+                                          id="qUserEnabled"
+                                          from="${[g.message(code: "default.boolean.true", default: "SI"), g.message(code: "default.boolean.false", default: "NO")]}"
+                                          noSelection="${['null': g.message(code: "default.label.cualquiera", default: "CUALQUIERA")]}"
+                                          keys="${[true, false]}"/>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="qFechaDesde"><g:message code="default.label.fechaDesde"
-                                                                default="Fecha Desde:"/></label>
-                            <input name="qFechaDesde" id="fecha-desde" type="date" step="day">
-                        </div>
+                            <div class="form-group">
+                                <label for="qFechaDesde"><g:message code="default.label.fechaDesde"
+                                                                    default="Fecha Desde:"/></label>
+                                <input name="qFechaDesde" id="fecha-desde" type="date" step="day">
+                            </div>
 
-                        <div class="row fieldcontain">
-                            <button type="button" class="row btn-block btn-primary"
-                                    onclick="filtrarUsuarios();">
-                                <g:message code="default.label.filtrarUsuarios" default="FILTRAR USUARIOS"/>
-                            </button>
-                            <g:actionSubmit class="btn-block btn-info"
-                                            value="${g.message(code: "default.label.exportar", default: "Exportar")}"
-                                            action="exportarUsuarios"/>
-                        </div>
-                    </g:form>
+                            <div class="row fieldcontain">
+                                <button type="button" class="row btn-block btn-primary"
+                                        onclick="filtrarUsuarios();">
+                                    <g:message code="default.label.filtrarUsuarios" default="FILTRAR USUARIOS"/>
+                                </button>
+                                <g:actionSubmit class="btn-block btn-info"
+                                                value="${g.message(code: "default.label.exportar", default: "Exportar")}"
+                                                action="exportarUsuarios"/>
+                            </div>
+                        </g:form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="content scaffold-list" role="main">
-        <h1><g:message code="default.label.usuarios"/></h1>
-        <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-        </g:if>
-        <div id="success"></div>
+        <div class="content scaffold-list" role="main">
+            <h1><g:message code="default.label.usuarios"/></h1>
+            <g:if test="${flash.message}">
+                <div class="message">${flash.message}</div>
+            </g:if>
+            <div id="success"></div>
 
-        <div class="table table-responsive" id="tabla-usuarios">
-            <g:render template="tablaUsuarios"/>
+            <div class="table table-responsive" id="tabla-usuarios">
+                <g:render template="tablaUsuarios"/>
+            </div>
         </div>
     </div>
-</div>
-<g:javascript>
+    <g:javascript>
 
-    function filtrarUsuarios() {
-        const qWhatsApp = $('#qWhatsApp option:selected').val();
-        const qUserEnabled = $('#qUserEnabled option:selected').val();
+        function filtrarUsuarios() {
+            const qWhatsApp = $('#qWhatsApp option:selected').val();
+            const qUserEnabled = $('#qUserEnabled option:selected').val();
 
-        const fecha = '1900-01-01';
-        let qFechaDesde = $('#fecha-desde').val();
-        if (qFechaDesde === "") {
-            qFechaDesde = fecha;
-        }
+            const fecha = '1900-01-01';
+            let qFechaDesde = $('#fecha-desde').val();
+            if (qFechaDesde === "") {
+                qFechaDesde = fecha;
+            }
 
-        $.post("/Usuario/filtrarUsuarios",
-                {
-                    qWhatsApp: qWhatsApp,
-                    qUsserEnabled: qUserEnabled,
-                    qFechaDesde: qFechaDesde
-                }, function (data, status) {
-            console.log(status);
-            $('#tabla-usuarios').html(data);
-        }
-        );
-    };
+            $.post("/Usuario/filtrarUsuarios",
+                    {
+                        qWhatsApp: qWhatsApp,
+                        qUserEnabled: qUserEnabled,
+                        qFechaDesde: qFechaDesde
+                    }, function (data, status) {
+                console.log(status);
+                $('#tabla-usuarios').html(data);
+            }
+            );
+        };
 
-</g:javascript>
+    </g:javascript>
 </body>
 </html>
