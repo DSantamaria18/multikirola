@@ -26,7 +26,7 @@ class Participante {
         movil(nullable: false, blank: false)
         email(nullable: false, email: true, blank: false)
         centro(nullable: false, blank: false)
-        curso(nullable: false, blank: false)
+        curso(nullable: true, blank: true)
         token(nullable: false, unique: true, display: false)
         usuario(nullable: false, display: false)
     }
