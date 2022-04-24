@@ -57,22 +57,25 @@ class UserController {
         }
 
         try {
-            user.email = user.email.toLowerCase()
-            user.username = user.email
-            user.nombre = WordUtils.capitalizeFully(user.nombre)
-            user.apellidos = WordUtils.capitalizeFully(user.apellidos)
+            if (user.email == null || user.nombre == null || user.apellidos == null) {
+                throw new ValidationException("DATOS DE USUARIO INCORRECTOS", user.errors)
+            } else {
+                user.email = user.email?.toLowerCase()
+                user.username = user?.email
+                user.nombre = WordUtils.capitalizeFully(user?.nombre)
+                user.apellidos = WordUtils.capitalizeFully(user?.apellidos)
 
-            final String emailTo = (user.email.contains('ñ') || user.email.contains('Ñ')) ? StringEscapeUtils.escapeJava(user.email) : user.email
-            emailService.sendEmailRegistro(user, emailTo)
-            emailService.sendChangeNotificacion(user)
+                final String emailTo = (user.email?.contains('ñ') || user.email?.contains('Ñ')) ? StringEscapeUtils.escapeJava(user.email) : user.email
+                emailService.sendEmailRegistro(user, emailTo)
+                emailService.sendChangeNotificacion(user)
 
-            userService.save(user)
+                userService.save(user)
 
-            def role = Role.findByAuthority('ROLE_CUSTOMER')
-            UserRole.create(user, role, true)
+                def role = Role.findByAuthority('ROLE_CUSTOMER')
+                UserRole.create(user, role, true)
 
-            springSecurityService.reauthenticate user.username
-
+                springSecurityService.reauthenticate user.username
+            }
         } catch (ValidationException e) {
             log.error("ERROR AL GUARDAR EL USUARIO: ${user.errors}")
             respond user.errors, view: 'register'
