@@ -60,10 +60,9 @@ class CentroControllerSpec extends Specification implements ControllerUnitTest<C
         response.reset()
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        populateValidParams(params)
-        def centro = new Centro(params)
+        def centro = new Centro()
         centro.id = 1
-
+        centro.nombre = "centro_test"
         controller.save(centro)
 
         then:"A redirect is issued to the show action"
@@ -82,7 +81,8 @@ class CentroControllerSpec extends Specification implements ControllerUnitTest<C
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def centro = new Centro()
+        Centro centro = new Centro()
+
         controller.save(centro)
 
         then:"The create view is rendered again with the correct model"
@@ -142,7 +142,6 @@ class CentroControllerSpec extends Specification implements ControllerUnitTest<C
         model.centro instanceof Centro
     }
 
-
     void "Test the update action with a null instance"() {
         when:"Save is called for a domain instance that doesn't exist"
         request.contentType = FORM_CONTENT_TYPE
@@ -164,9 +163,10 @@ class CentroControllerSpec extends Specification implements ControllerUnitTest<C
         response.reset()
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
-        populateValidParams(params)
-        def centro = new Centro(params)
+
+        Centro centro = new Centro()
         centro.id = 1
+        centro.nombre = "centro_test"
 
         controller.update(centro)
 
