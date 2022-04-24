@@ -191,7 +191,6 @@ class ParticipanteController {
         params.movil = ''
         params.email = ''
         params.centro = ''
-        params.curso = ''
         params.activos = ''
         params.fdesde = '-'
         params.fhasta = '-'
@@ -206,7 +205,6 @@ class ParticipanteController {
         params.movil = ''
         params.email = ''
         params.centro = ''
-        params.curso = ''
         params.activos = ''
         params.fdesde = '-'
         params.fhasta = '-'
@@ -261,8 +259,8 @@ class ParticipanteController {
             columna++
             sheet.addCell(new Label(columna, fila, "CENTRO", headerFormat))
             columna++
-            sheet.addCell(new Label(columna, fila, "CURSO", headerFormat))
-            columna++
+            /*sheet.addCell(new Label(columna, fila, "CURSO", headerFormat))
+            columna++*/
             sheet.addCell(new Label(columna, fila, "APELLIDO 1", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "APELLIDO 2", headerFormat))
@@ -288,8 +286,8 @@ class ParticipanteController {
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase(), cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase(), cellFormat))
-                columna++
+                /*sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase(), cellFormat))
+                columna++*/
                 sheet.addCell(new Label(columna, fila, "${it.apellido1}".toUpperCase(), cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.apellido2}".toUpperCase(), cellFormat))

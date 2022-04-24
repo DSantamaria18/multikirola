@@ -73,9 +73,9 @@
                                       id="qCentro"/>
                         </div>
 
-                        <div class="fieldcontain row">
+                        %{--<div class="fieldcontain row">
                             <label>
-                                %{--Curso :--}%
+                                --}%%{--Curso :--}%%{--
                                 <g:message code="default.label.curso"/>
                             </label>
                             <g:select name="curso"
@@ -85,7 +85,7 @@
                                       optionKey="id"
                                       optionValue="nombre"
                                       id="qCurso"/>
-                        </div>
+                        </div>--}%
 
                         <div class="fieldcontain row">
                             <label for="qUserEnabled"><g:message code="default.label.UsuariosActivos"
@@ -116,7 +116,6 @@
                                         , $('#qMovil').val()
                                         , $('#qEmail').val()
                                         , $('#qCentro option:selected').val()
-                                        , $('#qCurso option:selected').val()
                                         , $('#qUserEnabled option:selected').val()
                                         , $('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val()
                                         , $('#qFechaHasta_year').val() + '-' + $('#qFechaHasta_month').val()
