@@ -16,7 +16,7 @@ buildscript {
 
 def date = new Date()
 def formattedDate = date.format('yyMMddHHmm')
-def build = formattedDate.toInteger()
+def build = formattedDate
 
 version "$appMajorVersion.$appMinorVersion.$build"
 //version "0.1"
