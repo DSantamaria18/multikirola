@@ -266,7 +266,7 @@ function filtrarEventos(fechaIniDesde, fechaIniHasta) {
     })
 };
 
-function filtrarParticipantes(apellido1, movil, email, centro, curso, fDesde, fHasta) {
+function filtrarParticipantes(apellido1, movil, email, centro, curso, activos, fDesde, fHasta) {
     $.get("/participante/filtrarParticipantes/",
         {
             apellido1: apellido1,
@@ -274,6 +274,7 @@ function filtrarParticipantes(apellido1, movil, email, centro, curso, fDesde, fH
             email: email,
             centro: centro,
             curso: curso,
+            activos: activos,
             fdesde: fDesde,
             fhasta: fHasta
 

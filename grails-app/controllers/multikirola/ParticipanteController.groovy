@@ -1,5 +1,6 @@
 package multikirola
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import grails.plugin.springsecurity.annotation.Secured
 import jxl.Workbook
 import jxl.WorkbookSettings
@@ -40,7 +41,7 @@ class ParticipanteController {
     def show(Long id) {
         User currentUser = getAuthenticatedUser() as User
         Participante participante = Participante.findById(id)
-        if (participante && participante.usuario == currentUser){
+        if (participante && participante.usuario == currentUser) {
             respond participanteService.get(id)
         } else {
             redirect(uri: '/')
@@ -50,7 +51,7 @@ class ParticipanteController {
     def create() {
         User currentUser = getAuthenticatedUser() as User
         params.email = currentUser.email
-        params.movil= currentUser.getMovil()
+        params.movil = currentUser.getMovil()
 
         respond new Participante(params)
     }
@@ -66,9 +67,9 @@ class ParticipanteController {
         participante.token = token
 
         Participante participante2 = Participante.findByToken(token)
-        if(participante2){
+        if (participante2) {
             log.error(">>> ERROR: Ya existe el participante ${token}")
-            flash.message = message(code: 'participante.create.duplicatedToken', args: [${token}], default: "Ya existe un participante con este token: ${token}")
+            flash.message = message(code: 'participante.create.duplicatedToken', args: [$ { token }], default: "Ya existe un participante con este token: ${token}")
             respond participante
             return
         }
@@ -78,9 +79,9 @@ class ParticipanteController {
 
         participante.validate()
 
-        try{
+        try {
             participanteService.save(participante)
-        }catch (ValidationException e) {
+        } catch (ValidationException e) {
             log.error(e.message)
             log.error(e.stackTrace)
             respond participante.errors, view: 'create'
@@ -99,7 +100,7 @@ class ParticipanteController {
 
     def edit(Participante participante) {
         User currentUser = getAuthenticatedUser()
-        if (participante && participante.usuario == currentUser){
+        if (participante && participante.usuario == currentUser) {
             respond participante
         } else {
             redirect(uri: '/')
@@ -179,18 +180,19 @@ class ParticipanteController {
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
-    def gestionParticipantes(){
+    def gestionParticipantes() {
         User currentUser = getAuthenticatedUser()
-        if(!currentUser){
-            redirect(uri:'/login/auth')
+        if (!currentUser) {
+            redirect(uri: '/login/auth')
             return
         }
 
         params.apellido1 = ''
-        params.movil= ''
-        params.email= ''
-        params.centro= ''
-        params.curso= ''
+        params.movil = ''
+        params.email = ''
+        params.centro = ''
+        params.curso = ''
+        params.activos = ''
         params.fdesde = '-'
         params.fhasta = '-'
         def participantesList = participanteImplService.filtrarParticipantes(params)
@@ -201,10 +203,11 @@ class ParticipanteController {
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def descargarParticipantes() {
         params.apellido1 = ''
-        params.movil= ''
-        params.email= ''
-        params.centro= ''
-        params.curso= ''
+        params.movil = ''
+        params.email = ''
+        params.centro = ''
+        params.curso = ''
+        params.activos = ''
         params.fdesde = '-'
         params.fhasta = '-'
         def participantesList = participanteImplService.filtrarParticipantes(params)
@@ -273,6 +276,8 @@ class ParticipanteController {
             sheet.addCell(new Label(columna, fila, "MOVIL", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "F.NACIMIENTO", headerFormat))
+            columna++
+            sheet.addCell(new Label(columna, fila, "ACTIVO", headerFormat))
 
             fila++
             columna = 1
@@ -298,6 +303,12 @@ class ParticipanteController {
                 sheet.addCell(new Label(columna, fila, "${it.movil}", cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${formatDate(format: "dd/MM/yyyy", date: it.fechaNacimiento)}", cellFormat))
+                columna++
+                if (it.activo == true) {
+                    sheet.addCell(new Label(columna, fila, "SI", cellFormat))
+                } else {
+                    sheet.addCell(new Label(columna, fila, "NO", cellFormat))
+                }
 
                 columna = 1
                 fila++
@@ -316,9 +327,9 @@ class ParticipanteController {
 
     }
 
-    def filtrarParticipantes(params){
+    def filtrarParticipantes(params) {
         def participantesList = participanteImplService.filtrarParticipantes(params)
-        render(template: "tablaParticipantes", model:[participantesList: participantesList])
+        render(template: "tablaParticipantes", model: [participantesList: participantesList])
     }
 
 }
