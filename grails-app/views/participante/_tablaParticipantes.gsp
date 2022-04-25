@@ -19,24 +19,29 @@
             <th>Email</th>
             %{--<th>F. Nacimiento</th>--}%
             <th><g:message code="default.label.fechaNacimiento"/></th>
+            <th><g:message code="default.label.estado"/></th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${participantesList}" var="participante" status="i">
             <tr data-id="${participante.id}" onclick="">
                 <td>${participante.id}</td>
-                %{--<td class="text-uppercase">${participante.centro?.nombre}</td>--}%
                 <td class="text-uppercase">${participante.centro}</td>
-                %{--<td class="text-uppercase">${participante.curso?.nombre}</td>--}%
                 <td class="text-uppercase">${participante.curso}</td>
                 <td class="text-capitalize">${participante.nombre}</td>
                 <td class="text-capitalize">${participante.apellido1}</td>
                 <td class="text-capitalize">${participante.apellido2}</td>
-%{--                <td>${participante.telefono}</td>--}%
                 <td>${participante.movil}</td>
                 <td>${participante.email}</td>
-                %{--<td><g:formatDate date="${participante.fechaNacimiento}" format="dd-MM-yyyy"/></td>--}%
                 <td><g:formatDate date="${participante.fechaNacimiento}" formatName="default.date.format"/></td>
+                <td>
+                    <g:if test="${participante.activo}">
+                        <g:message code="default.label.activo"/>
+                    </g:if>
+                    <g:else>
+                        <g:message code="default.label.inactivo"/>
+                    </g:else>
+                </td>
             </tr>
         </g:each>
         </tbody>

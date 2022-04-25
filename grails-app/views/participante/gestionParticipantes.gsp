@@ -88,6 +88,16 @@
                         </div>
 
                         <div class="fieldcontain row">
+                            <label for="qUserEnabled"><g:message code="default.label.UsuariosActivos"
+                                                                 default="Usuarios Activos"/></label>
+                            <g:select name="qUserEnabled"
+                                      id="qUserEnabled"
+                                      from="${[g.message(code: "default.boolean.true", default: "SI"), g.message(code: "default.boolean.false", default: "NO")]}"
+                                      noSelection="${['null': g.message(code: "default.label.cualquiera", default: "CUALQUIERA")]}"
+                                      keys="${[true, false]}"/>
+                        </div>
+
+                        <div class="fieldcontain row">
                             <label>
                                 %{--F. Nacimiento :--}%
                                 <g:message code="default.label.fechaNacimiento"/>
@@ -107,6 +117,7 @@
                                         , $('#qEmail').val()
                                         , $('#qCentro option:selected').val()
                                         , $('#qCurso option:selected').val()
+                                        , $('#qUserEnabled option:selected').val()
                                         , $('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val()
                                         , $('#qFechaHasta_year').val() + '-' + $('#qFechaHasta_month').val()
                                         )">
