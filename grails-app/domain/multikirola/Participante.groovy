@@ -6,7 +6,7 @@ class Participante {
     String apellido1
     String apellido2
     Centro centro
-    Curso curso
+    //Curso curso
     String sexo
     String movil
     String email
@@ -26,7 +26,7 @@ class Participante {
         movil(nullable: false, blank: false)
         email(nullable: false, email: true, blank: false)
         centro(nullable: false, blank: false)
-        curso(nullable: true, blank: true)
+        //curso(nullable: true, blank: true)
         token(nullable: false, unique: true, display: false)
         usuario(nullable: false, display: false)
     }
