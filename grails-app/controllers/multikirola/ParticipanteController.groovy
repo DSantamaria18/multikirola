@@ -201,14 +201,27 @@ class ParticipanteController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def descargarParticipantes() {
-        /*params.apellido1 = ''
-        params.movil = ''
-        params.email = ''
-        params.centro = ''
-        params.activos = ''
-        params.fdesde = '-'
-        params.fhasta = '-'*/
-        def participantesList = participanteImplService.filtrarParticipantes(params)
+
+        String apellido1 = params?.apellido1
+        String movil = (params?.movil) ?: ""
+        String email = (params?.email) ?: ""
+
+        Long centro = null
+        if (params?.centro != "") {
+            centro = params.centro as Long
+        }
+
+        Boolean activos = null
+        if (params?.qUserEnabled == "true") {
+            activos = Boolean.TRUE
+        } else if (params?.qUserEnabled == "false") {
+            activos = Boolean.FALSE
+        }
+
+        Date fechaDesde = (params.qFechaDesde) ? Date.parse('yyyy-MM-dd', params.qFechaDesde) : Date.parse('yyyy-MM-dd', '1900-01-01')
+        Date fechaHasta = (params.qFechaHasta) ? Date.parse('yyyy-MM-dd', params.qFechaHasta) : Date.parse('yyyy-MM-dd', '2100-01-01')
+
+        def participantesList = participanteImplService.filtrarParticipantes(apellido1, movil, email, centro, activos, fechaDesde, fechaHasta)
 
         // Fichero
         response.setContentType('application/vnd.ms-excel')
@@ -346,7 +359,6 @@ class ParticipanteController {
         Date fechaDesde = Date.parse('yyyy-MM-dd', params?.fDesde)
         Date fechaHasta = Date.parse('yyyy-MM-dd', params?.fHasta)
 
-        //def participantesList = participanteImplService.filtrarParticipantes(params)
         def participantesList = participanteImplService.filtrarParticipantes(apellido1, movil, email, centro, activos, fechaDesde, fechaHasta)
 
         render(template: "tablaParticipantes", model: [participantesList: participantesList])

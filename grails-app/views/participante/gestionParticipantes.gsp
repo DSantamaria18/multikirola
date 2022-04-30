@@ -99,31 +99,14 @@
 
                         <div class="fieldcontain row">
                             <label>
-                                %{--F. Nacimiento :--}%
                                 <g:message code="default.label.fechaNacimiento"/>
                             </label>
-                            %{--<g:datePicker name="fechaDesde" precision="month" id="qFechaDesde"
-                                          relativeYears="${-15..0}" noSelection="['': '']" default="none"/> y
-                            <g:datePicker name="fechaHasta" precision="month" id="qFechaHasta"
-                                          relativeYears="${-15..0}" noSelection="['': '']" default="none"/>--}%
                             <input name="qFechaDesde" id="qFechaDesde" type="date" step="month"> -
                             <input name="qFechaHasta" id="qFechaHasta" type="date" step="month">
                         </div>
 
                         <!-- botones filtrado-->
                         <div class="fieldcontain row">
-                            %{--<button type="button" class="row btn-block btn-primary"
-                                    onclick="filtrarParticipantes(
-                                        $('#qApellido1').val()
-                                        , $('#qMovil').val()
-                                        , $('#qEmail').val()
-                                        , $('#qCentro option:selected').val()
-                                        , $('#qUserEnabled option:selected').val()
-                                        , $('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val()
-                                        , $('#qFechaHasta_year').val() + '-' + $('#qFechaHasta_month').val()
-                                        )">
-                                FILTRAR PARTICIPANTES</button>--}%
-
                             <button type="button" class="row btn-block btn-primary"
                                     onclick="filtrarParticipantes()">FILTRAR PARTICIPANTES</button>
 
@@ -136,12 +119,6 @@
             </div>
         </div>
 
-    </div>
-
-    <div>
-        <g:link class="btn btn-primary" action="descargarParticipantes">
-            <g:message default="Descargar" code="default.label.descargar"/> <i class="glyphicon glyphicon-download"></i>
-        </g:link>
     </div>
 
     <div id="tabla-participantes">
