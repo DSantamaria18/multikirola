@@ -70,7 +70,7 @@
                 </div>
                 <br>
 
-                <div class="input-group" id="div-curso">
+                %{--<div class="input-group" id="div-curso">
                     <span class="input-group-addon"><g:message code="default.label.curso"/></span>
                     <g:select name="participante.curso.id"
                               from="${multikirola.Curso.list()}"
@@ -79,7 +79,7 @@
                               optionKey="id"
                               noSelection="${['null': g.message(code: 'default.label.curso')]}"/>
                 </div>
-                <br>
+                <br>--}%
 
                 <div class="input-group" id="div-sexo">
                     <span class="input-group-addon"><g:message code="default.label.sexo"/></span>
