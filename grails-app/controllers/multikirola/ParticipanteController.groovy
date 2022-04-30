@@ -187,30 +187,41 @@ class ParticipanteController {
             return
         }
 
-        params.apellido1 = ''
-        params.movil = ''
-        params.email = ''
-        params.centro = ''
-        params.curso = ''
-        params.activos = ''
-        params.fdesde = '-'
-        params.fhasta = '-'
-        def participantesList = participanteImplService.filtrarParticipantes(params)
+        String apellido1 = ""
+        String movil = ""
+        String email = ""
+        Long centro = null
+        Boolean activos = null
+        Date fdesde = Date.parse('yyyy-MM-dd', '1900-01-01')
+        Date fhasta = Date.parse('yyyy-MM-dd', '2100-01-01')
+        def participantesList = participanteImplService.filtrarParticipantes(apellido1, movil, email, centro, activos, fdesde, fhasta)
 
         [participantesList: participantesList]
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def descargarParticipantes() {
-        params.apellido1 = ''
-        params.movil = ''
-        params.email = ''
-        params.centro = ''
-        params.curso = ''
-        params.activos = ''
-        params.fdesde = '-'
-        params.fhasta = '-'
-        def participantesList = participanteImplService.filtrarParticipantes(params)
+
+        String apellido1 = params?.apellido1
+        String movil = (params?.movil) ?: ""
+        String email = (params?.email) ?: ""
+
+        Long centro = null
+        if (params?.centro != "") {
+            centro = params.centro as Long
+        }
+
+        Boolean activos = null
+        if (params?.qUserEnabled == "true") {
+            activos = Boolean.TRUE
+        } else if (params?.qUserEnabled == "false") {
+            activos = Boolean.FALSE
+        }
+
+        Date fechaDesde = (params.qFechaDesde) ? Date.parse('yyyy-MM-dd', params.qFechaDesde) : Date.parse('yyyy-MM-dd', '1900-01-01')
+        Date fechaHasta = (params.qFechaHasta) ? Date.parse('yyyy-MM-dd', params.qFechaHasta) : Date.parse('yyyy-MM-dd', '2100-01-01')
+
+        def participantesList = participanteImplService.filtrarParticipantes(apellido1, movil, email, centro, activos, fechaDesde, fechaHasta)
 
         // Fichero
         response.setContentType('application/vnd.ms-excel')
@@ -261,8 +272,8 @@ class ParticipanteController {
             columna++
             sheet.addCell(new Label(columna, fila, "CENTRO", headerFormat))
             columna++
-            sheet.addCell(new Label(columna, fila, "CURSO", headerFormat))
-            columna++
+            /*sheet.addCell(new Label(columna, fila, "CURSO", headerFormat))
+            columna++*/
             sheet.addCell(new Label(columna, fila, "APELLIDO 1", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "APELLIDO 2", headerFormat))
@@ -288,8 +299,8 @@ class ParticipanteController {
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase(), cellFormat))
                 columna++
-                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase(), cellFormat))
-                columna++
+                /*sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase(), cellFormat))
+                columna++*/
                 sheet.addCell(new Label(columna, fila, "${it.apellido1}".toUpperCase(), cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.apellido2}".toUpperCase(), cellFormat))
@@ -327,8 +338,29 @@ class ParticipanteController {
 
     }
 
-    def filtrarParticipantes(params) {
-        def participantesList = participanteImplService.filtrarParticipantes(params)
+    def filtrarParticipantes() {
+
+        String apellido1 = params?.apellido1
+        String movil = (params?.movil) ?: ""
+        String email = (params?.email) ?: ""
+
+        Long centro = null
+        if (params?.centro != "") {
+            centro = params.centro as Long
+        }
+
+        Boolean activos = null
+        if (params?.activos == "true") {
+            activos = Boolean.TRUE
+        } else if (params?.activos == "false") {
+            activos = Boolean.FALSE
+        }
+
+        Date fechaDesde = Date.parse('yyyy-MM-dd', params?.fDesde)
+        Date fechaHasta = Date.parse('yyyy-MM-dd', params?.fHasta)
+
+        def participantesList = participanteImplService.filtrarParticipantes(apellido1, movil, email, centro, activos, fechaDesde, fechaHasta)
+
         render(template: "tablaParticipantes", model: [participantesList: participantesList])
     }
 

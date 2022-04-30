@@ -42,8 +42,8 @@
                         code="default.label.actividades"/></g:link></li>
                 <li><g:link class="list" controller="Centro" action="index"><g:message
                         code="default.label.centros"/></g:link></li>
-                <li><g:link class="list" controller="Curso" action="index"><g:message
-                        code="default.label.cursos"/></g:link></li>
+                %{--<li><g:link class="list" controller="Curso" action="index"><g:message
+                        code="default.label.cursos"/></g:link></li>--}%
                 <li><g:link class="list" controller="Participante"
                             action="gestionParticipantes"><g:message code="default.label.participante"/></g:link></li>
                 <li><g:link class="list" controller="Usuario" action="index"><g:message
