@@ -267,6 +267,7 @@ function filtrarEventos(fechaIniDesde, fechaIniHasta) {
 };
 
 
+/*
 function filtrarParticipantes(apellido1, movil, email, centro, activos, fDesde, fHasta) {
     $.get("/participante/filtrarParticipantes/",
         {
@@ -282,4 +283,4 @@ function filtrarParticipantes(apellido1, movil, email, centro, activos, fDesde, 
         console.log(status);
         $('#tabla-participantes').html(data);
     })
-}
+}*/

@@ -37,12 +37,12 @@
                             <g:textField name="apellido1" id="qApellido1"/>
                         </div>
 
-                        %{--<div class="fieldcontain row">
-                            <label>
-                                Teléfono :
-                            </label>
-                            <g:textField name="telefono" id="qTelefono"/>
-                        </div>--}%
+                    %{--<div class="fieldcontain row">
+                        <label>
+                            Teléfono :
+                        </label>
+                        <g:textField name="telefono" id="qTelefono"/>
+                    </div>--}%
 
                         <div class="fieldcontain row">
                             <label>
@@ -73,19 +73,19 @@
                                       id="qCentro"/>
                         </div>
 
-                        %{--<div class="fieldcontain row">
-                            <label>
-                                --}%%{--Curso :--}%%{--
-                                <g:message code="default.label.curso"/>
-                            </label>
-                            <g:select name="curso"
-                                      from="${Curso.listOrderByNombre()}"
-                                      value="''"
-                                      noSelection="${['': 'Cualquiera']}"
-                                      optionKey="id"
-                                      optionValue="nombre"
-                                      id="qCurso"/>
-                        </div>--}%
+                    %{--<div class="fieldcontain row">
+                        <label>
+                            --}%%{--Curso :--}%%{--
+                            <g:message code="default.label.curso"/>
+                        </label>
+                        <g:select name="curso"
+                                  from="${Curso.listOrderByNombre()}"
+                                  value="''"
+                                  noSelection="${['': 'Cualquiera']}"
+                                  optionKey="id"
+                                  optionValue="nombre"
+                                  id="qCurso"/>
+                    </div>--}%
 
                         <div class="fieldcontain row">
                             <label for="qUserEnabled"><g:message code="default.label.UsuariosActivos"
@@ -102,15 +102,17 @@
                                 %{--F. Nacimiento :--}%
                                 <g:message code="default.label.fechaNacimiento"/>
                             </label>
-                            <g:datePicker name="fechaDesde" precision="month" id="qFechaDesde"
-                                          relativeYears="${-15..0}" noSelection="['':'']" default="none"/> y
+                            %{--<g:datePicker name="fechaDesde" precision="month" id="qFechaDesde"
+                                          relativeYears="${-15..0}" noSelection="['': '']" default="none"/> y
                             <g:datePicker name="fechaHasta" precision="month" id="qFechaHasta"
-                                          relativeYears="${-15..0}" noSelection="['':'']" default="none"/>
+                                          relativeYears="${-15..0}" noSelection="['': '']" default="none"/>--}%
+                            <input name="qFechaDesde" id="qFechaDesde" type="date" step="month"> -
+                            <input name="qFechaHasta" id="qFechaHasta" type="date" step="month">
                         </div>
 
                         <!-- botones filtrado-->
-                        <div class="row fieldcontain">
-                            <button type="button" class="row btn-block btn-primary"
+                        <div class="fieldcontain row">
+                            %{--<button type="button" class="row btn-block btn-primary"
                                     onclick="filtrarParticipantes(
                                         $('#qApellido1').val()
                                         , $('#qMovil').val()
@@ -120,7 +122,14 @@
                                         , $('#qFechaDesde_year').val() + '-' + $('#qFechaDesde_month').val()
                                         , $('#qFechaHasta_year').val() + '-' + $('#qFechaHasta_month').val()
                                         )">
-                                FILTRAR PARTICIPANTES</button>
+                                FILTRAR PARTICIPANTES</button>--}%
+
+                            <button type="button" class="row btn-block btn-primary"
+                                    onclick="filtrarParticipantes()">FILTRAR PARTICIPANTES</button>
+
+                            <g:actionSubmit class="btn-block btn-info"
+                                            value="${g.message(code: "default.label.exportar", default: "Exportar").toUpperCase()}"
+                                            action="descargarParticipantes"/>
                         </div>
                     </g:form>
                 </div>
@@ -140,5 +149,42 @@
     </div>
 
 </div>
+
+<g:javascript>
+    function filtrarParticipantes() {
+        const qApellido1 = $("#qApellido1").val();
+        const qMovil = $("qMovil").val();
+        const qEmail = $("qEmail").val();
+        const qCentro = $('#qCentro option:selected').val();
+        const qUserEnabled = $('#qUserEnabled option:selected').val();
+
+        const fechaDesde = '1900-01-01';
+        let qFechaDesde = $('#qFechaDesde').val();
+        if (qFechaDesde === "") {
+            qFechaDesde = fechaDesde;
+        }
+
+        const fechaHasta = '2100-01-01';
+        let qFechaHasta = $('#qFechaHasta').val();
+        if (qFechaHasta === "") {
+            qFechaHasta = fechaHasta;
+        }
+
+        $.post("/participante/filtrarParticipantes",
+                {
+                    apellido1: qApellido1,
+                    movil: qMovil,
+                    email: qEmail,
+                    centro: qCentro,
+                    activos: qUserEnabled,
+                    fDesde: qFechaDesde,
+                    fHasta: qFechaHasta
+                }, function (data, status) {
+            console.log(status);
+            $('#tabla-participantes').html(data);
+        }
+        );
+    };
+</g:javascript>
 </body>
 </html>
