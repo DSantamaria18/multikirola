@@ -119,7 +119,7 @@
         </g:if>
 
 
-        <g:if test="${participante?.curso}">
+        %{--<g:if test="${participante?.curso}">
             <li class="fieldcontain">
                 <span id="curso-label" class="property-label"><g:message code="default.label.curso"
                                                                          default="Curso:"/></span>
@@ -127,7 +127,7 @@
                         bean="${participante}"
                         field="curso"/></span>
             </li>
-        </g:if>
+        </g:if>--}%
     </ol>
 
 %{--<f:display bean="participante"/>--}%
