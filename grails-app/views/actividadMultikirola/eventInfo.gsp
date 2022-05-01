@@ -65,7 +65,6 @@
                 <th>Movil</th>
                 <th>Email</th>
                 <th>Centro</th>
-                <th>Curso</th>
                 <th>Sexo</th>
                 <th></th>
             </tr>
@@ -80,7 +79,6 @@
                     <td>${participante.movil}</td>
                     <td>${participante.email}</td>
                     <td>${participante.centro}</td>
-                    <td>${participante.curso}</td>
                     <td>${participante.sexo}</td>
                     <td>
                         <div class="btn btn-danger btn-sm push eliminar-push borrar-participante-btn"

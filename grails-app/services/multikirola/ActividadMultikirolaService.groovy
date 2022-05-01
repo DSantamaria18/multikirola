@@ -69,8 +69,8 @@ class ActividadMultikirolaService {
 
     def findRegisteredParticipants(Long eventId) {
         final String query = "SELECT p.id, p.apellido1, p.apellido2, p.nombre, p.movil, p.email, c.nombre as centro, " +
-                "cu.nombre as curso, p.sexo, p.fecha_nacimiento as fnacimiento FROM actividad_multikirola am, participante p, centro c, curso cu " +
-                "WHERE am.participante = p.id  AND p.centro_id = c.id AND p.curso_id = cu.id " +
+                "p.sexo, p.fecha_nacimiento as fnacimiento FROM actividad_multikirola am, participante p, centro c " +
+                "WHERE am.participante = p.id  AND p.centro_id = c.id " +
                 " AND am.evento = ${eventId} ORDER BY p.apellido1, p.apellido2 ASC"
 
         final Sql sql = new Sql(dataSource)
