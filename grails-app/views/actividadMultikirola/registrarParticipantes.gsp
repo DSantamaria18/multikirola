@@ -38,9 +38,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     <input type="text" class="form-control" id="event-date" readonly
-                           %{--value="${formatDate(date: evento.fecha, format: "dd-MM-yyyy")}">--}%
-                           value="${formatDate(date: evento.fecha, formatName:'default.date.format')}">
-                           %{--value="${formatDate(date: evento.fecha, format: "EEEE, d MMMM yyyy", style: "LONG")}">--}%
+                    %{--value="${formatDate(date: evento.fecha, format: "dd-MM-yyyy")}">--}%
+                           value="${formatDate(date: evento.fecha, formatName: 'default.date.format')}">
+                    %{--value="${formatDate(date: evento.fecha, format: "EEEE, d MMMM yyyy", style: "LONG")}">--}%
                 </div>
             </div>
 
@@ -57,6 +57,15 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                     <input type="text" class="form-control" id="event-venue" readonly
                            value="${evento?.lugar} ${evento?.recinto} ${evento?.instalacion}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                    <input type="text" class="form-control" id="event-restriction" readonly
+%{--                           value="${message(code:'your.code.here', default: 'Edad mínima', params:[evento?.edad_minima])} ${evento?.edad_minima} años">--}%
+                           value="${message(code:'your.code.here', default: 'Edad mínima', args:[evento?.edad_minima]).decodeHTML()}">
                 </div>
             </div>
 
