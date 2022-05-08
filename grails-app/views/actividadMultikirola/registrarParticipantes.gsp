@@ -62,7 +62,7 @@
 
             <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign"></i></span>
                     <input type="text" class="form-control" id="event-restriction" readonly
 %{--                           value="${message(code:'your.code.here', default: 'Edad mínima', params:[evento?.edad_minima])} ${evento?.edad_minima} años">--}%
                            value="${message(code:'your.code.here', default: 'Edad mínima', args:[evento?.edad_minima]).decodeHTML()}">
