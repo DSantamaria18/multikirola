@@ -213,8 +213,6 @@ class ActividadMultikirolaController {
             // Cabecera listado participantes
             sheet.addCell(new Label(columna, fila, "CENTRO ", headerFormat))
             columna++
-            sheet.addCell(new Label(columna, fila, "CURSO ", headerFormat))
-            columna++
             sheet.addCell(new Label(columna, fila, "NOMBRE ", headerFormat))
             columna++
             sheet.addCell(new Label(columna, fila, "APELLIDOS ", headerFormat))
@@ -233,8 +231,6 @@ class ActividadMultikirolaController {
             // Datos de los participantes
             participantesList.each {
                 sheet.addCell(new Label(columna, fila, "${it.centro}".toUpperCase(), cellFormat))
-                columna++
-                sheet.addCell(new Label(columna, fila, "${it.curso}".toUpperCase(), cellFormat))
                 columna++
                 sheet.addCell(new Label(columna, fila, "${it.nombre}".toUpperCase(), cellFormat))
                 columna++
