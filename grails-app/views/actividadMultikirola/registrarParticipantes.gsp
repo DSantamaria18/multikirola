@@ -39,7 +39,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     <input type="text" class="form-control" id="event-date" readonly
-                           value="${formatDate(date: evento.fecha, formatName:'default.date.format')}">
+                           value="${formatDate(date: evento.fecha, formatName: 'default.date.format')}">
                 </div>
             </div>
 
@@ -56,6 +56,13 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                     <input type="text" class="form-control" id="event-venue" readonly
                            value="${evento?.lugar} ${evento?.recinto} ${evento?.instalacion}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                    <textarea  class="form-control" id="event-avisos" readonly>${evento?.avisos}</textarea>
                 </div>
             </div>
 
