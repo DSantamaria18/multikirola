@@ -179,32 +179,41 @@ function inscribirParticipante() {
     var movil = $('#participante-mobile').val();
     var fnacimiento = new Date($('#participante-fnacimiento').val());
     var edadMinima = parseInt($('#edadMinima').val());
+    var edadMaxima = parseInt($('#edadMaxima').val());
+
+    if (edadMaxima === undefined || edadMaxima === 0) {
+        edadMaxima = 12
+    }
 
     var edad = calcularEdad(fnacimiento);
     if (edad < edadMinima) {
         alert("La edad mínima para poder inscribirse es de " + edadMinima.toString() + " años.");
     } else {
-        if (movil.length < 9) {
-            alert("Los datos de contacto del participante no son correctos...")
-        }
-
-        var params = {
-            eventId: eventId,
-            participanteId: participanteId,
-            movil: movil
-        }
-
-        $.post('/actividadMultikirola/save', params,
-            function (data, status) {
-                console.log(status);
-                $('#selected-participant-id').val('');
-                $('#participante-telefono').val('');
-                $('#participante-mobile').val('');
-                $('.form-datos-contacto').hide();
-                $('.div-inscribirParticipanteBtn').hide();
-                $('#selector-participantes').html(data);
+        if (edad > edadMaxima) {
+            alert("La edad máxima para poder inscribirse es de " + edadMaxima.toString() + " años.");
+        } else {
+            if (movil.length < 9) {
+                alert("Los datos de contacto del participante no son correctos...")
             }
-        );
+
+            var params = {
+                eventId: eventId,
+                participanteId: participanteId,
+                movil: movil
+            }
+
+            $.post('/actividadMultikirola/save', params,
+                function (data, status) {
+                    console.log(status);
+                    $('#selected-participant-id').val('');
+                    $('#participante-telefono').val('');
+                    $('#participante-mobile').val('');
+                    $('.form-datos-contacto').hide();
+                    $('.div-inscribirParticipanteBtn').hide();
+                    $('#selector-participantes').html(data);
+                }
+            );
+        }
     }
 };
 
@@ -267,20 +276,3 @@ function filtrarEventos(fechaIniDesde, fechaIniHasta) {
 };
 
 
-/*
-function filtrarParticipantes(apellido1, movil, email, centro, activos, fDesde, fHasta) {
-    $.get("/participante/filtrarParticipantes/",
-        {
-            apellido1: apellido1,
-            movil: movil,
-            email: email,
-            centro: centro,
-            activos: activos,
-            fdesde: fDesde,
-            fhasta: fHasta
-
-        }).done(function (data, status) {
-        console.log(status);
-        $('#tabla-participantes').html(data);
-    })
-}*/
