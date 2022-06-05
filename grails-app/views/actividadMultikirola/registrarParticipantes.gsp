@@ -30,7 +30,8 @@
     <div id="event-info" class="content mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" role="main">
         <h1>${evento?.tipo_actividad} ${evento?.modalidad}</h1>
         <input type="hidden" id="eventId" value="${evento.id}">
-        <input type="hidden" id="edadMinima" value="${evento.edad_minima}">
+        <input type="hidden" id="edadMinima" value="${evento?.edad_minima}">
+        <input type="hidden" id="edadMaxima" value="${evento?.edad_maxima}">
 
         <!-- Datos del evento -->
         <div class="form-horizontal">
@@ -38,9 +39,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     <input type="text" class="form-control" id="event-date" readonly
-                           %{--value="${formatDate(date: evento.fecha, format: "dd-MM-yyyy")}">--}%
                            value="${formatDate(date: evento.fecha, formatName:'default.date.format')}">
-                           %{--value="${formatDate(date: evento.fecha, format: "EEEE, d MMMM yyyy", style: "LONG")}">--}%
                 </div>
             </div>
 
