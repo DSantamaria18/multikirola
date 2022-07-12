@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    %{--<title>Eventos Fútbol Sala</title>--}%
 </head>
 
 <style>
@@ -60,9 +59,23 @@
             </div>
 
             <div class="form-group">
+                <div class="mapouter">
+                    <div class="gmap_canvas">
+                        <iframe class="gmaps"
+                                src="${evento?.localizacion}"
+                                allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                    <textarea  class="form-control" id="event-avisos" readonly>${evento?.avisos}</textarea>
+                    <textarea class="form-control" id="event-avisos" readonly>${evento?.avisos}</textarea>
                 </div>
             </div>
 
