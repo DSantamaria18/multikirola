@@ -51,7 +51,7 @@ function validateForm() {
     let apellidos = $('#apellidos').val();
     const email = $('#useremail').val();
     const movil = $('#usercellphone').val();
-    const whatsapp = $('#whatsapp').prop('checked');
+    //const whatsapp = $('#whatsapp').prop('checked');
 
     /* validación de nombre y apellidos */
     const nombre_regex = /^[a-zA-Z'ñÑ\-áéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜ\s]*$/;
@@ -92,11 +92,11 @@ function validateForm() {
     }
 
     /* validación de whatsapp sin movil */
-    if (movil == "" && whatsapp === true) {
+    /*if (movil == "" && whatsapp === true) {
         $('#error-whatsapp').text('Debes introducir un móvil.');
         $('#error-whatsapp').attr('hidden', false);
         formRegistroOk = false;
-    }
+    }*/
 
     if ($('#legal').size() > 0) {
         var legal = $('#legal').prop('checked');

@@ -18,7 +18,7 @@
         content: "\e080";
     }
 
-    .botones{
+    .botones {
         display: flex;
         justify-content: space-around;
     }
@@ -116,16 +116,13 @@
 
                     <div class="input-group" style="margin-bottom: 10px">
                         <div class="checkbox">
-                            <label>
-                                <g:checkBox id="whatsapp" name="whatsapp"
-                                            value="${this.user?.whatsapp}"/>
-                                <g:message code="default.label.notificadmeWhatsapp"/>
-                            </label>
+                            <button type="button" id="btn-telegram" class="btn btn-info collapsed"
+                                    name="btn-telegram"
+                                    onclick="window.open('https://t.me/+XQvCm6-REx9hNzFk', 'blank')">
+                                <span><i class="glyphicon glyphicon-send"></i></span>
+                                <span><g:message code="default.label.notificadmeTelegram"/></span>
+                            </button>
                         </div>
-                    </div>
-
-                    <div>
-                        <label id="error-whatsapp" class="error" style="color: red" hidden>ERROR!!!</label>
                     </div>
 
                     <!-- PASSWORD -->
@@ -143,10 +140,13 @@
                         </div>
 
                         <div>
-%{--                            <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>--}%
-                            <label id="error-longitudPassword" class="error" style="color: red" hidden>La contraseña de tener al menos 8 caracteres</label>
-                            <label id="error-contenidoPassword" class="error" style="color: red" hidden>La contraseña contiene caracteres no válidos</label>
-                            <label id="error-password" class="error" style="color: red" hidden>Las contraseñas no coinciden</label>
+                            %{--                            <label id="error-password" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                            <label id="error-longitudPassword" class="error" style="color: red"
+                                   hidden>La contraseña de tener al menos 8 caracteres</label>
+                            <label id="error-contenidoPassword" class="error" style="color: red"
+                                   hidden>La contraseña contiene caracteres no válidos</label>
+                            <label id="error-password" class="error" style="color: red"
+                                   hidden>Las contraseñas no coinciden</label>
                         </div>
 
                         <div style="margin-top: 10px" class="input-group">
@@ -158,10 +158,13 @@
                         </div>
 
                         <div>
-                            <label id="error-longitudPassword" class="error" style="color: red" hidden>La contraseña de tener al menos 8 caracteres</label>
-                            <label id="error-contenidoPassword" class="error" style="color: red" hidden>La contraseña contiene caracteres no válidos</label>
-                            <label id="error-password" class="error" style="color: red" hidden>Las contraseñas no coinciden</label>
-%{--                            <label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>--}%
+                            <label id="error-longitudPassword" class="error" style="color: red"
+                                   hidden>La contraseña de tener al menos 8 caracteres</label>
+                            <label id="error-contenidoPassword" class="error" style="color: red"
+                                   hidden>La contraseña contiene caracteres no válidos</label>
+                            <label id="error-password" class="error" style="color: red"
+                                   hidden>Las contraseñas no coinciden</label>
+                            %{--                            <label id="error-password2" class="error" style="color: red" hidden>ERROR!!!</label>--}%
                         </div>
                     </div>
 
@@ -169,7 +172,7 @@
                         <!-- Button -->
                         <div class="row botones">
 
-                            <div class="col-md-6 mb-3" >
+                            <div class="col-md-6 mb-3">
                                 <input id="btn-myaccount" type="submit" class="btn btn-info save"
                                        name="register"
                                        value="<g:message code="default.label.actualizar" default="Actualizar"/>"/>
@@ -187,44 +190,44 @@
                     </div>
             </div>
         </form>
-    </div>
-</div>
-
-<!-- Modal -->
-<div id="modal-eliminar-cuenta" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><g:message code="micuenta.modal.eliminarCuenta.header"
-                                                   default="Eliminar Cuenta"/></h4>
-            </div>
-
-            <div class="modal-body">
-                <p><g:message code="micuenta.modal.eliminarCuenta.texto"
-                              default="¿Estás seguro/a de querer eliminar completamente tu cuenta?"/></p>
-            </div>
-
-            <div class="modal-footer">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input"
-                           id="check-modal-eliminar-cuenta"
-                           onchange="modalButtonEnable()">
-                    <label class="custom-control-label" for="check-modal-eliminar-cuenta">
-                        <g:message code="micuenta.modal.check.label" default="Sí, estoy seguro"/>
-                    </label>
-                </div>
-                <button type="button" id="btn-modal-eliminar-cuenta" class="btn btn-danger"
-                        data-dismiss="modal" disabled onclick="borrarCuenta()">
-                    <g:message code="default.label.enviar"/>
-                </button>
-            </div>
         </div>
-
     </div>
-</div>
+
+    <!-- Modal -->
+    <div id="modal-eliminar-cuenta" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><g:message code="micuenta.modal.eliminarCuenta.header"
+                                                       default="Eliminar Cuenta"/></h4>
+                </div>
+
+                <div class="modal-body">
+                    <p><g:message code="micuenta.modal.eliminarCuenta.texto"
+                                  default="¿Estás seguro/a de querer eliminar completamente tu cuenta?"/></p>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input"
+                               id="check-modal-eliminar-cuenta"
+                               onchange="modalButtonEnable()">
+                        <label class="custom-control-label" for="check-modal-eliminar-cuenta">
+                            <g:message code="micuenta.modal.check.label" default="Sí, estoy seguro"/>
+                        </label>
+                    </div>
+                    <button type="button" id="btn-modal-eliminar-cuenta" class="btn btn-danger"
+                            data-dismiss="modal" disabled onclick="borrarCuenta()">
+                        <g:message code="default.label.enviar"/>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>

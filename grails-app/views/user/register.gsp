@@ -1,5 +1,5 @@
 <g:set var='securityConfig' value='${applicationContext.springSecurityService.securityConfig}'/>
-<html>
+<html xmlns:target="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="layout" content="main"/>
     <asset:stylesheet src='application.css'/>
@@ -105,16 +105,13 @@
 
                     <div class="input-group" style="margin-bottom: 10px">
                         <div class="checkbox">
-                            <label>
-                                <g:checkBox id="whatsapp" name="whatsapp" value="${this.user?.whatsapp}"/>
-                                <g:message code="default.label.notificadmeWhatsapp"/>
-                            </label>
+                            <button type="button" id="btn-telegram" class="btn btn-info collapsed"
+                                    name="btn-telegram"
+                                    onclick="window.open('https://t.me/+XQvCm6-REx9hNzFk', 'blank')">
+                                <span><i class="glyphicon glyphicon-send"></i></span>
+                                <span><g:message code="default.label.notificadmeTelegram"/></span>
+                            </button>
                         </div>
-                    </div>
-
-                    <div>
-                        <label id="error-whatsapp" class="error" style="color: red" hidden><g:message
-                                code="default.error.whatsapp"/></label>
                     </div>
 
                     <div style="margin-top: 25px" class="input-group">
