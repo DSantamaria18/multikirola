@@ -2,6 +2,7 @@ package multikirola
 
 import com.sun.org.apache.xpath.internal.operations.Bool
 import grails.plugin.springsecurity.annotation.Secured
+import groovy.transform.CompileDynamic
 import jxl.Workbook
 import jxl.WorkbookSettings
 import jxl.write.Border
@@ -20,7 +21,8 @@ import java.text.SimpleDateFormat
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = false)
+@CompileDynamic
+//@Transactional(readOnly = false)
 class ParticipanteController {
 
     ParticipanteService participanteService

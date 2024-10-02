@@ -79,9 +79,12 @@
                     <g:if test="${participante.sexo == 'F'}">
                         <g:message code="default.label.femenino"/>
                     </g:if>
-                    <g:else>
+                    <g:if test="${participante.sexo == 'M'}">
                         <g:message code="default.label.masculino"/>
-                    </g:else>
+                    </g:if>
+                    <g:if test="${participante.sexo == 'NB'}">
+                        <g:message code="default.label.nobinario"/>
+                    </g:if>
                 </span>
             </li>
         </g:if>

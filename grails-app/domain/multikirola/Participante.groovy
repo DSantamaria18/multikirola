@@ -1,5 +1,8 @@
 package multikirola
 
+import groovy.transform.CompileDynamic
+
+@CompileDynamic
 class Participante {
 
     String nombre
@@ -22,7 +25,7 @@ class Participante {
         apellido1(nullable: false, blank: false)
         apellido2(nullable: true, blank: true)
         fechaNacimiento(nullable: false, blank: false, max: new Date())
-        sexo(inList: ['F', 'M'])
+        sexo(inList: ['F', 'M', 'NB'])
         movil(nullable: false, blank: false)
         email(nullable: false, email: true, blank: false)
         centro(nullable: false, blank: false)

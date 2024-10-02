@@ -84,7 +84,7 @@
                 <div class="input-group" id="div-sexo">
                     <span class="input-group-addon"><g:message code="default.label.sexo"/></span>
                     <g:select name="participante.sexo"
-                              from="${['F', 'M']}"
+                              from="${['F', 'M', 'NB']}"
                               valueMessagePrefix="default.label.sexo"
                               value="${participante?.sexo}"
                               noSelection="${['null': g.message(code: 'default.label.sexo')]}"/>
