@@ -79,7 +79,7 @@ function validateForm() {
 
     /* validación de email */
     var email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zñA-ZÑ\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (email == "" || !email_re.test(email)) {
+    if (email == "" || !email_re.test(email) || email.contains("mail.ru")) {
         $('#error-email').attr('hidden', false);
         formRegistroOk = false;
     }
